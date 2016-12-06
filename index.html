@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <script type="text/javascript" src="./lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.json.min.js"></script>
+
+    <script type="text/javascript">
+        function sendJson() {
+            var request = {
+                username: $("#username").val(),
+                passwd: $("#password").val()
+            };
+            //调用了jquery.json 库
+            var encoded;
+            encoded = $.toJSON(request);
+            var jsonStr = encoded;
+            var URL = 'http://api.oms.miaodeli.com/admin/user_login';
+            $.ajax({
+                url: URL,
+                type: 'POST',
+                data: jsonStr,
+                dataType: 'json',
+                contentType: 'application/json;charset=utf8',
+                success: function (data) {
+                    // 解析收到的json数据
+                    console.log(data);
+                    var models = data;
+                   // var models = $.parseJSON(data);
+                    if (models.ok == true) {
+                        //alert(models.info);
+                        window.location.href = "task.html";
+                    } else {
+                        alert(models.info);
+                    }
+                },
+                Error: function (xhr, error, exception) {
+                    alert(exception.toString());
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<B>username: </B><input id="username" type="text" style="width: 100px;"/>
+<br>
+<B>password: </B><input id="password" type="text" style="width: 100px;"/>
+<br>
+<button class="button" id="buttonUpload" style="margin-left:10px;"
+        onclick="return sendJson();">Send
+</button>
+</body>
+</html>
