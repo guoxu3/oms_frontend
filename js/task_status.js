@@ -48,8 +48,8 @@ function updateTaskStatus() {
             var models = data;
             if (models.ok == true) {
                 //alert(models.info);
-                //alert(models.info.task_id);
-                window.location.href = "showtaskstatus.html";
+                alert(models.info);
+                //window.location.href = "showtaskstatus.html";
                 //
             } else {
                 alert(models.info);

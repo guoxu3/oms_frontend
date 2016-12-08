@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>添加任务</title>
+    <title>添加用户</title>
     <script type="text/javascript" src="./lib/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="./lib/jquery.json.min.js"></script>
-    <script type="text/javascript" src="./js/task.js"></script>
+    <script type="text/javascript" src="./js/user.js"></script>
 
 
 </head>
@@ -23,16 +23,18 @@
         <a href="deleteuser.html">删除用户</a>
     </div>
     <br>
-    <B>ip: </B><label for="ip"></label><input id="ip" value="192.168.1.1" type="text" style="width: 100px;"/>
+    <B>mail: </B><label for="mail"></label><input id="mail" value="test@example.com" type="text" style="width: 100px;"/>
     <br>
-    <B>action: </B><label for="action"></label><input id="action" value="update" type="text" style="width: 100px;"/>
+    <B>username: </B><label for="username"></label><input id="username" value="test" type="text" style="width: 100px;"/>
     <br>
-    <B>content: </B><label for="content"></label><input id="content" value="/test/test.html" type="text" style="width: 100px;"/>
+    <B>passwd: </B><label for="passwd"></label><input id="passwd" value="123456" type="text" style="width: 100px;"/>
     <br>
-    <B>description: </B><label for="description"></label><input id="description" value="测试" type="text" style="width: 100px;"/>
+    <B>department: </B><label for="department"></label><input id="department" value="dev" type="text" style="width: 100px;"/>
+    <br>
+    <B>permisions: </B><label for="permisions"></label><input id="permisions" value="1,2,3" type="text" style="width: 100px;"/>
     <br>
     <button class="button" id="buttonUpload" style="margin-left:10px;"
-            onclick="return addTask('ip', 'action', 'content', 'description');">add
+            onclick="return addUser('mail', 'usename', 'passwd', 'department', 'permisions');">add
     </button>
 </body>
 </html>

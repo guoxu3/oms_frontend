@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>任务列表</title>
+    <title>删除用户</title>
     <script type="text/javascript" src="./lib/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="./lib/jquery.json.min.js"></script>
-    <script type="text/javascript" src="./js/task.js"></script>
-    <script>getTask();</script>
+    <script type="text/javascript" src="./js/user.js"></script>
+
+
 </head>
 <body>
 <div class="s_tab" id="s_tab">
@@ -22,7 +23,11 @@
     <a href="deleteuser.html">删除用户</a>
 </div>
 <br>
-    <p>task list:</p>
-    <p id="p1"></p>
+<p>delete task</p>
+<B>username: </B><label for="username"></label><input id="username" type="text" style="width: 100px;"/>
+<br>
+<button class="button" id="buttonUpload" style="margin-left:10px;"
+        onclick="return deleteUser();">delete
+</button>
 </body>
 </html>
