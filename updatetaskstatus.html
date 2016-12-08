@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更新任务状态</title>
+    <script type="text/javascript" src="./lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.json.min.js"></script>
+    <script type="text/javascript" src="./js/task_status.js"></script>
+
+
+</head>
+<body>
+<p> update task status </p>
+<B>task_id: </B><label for="task_id"></label><input id="task_id"  type="text" style="width: 100px;"/>
+<br>
+<B>start_time: </B><label for="start_time"></label><input id="start_time" value=0 type="text" style="width: 100px;"/>
+<br>
+<B>revert_time: </B><label for="revert_time"></label><input id="revert_time" value=0 type="text" style="width: 100px;"/>
+<br>
+<B>percent: </B><label for="percent"></label><input id="percent" value=10 type="text" style="width: 100px;"/>
+<br>
+<B>status: </B><label for="status"></label><input id="status" value=1 type="text" style="width: 100px;"/>
+<br>
+<B>revert: </B><label for="revert"></label><input id="revert" value=0 type="text" style="width: 100px;"/>
+<br>
+<button class="button" id="buttonUpload" style="margin-left:10px;"
+        onclick="return updateTaskStatus('task_id', 'start_time', 'revert_time', 'percent', 'status', 'revert');">update
+</button>
+</body>
+</html>
