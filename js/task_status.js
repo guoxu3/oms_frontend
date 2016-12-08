@@ -1,8 +1,8 @@
 /**
  * Created by guoxu on 12/7/16.
  */
-function getTask() {
-    var URL = 'http://api.oms.miaodeli.com/api/task?start=0&count=10';
+function getTaskStatus() {
+    var URL = 'http://api.oms.miaodeli.com/api/task_status?start=0&count=10';
     $.ajax({
          type: "GET",
          url: URL,
@@ -21,14 +21,14 @@ function getTask() {
     });
 }
 
-function addTask() {
+function updateTaskStatus() {
     var data = {};
     for (var i = 0; i < arguments.length; i++) {
         console.log("#"+arguments[i]);
         data[arguments[i]] = $("#"+arguments[i]).val();
     }
     var request = {
-        action: 'add',
+        action: 'update',
         data: data
     };
     //调用了jquery.json 库
@@ -36,7 +36,7 @@ function addTask() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://api.oms.miaodeli.com/api/task';
+    var URL = 'http://api.oms.miaodeli.com/api/task_status';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -49,7 +49,7 @@ function addTask() {
             if (models.ok == true) {
                 //alert(models.info);
                 //alert(models.info.task_id);
-                window.location.href = "showtask.html";
+                window.location.href = "showtaskstatus.html";
                 //
             } else {
                 alert(models.info);
@@ -58,26 +58,5 @@ function addTask() {
         Error: function (xhr, error, exception) {
             alert(exception.toString());
         }
-    });
-}
-
-function deleteTask(){
-    var task_id = $("#task_id").val();
-    var URL = 'http://api.oms.miaodeli.com/api/task?task_id=' + task_id;
-    $.ajax({
-         type: "DELETE",
-         url: URL,
-         success: function (data) {
-            // 解析收到的json数据
-            var models = $.parseJSON(data);
-            if (models.ok == true) {
-                alert(models.info);
-            } else {
-                alert(models.info);
-            }
-         },
-         Error: function (xhr, error, exception) {
-            alert(exception.toString());
-         }
     });
 }
