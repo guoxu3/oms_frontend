@@ -28,7 +28,7 @@ var login = function() {
            // var models = $.parseJSON(data);
             if (models.ok == true) {
                 //alert(models.info);
-                //window.location.href = "showtask.html";
+                window.location.href = "showtask.html";
             } else {
                 alert(models.info);
             }
@@ -37,4 +37,4 @@ var login = function() {
             alert(exception.toString());
         }
     });
-}
+};
