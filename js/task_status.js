@@ -24,8 +24,9 @@ function getTaskStatus() {
 function updateTaskStatus() {
     var data = {};
     for (var i = 0; i < arguments.length; i++) {
-        console.log("#"+arguments[i]);
-        data[arguments[i]] = $("#"+arguments[i]).val();
+        if ($("#"+arguments[i]).val()) {
+            data[arguments[i]] = $("#" + arguments[i]).val();
+        }
     }
     var request = {
         action: 'update',
