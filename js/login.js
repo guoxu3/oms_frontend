@@ -27,7 +27,7 @@ var login = function() {
             var models = data;
            // var models = $.parseJSON(data);
             if (models.ok == true) {
-                //alert(models.info);
+                console.log(models.info);
                 window.location.href = "showtask.html";
             } else {
                 alert(models.info);
