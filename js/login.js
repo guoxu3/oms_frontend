@@ -14,11 +14,15 @@ var login = function() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://api.oms.miaodeli.com/admin/user_login';
+    var URL = 'http://oms.miaodeli.com/api/user_login';
     $.ajax({
         url: URL,
         type: 'POST',
         data: jsonStr,
+        //crossDomain: true,
+        //xhrFields: {
+        //    withCredentials: true
+        //},
         dataType: 'json',
         contentType: 'application/json;charset=utf8',
         success: function (data) {
@@ -27,8 +31,9 @@ var login = function() {
             var models = data;
            // var models = $.parseJSON(data);
             if (models.ok == true) {
-                console.log(models.info);
-                window.location.href = "showtask.html";
+                // console.log(models.info);
+                //window.location.href = "showtask.html";
+                 alert(models.info);
             } else {
                 alert(models.info);
             }

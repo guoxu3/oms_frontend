@@ -2,7 +2,7 @@
  * Created by guoxu on 12/7/16.
  */
 function getTaskStatus() {
-    var URL = 'http://api.oms.miaodeli.com/api/task_status?start=0&count=10';
+    var URL = 'http://oms.miaodeli.com/api/task_status?start=0&count=10';
     $.ajax({
          type: "GET",
          url: URL,
@@ -37,7 +37,7 @@ function updateTaskStatus() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://api.oms.miaodeli.com/api/task_status';
+    var URL = 'http://oms.miaodeli.com/api/task_status';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -49,8 +49,8 @@ function updateTaskStatus() {
             var models = data;
             if (models.ok == true) {
                 //alert(models.info);
-                alert(models.info);
-                //window.location.href = "showtaskstatus.html";
+                //alert(models.info);
+                window.location.href = "showtaskstatus.html";
                 //
             } else {
                 alert(models.info);

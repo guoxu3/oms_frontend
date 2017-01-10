@@ -2,7 +2,7 @@
  * Created by guoxu on 12/7/16.
  */
 function getTask() {
-    var URL = 'http://api.oms.miaodeli.com/api/task?start=0&count=10';
+    var URL = 'http://oms.miaodeli.com/api/task?start=0&count=10';
     $.ajax({
          type: "GET",
          url: URL,
@@ -36,7 +36,7 @@ function addTask() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://api.oms.miaodeli.com/api/task';
+    var URL = 'http://oms.miaodeli.com/api/task';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -63,7 +63,7 @@ function addTask() {
 
 function deleteTask(){
     var task_id = $("#task_id").val();
-    var URL = 'http://api.oms.miaodeli.com/api/task?task_id=' + task_id;
+    var URL = 'http://oms.miaodeli.com/api/task?task_id=' + task_id;
     $.ajax({
          type: "DELETE",
          url: URL,
