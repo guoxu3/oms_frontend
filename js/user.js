@@ -2,7 +2,7 @@
  * Created by guoxu on 12/7/16.
  */
 function getUser() {
-    var URL = 'http://oms.miaodeli.com/admin/user?start=0&count=10';
+    var URL = 'http://oms.miaodeli.com/api/user?start=0&count=10';
     $.ajax({
          type: "GET",
          url: URL,
@@ -36,7 +36,7 @@ function addUser() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/admin/user';
+    var URL = 'http://oms.miaodeli.com/api/user';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -78,7 +78,7 @@ function updateUser() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/admin/user';
+    var URL = 'http://oms.miaodeli.com/api/user';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -105,7 +105,7 @@ function updateUser() {
 
 function deleteUser(){
     var username = $("#username").val();
-    var URL = 'http://oms.miaodeli.com/admin/user?username=' + username;
+    var URL = 'http://oms.miaodeli.com/api/user?username=' + username;
     $.ajax({
          type: "DELETE",
          url: URL,

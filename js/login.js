@@ -14,7 +14,7 @@ var login = function() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/api/user_login';
+    var URL = 'http://oms.miaodeli.com/api/login';
     $.ajax({
         url: URL,
         type: 'POST',
