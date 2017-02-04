@@ -1,11 +1,13 @@
 /**
  * Created by guoxu on 12/7/16.
  */
+
+
 var login = function() {
 
     var request = {};
     for (var i = 0; i < arguments.length; i++) {
-        console.log("#"+arguments[i]);
+        console.log("#"+arguments[i]).val();
         request[arguments[i]] = $("#"+arguments[i]).val();
     }
 
@@ -19,10 +21,6 @@ var login = function() {
         url: URL,
         type: 'POST',
         data: jsonStr,
-        //crossDomain: true,
-        //xhrFields: {
-        //    withCredentials: true
-        //},
         dataType: 'json',
         contentType: 'application/json;charset=utf8',
         success: function (data) {
