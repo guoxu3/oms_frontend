@@ -29,44 +29,18 @@
     <link rel="stylesheet" type="text/css" href="./css/login.css">
 
     <script src="./lib/jquery-3.1.1.min.js"></script>
+    <script src="./lib/jquery.json.min.js"></script>
     <script src="./lib/semantic/components/form.js"></script>
     <script src="./lib/semantic/components/transition.js"></script>
+    <script src="./js/login.js"></script>
 
      <script>
   $(document)
     .ready(function() {
-      $('.ui.form')
-        .form({
-          fields: {
-            email: {
-              identifier  : 'email',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your e-mail'
-                },
-                {
-                  type   : 'email',
-                  prompt : 'Please enter a valid e-mail'
-                }
-              ]
-            },
-            password: {
-              identifier  : 'password',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[6]',
-                  prompt : 'Your password must be at least 6 characters'
-                }
-              ]
-            }
-          }
-        })
-      ;
+      $(".button").click(function() {
+         login('username', 'passwd');
+          //alert("haha")
+      });
     })
   ;
   </script>
@@ -77,7 +51,7 @@
 <div class="ui middle aligned center aligned grid">
     <div class="column">
         <h2 class="ui teal image header">
-            <img src="./img/logo.png" class="image">
+            <img src="./img/logo.jpg" class="image">
             <div class="content">
                 Log-in to your account
             </div>
@@ -87,13 +61,13 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="username" placeholder="E-mail or Username">
+                        <input id="username" type="text" name="username" placeholder="E-mail or Username">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input  type="password" name="passwd" placeholder="Password">
+                        <input id="passwd" type="password" name="passwd" placeholder="Password">
                     </div>
                 </div>
                 <div class="ui fluid large teal submit button">Login</div>

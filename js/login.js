@@ -2,12 +2,11 @@
  * Created by guoxu on 12/7/16.
  */
 
-
 var login = function() {
 
     var request = {};
     for (var i = 0; i < arguments.length; i++) {
-        console.log("#"+arguments[i]).val();
+        console.log($("#"+arguments[i]).val());
         request[arguments[i]] = $("#"+arguments[i]).val();
     }
 
@@ -30,7 +29,7 @@ var login = function() {
            // var models = $.parseJSON(data);
             if (models.ok == true) {
                 // console.log(models.info);
-                window.location.href = "showtask.html";
+                window.location.href = "taskList.html";
                 // alert(models.info);
             } else {
                 alert(models.info);

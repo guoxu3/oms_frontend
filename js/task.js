@@ -10,7 +10,7 @@ function getTask() {
             // 解析收到的json数据
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                $("#p1").html(data);
+                $("#taskList").html(data);
             } else {
                 alert(models.info);
             }
