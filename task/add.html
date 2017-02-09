@@ -9,13 +9,19 @@
     <!-- Site Properties -->
     <title>新增任务</title>
 
-    <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
-    <script src="../lib/semantic/semantic.min.js"></script>
-
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
+    <script src="../lib/semantic/semantic.min.js"></script>
+
     <script type="text/javascript" src="../js/task.js"></script>
+    <script>
+        $(function() {
+            $('.ui.dropdown').dropdown();
+        })
+    </script>
+
 
     <style type="text/css">
         body {
@@ -91,23 +97,39 @@
                 <option value="haimian.card">card</option>
             </select>
         </div>
-        <div class="ui fluid search selection dropdown">
-            <input type="hidden" name="country">
-            <i class="dropdown icon"></i>
-            <div class="default text">Select Country</div>
-            <div class="menu">
-                <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
-                <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
-                <div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+        <div class="field">
+            <label>请选择更新机器</label>
+            <select class="ui dropdown">
+                <option value="10.72.32.243">release</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>更新版本号</label>
+            <div class="ui input focus">
+                <input type="text" placeholder="1234...">
             </div>
         </div>
         <div class="field">
-            <label>Username</label>
+            <label>更新文件名(多个文件分行写)</label>
+            <div class="ui large input focus">
+                <textarea id="files"  rows="10" cols="100" placeholder="example/example.php,example1/example1.php...">
+                </textarea>
+            </div>
+        </div>
+        <div class="field">
+            <label>更新描述</label>
             <div class="ui input focus">
-                <input type="text" placeholder="Search...">
+                <input type="text" placeholder="优化了xxx功能...">
             </div>
         </div>
     </div>
+    <div class="ui divider"></div>
+        <button class="ui primary button">
+            添加
+        </button>
+        <button class="ui button">
+            清空
+        </button>
 </div>
 
 
