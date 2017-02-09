@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>任务列表</title>
+    <title>新增任务</title>
 
     <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
     <script src="../lib/semantic/semantic.min.js"></script>
+
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
 
     <script type="text/javascript" src="../js/task.js"></script>
-    <script>getTask();</script>
 
     <style type="text/css">
         body {
@@ -71,16 +71,46 @@
                     username
                 </div>
             </div>
-            <a class="item">注销</a>
+            <a class="item" href="http://oms.miaodeli.com/machine/add">注销</a>
         </div>
     </div>
 </div>
 
 
+
+
 <div class="ui main text container">
-    <h1 class="ui header">任务列表:</h1>
-    <p id="taskList"></p>
+    <div class="ui form">
+        <h1 class="ui header">新增任务:</h1>
+        <div class="ui divider"></div>
+        <div class="field">
+            <label>请选择版本库</label>
+            <select class="ui dropdown">
+                <option value="haimian.pay">pay</option>
+                <option value="haimian.static">static</option>
+                <option value="haimian.card">card</option>
+            </select>
+        </div>
+        <div class="ui fluid search selection dropdown">
+            <input type="hidden" name="country">
+            <i class="dropdown icon"></i>
+            <div class="default text">Select Country</div>
+            <div class="menu">
+                <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+                <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+                <div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+            </div>
+        </div>
+        <div class="field">
+            <label>Username</label>
+            <div class="ui input focus">
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 <!-- 底部 -->
 <div class="ui inverted vertical footer segment">
