@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>新增任务</title>
+    <title>编辑个人资料</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
@@ -15,10 +15,33 @@
     <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
     <script src="../lib/semantic/semantic.min.js"></script>
 
-    <script type="text/javascript" src="../js/task.js"></script>
+    <script type="text/javascript" src="../js/user.js"></script>
+    <script>
+        getUser();
+        </script>
     <script>
         $(function() {
-            $('.ui.dropdown').dropdown();
+            $('.main.container .menu .item')
+                .tab({
+                    cache: false,
+                    // faking API request
+                    apiSettings: {
+                        loadingDuration : 300,
+                        mockResponse    : function(settings) {
+                            var response = {
+                                first  : 'AJAX Tab One',
+                                second : 'AJAX Tab Two',
+                                third  : 'AJAX Tab Three'
+                            };
+                            return response[settings.urlData.tab];
+                        }
+                    },
+                context : 'parent',
+                auto    : true,
+                path    : 'edit.html'
+              })
+            ;
+            $('.menu .item').tab();
         })
     </script>
 
@@ -86,50 +109,44 @@
 
 
 <div class="ui main text container">
-    <div class="ui form">
-        <h1 class="ui header">新增任务:</h1>
-        <div class="ui divider"></div>
-        <div class="field">
-            <label>请选择版本库</label>
-            <select class="ui dropdown">
-                <option value="haimian.pay">pay</option>
-                <option value="haimian.static">static</option>
-                <option value="haimian.card">card</option>
-            </select>
-        </div>
-        <div class="field">
-            <label>请选择更新机器</label>
-            <select class="ui dropdown">
-                <option value="10.72.32.243">release</option>
-            </select>
-        </div>
-        <div class="field">
-            <label>更新版本号</label>
-            <div class="ui input focus">
-                <input type="text" placeholder="1234...">
+    <h1 class="ui header">个人中心</h1>
+    <div class="ui divider"></div>
+    <div class="ui top attached tabular menu">
+          <a class="item active" data-tab="first">我的资料</a>
+          <a class="item" data-tab="second">密码修改</a>
+          <a class="item" data-tab="third">我的统计</a>
+    </div>
+    <div class="ui bottom attached tab segment active" data-tab="first">
+        <p id="userinfo"></p>
+    </div>
+
+    <div class="ui bottom attached tab segment " data-tab="second">
+        <div class="ui form">
+            <div class="field">
+                <label>原密码</label>
+                <div class="ui input focus">
+                    <input type="text" placeholder="">
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label>更新文件名(多个文件分行写)</label>
-            <div class="ui">
-                <textarea id="files" placeholder="example/example.php,example1/example1.php..." rows="10" cols="100">
-                </textarea>
+            <div class="field">
+                <label>新密码</label>
+                <div class="ui input focus">
+                    <input type="text" placeholder="">
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label>更新描述</label>
-            <div class="ui input focus">
-                <input type="text" placeholder="优化了xxx功能...">
+            <div class="field">
+                <label>确认新密码</label>
+                <div class="ui input focus">
+                    <input type="text" placeholder="">
+                </div>
             </div>
+            <button class="ui button" type="submit">提交</button>
         </div>
     </div>
-    <div class="ui divider"></div>
-        <button class="ui primary button">
-            添加
-        </button>
-        <button class="ui button">
-            清空
-        </button>
+
+    <div class="ui bottom attached tab segment" data-tab="third">
+        # todo
+    </div>
 </div>
 
 

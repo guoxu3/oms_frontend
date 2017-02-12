@@ -1,7 +1,29 @@
 /**
  * Created by guoxu on 12/7/16.
  */
+
 function getUser() {
+    var URL = 'http://oms.miaodeli.com/api/user?username=guoxu';
+    $.ajax({
+         type: "GET",
+         url: URL,
+         success: function (data) {
+            // 解析收到的json数据
+            var models = $.parseJSON(data);
+            if (models.ok == true) {
+                $("#userinfo").html(data);
+            } else {
+                alert(models.info);
+            }
+         },
+         Error: function (xhr, error, exception) {
+            alert(exception.toString());
+         }
+    });
+}
+
+
+function getAllUser() {
     var URL = 'http://oms.miaodeli.com/api/user?start=0&count=10';
     $.ajax({
          type: "GET",
