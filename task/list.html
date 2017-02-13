@@ -103,10 +103,10 @@
             </thead>
             <tbody>
                 <tr v-for="task in tasks">
-                    <td>{{ task.id  }}</td>
-                    <td>{{ task.create_time  }}</td>
-                    <td>{{ task.creator  }}</td>
-                    <td>{{ task.description  }}</td>
+                    <td v-if="has_data">{{ task.id  }}</td>
+                    <td v-if="has_data">{{ task.create_time  }}</td>
+                    <td v-if="has_data">{{ task.creator  }}</td>
+                    <td v-if="has_data">{{ task.description  }}</td>
                     <td>
                         <div class="blue ui icon buttons">
                             <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i></div>

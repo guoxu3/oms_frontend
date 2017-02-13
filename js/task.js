@@ -13,12 +13,19 @@ function getTask() {
                 // $("#taskList").html(data);
                 var ser_data = models.info['data'];
                 var vm = new Vue({
-                el: '#task',
-                data: {
-                    tasks: ser_data
-                }
+                    el: '#task',
+                    data: {
+                        tasks: ser_data,
+                        has_data: true
+                    }
                 })
             } else {
+                var vm = new Vue({
+                    el: '#task',
+                    data: {
+                        has_data: false
+                    }
+                });
                 alert(models.info);
             }
          },
