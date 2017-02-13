@@ -10,7 +10,14 @@ function getTask() {
             // 解析收到的json数据
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                $("#taskList").html(data);
+                // $("#taskList").html(data);
+                var ser_data = models.info['data'];
+                var vm = new Vue({
+                el: '#task',
+                data: {
+                    tasks: ser_data
+                }
+                })
             } else {
                 alert(models.info);
             }
