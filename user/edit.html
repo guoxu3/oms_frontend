@@ -14,11 +14,15 @@
 
     <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
     <script src="../lib/semantic/semantic.min.js"></script>
+    <script src="../lib/vue.js"></script>
 
     <script type="text/javascript" src="../js/user.js"></script>
+    <script type="text/javascript" src="../js/public.js"></script>
+
     <script>
-        getUser();
-        </script>
+        username = getCookie("username");
+        getUser(username);
+    </script>
     <script>
         $(function() {
             $('.main.container .menu .item')
@@ -75,7 +79,7 @@
 <!-- 头部导航栏 -->
 <div class="ui blue fixed inverted menu">
     <div class="ui container">
-        <a href="#" class="header item">
+        <a href="http://oms.miaodeli.com/login" class="header item">
             <img class="logo" src="../img/logo.jpg">
             免税 OMS
         </a>
@@ -96,15 +100,12 @@
         <div class="right menu">
             <a class="ui transparent inverted icon item" href="http://oms.miaodeli.com/user/edit">
                 <i class="user icon"></i>
-                 &nbsp;&nbsp;guoxu
+                 &nbsp;&nbsp;<span id=username></span>
             </a>
             <a class="item" href="http://oms.miaodeli.com/logout">注销</a>
         </div>
     </div>
 </div>
-
-
-
 
 <div class="ui main text container">
     <h1 class="ui header">个人中心</h1>
@@ -114,8 +115,13 @@
           <a class="item" data-tab="second">密码修改</a>
           <a class="item" data-tab="third">我的统计</a>
     </div>
-    <div class="ui bottom attached tab segment active" data-tab="first">
-        <p id="userinfo"></p>
+    <div  class="ui bottom attached tab segment active" data-tab="first">
+        <div id="userinfo">
+            <p>用户名：{{ username }}</p>
+            <p>昵称：{{ nickname }}</p>
+            <p>邮箱：{{ mail }}</p>
+            <p>所属部门：{{ department }}</p>
+        </div>
     </div>
 
     <div class="ui bottom attached tab segment " data-tab="second">

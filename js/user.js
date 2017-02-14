@@ -2,8 +2,8 @@
  * Created by guoxu on 12/7/16.
  */
 
-function getUser() {
-    var URL = 'http://oms.miaodeli.com/api/user?username=guoxu';
+function getUser(username) {
+    var URL = 'http://oms.miaodeli.com/api/user?username=' + username;
     $.ajax({
          type: "GET",
          url: URL,
@@ -11,7 +11,11 @@ function getUser() {
             // 解析收到的json数据
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                $("#userinfo").html(data);
+              //  $("#userinfo").html(data);
+                var vm = new Vue({
+                    el: '#userinfo',
+                    data: models.info['data']
+                })
             } else {
                 alert(models.info);
             }
@@ -21,6 +25,7 @@ function getUser() {
          }
     });
 }
+
 
 
 function getAllUser() {
