@@ -87,30 +87,33 @@
 
 
 <div class="ui main text container">
-    <h1 class="ui header">任务列表:</h1>
+    <h1 class="ui header">机器列表</h1>
     <div id="task">
         <table class="ui single line table">
             <thead>
             <tr>
                 <th>id</th>
-                <th>创建时间</th>
-                <th>创建者</th>
-                <th>任务描述</th>
-                <th>操作</th>
+                <th>机器名称</th>
+                <th>内网IP</th>
+                <th>外网IP</th>
+                <th>所属机房</th>
+                <th>机器用途</th>
+                <th>是否初始化</th>
             </tr>
             </thead>
             <tbody>
-                <tr v-for="task in tasks">
-                    <td v-if="has_data">{{ task.id  }}</td>
-                    <td v-if="has_data">{{ task.create_time  }}</td>
-                    <td v-if="has_data">{{ task.creator  }}</td>
-                    <td v-if="has_data">{{ task.description  }}</td>
+                <tr v-for="machine in machines">
+                    <td v-if="has_data">{{ machine.id  }}</td>
+                    <td v-if="has_data">{{ machine.machine_name  }}</td>
+                    <td v-if="has_data">{{ machine.inside_ip  }}</td>
+                    <td v-if="has_data">{{ machine.outside_ip  }}</td>
+                    <td v-if="has_data">{{ machine.location  }}</td>
+                    <td v-if="has_data">{{ machine.usage  }}</td>
+                    <td v-if="has_data">{{ machine.is_initialized  }}</td>
                     <td>
                         <div class="blue ui icon buttons">
                             <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i></div>
                             <div class="ui button" data-tooltip="编辑" data-position="top center"><i class="edit icon"></i></div>
-                            <div class="ui button" data-tooltip="执行" data-position="top right"><i class="play icon"></i></div>
-                            <div class="ui button" data-tooltip="回退" data-position="top right"><i class="undo icon"></i></div>
                             <div class="ui button" data-tooltip="删除" data-position="top right"><i class="trash icon"></i></div>
                         </div>
                     </td>
@@ -118,7 +121,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="5">
+                <th colspan="7">
                     <div class="ui right floated pagination menu">
                         <a class="icon item">
                             <i class="left chevron icon"></i>

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>新增任务</title>
+    <title>新增机器</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
@@ -86,40 +86,46 @@
 
 <div class="ui main text container">
     <div class="ui form">
-        <h1 class="ui header">新增任务:</h1>
+        <h1 class="ui header">新增机器</h1>
         <div class="ui divider"></div>
         <div class="field">
-            <label>请选择版本库</label>
+            <label>机器名称</label>
+            <div class="ui input focus">
+                <input type="text" placeholder="Web01...">
+            </div>
+        </div>
+        <div class="field">
+            <label>内网IP</label>
+            <div class="ui input focus">
+                <input type="text" placeholder="192.168.1.1">
+            </div>
+        </div>
+        <div class="field">
+            <label>外网IP</label>
+            <div class="ui input focus">
+                <input type="text" placeholder="121.121.121.121">
+            </div>
+        </div>
+        <div class="field">
+            <label>所在机房</label>
             <select class="ui dropdown">
-                <option value="haimian.pay">pay</option>
-                <option value="haimian.static">static</option>
-                <option value="haimian.card">card</option>
+                <option value="aliyun-bj">阿里云-北京</option>
+                <option value="aliyun-sz">阿里云-深圳</option>
+                <option value="aliyun-hz">阿里云-杭州</option>
             </select>
         </div>
         <div class="field">
-            <label>请选择更新机器</label>
+            <label>机器用途</label>
+            <div class="ui input focus">
+                <input type="text" placeholder="前端机器">
+            </div>
+        </div>
+        <div class="field">
+            <label>是否初始化</label>
             <select class="ui dropdown">
-                <option value="10.72.32.243">release</option>
+                <option value="1">是</option>
+                <option value="0">否</option>
             </select>
-        </div>
-        <div class="field">
-            <label>更新版本号</label>
-            <div class="ui input focus">
-                <input type="text" placeholder="1234...">
-            </div>
-        </div>
-        <div class="field">
-            <label>更新文件名(多个文件分行写)</label>
-            <div class="ui">
-                <textarea id="files" placeholder="example/example.php,example1/example1.php..." rows="10" cols="100">
-                </textarea>
-            </div>
-        </div>
-        <div class="field">
-            <label>更新描述</label>
-            <div class="ui input focus">
-                <input type="text" placeholder="优化了xxx功能...">
-            </div>
         </div>
     </div>
     <div class="ui divider"></div>
