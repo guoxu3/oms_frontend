@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>新增任务</title>
+    <title>新增文件更新任务</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
@@ -55,13 +55,20 @@
     <div class="ui container">
         <a href="http://oms.miaodeli.com/login" class="header item">
             <img class="logo" src="../img/logo.jpg">
-            免税 OMS
+            XXX OMS
         </a>
         <div class="ui simple dropdown item">
             任务管理 <i class="dropdown icon"></i>
             <div class="menu">
                 <a class="item" href="http://oms.miaodeli.com/task/list">任务列表</a>
-                <a class="item" href="http://oms.miaodeli.com/task/add">新增任务</a>
+                <div class="item">
+                    <i class="dropdown icon"></i>
+                    <span class="text">新增任务</span>
+                    <div class="menu">
+                        <a class="item" href="http://oms.miaodeli.com/task/add_update_file">文件更新</a>
+                        <a class="item" href="http://oms.miaodeli.com/task/add_update_db">数据库更新</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="ui simple dropdown item">
@@ -83,23 +90,22 @@
 
 
 
-
 <div class="ui main text container">
     <div class="ui form">
-        <h1 class="ui header">新增任务:</h1>
+        <h1 class="ui header">新增文件更新任务:</h1>
         <div class="ui divider"></div>
         <div class="field">
             <label>请选择版本库</label>
             <select class="ui dropdown">
-                <option value="haimian.pay">pay</option>
-                <option value="haimian.static">static</option>
-                <option value="haimian.card">card</option>
+                <option value="pay">pay</option>
+                <option value="static">static</option>
+                <option value="card">card</option>
             </select>
         </div>
         <div class="field">
             <label>请选择更新机器</label>
             <select class="ui dropdown">
-                <option value="10.72.32.243">release</option>
+                <option value="192.168.1.1">release</option>
             </select>
         </div>
         <div class="field">
@@ -111,7 +117,7 @@
         <div class="field">
             <label>更新文件名(多个文件分行写)</label>
             <div class="ui">
-                <textarea id="files" placeholder="example/example.php,example1/example1.php..." rows="10" cols="100">
+                <textarea id="files" placeholder="example/example.php..." rows="10" cols="100">
                 </textarea>
             </div>
         </div>
@@ -123,12 +129,12 @@
         </div>
     </div>
     <div class="ui divider"></div>
-        <button class="ui primary button">
-            添加
-        </button>
-        <button class="ui button">
-            清空
-        </button>
+    <button class="ui primary button">
+        添加
+    </button>
+    <button class="ui button">
+        清空
+    </button>
 </div>
 
 

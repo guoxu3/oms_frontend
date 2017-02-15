@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>任务列表</title>
+    <title>机器列表</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
@@ -59,13 +59,20 @@
     <div class="ui container">
         <a href="http://oms.miaodeli.com/login" class="header item">
             <img class="logo" src="../img/logo.jpg">
-            免税 OMS
+            XXX OMS
         </a>
         <div class="ui simple dropdown item">
             任务管理 <i class="dropdown icon"></i>
             <div class="menu">
                 <a class="item" href="http://oms.miaodeli.com/task/list">任务列表</a>
-                <a class="item" href="http://oms.miaodeli.com/task/add">新增任务</a>
+                <div class="item">
+                    <i class="dropdown icon"></i>
+                    <span class="text">新增任务</span>
+                    <div class="menu">
+                        <a class="item" href="http://oms.miaodeli.com/task/add_update_file">文件更新</a>
+                        <a class="item" href="http://oms.miaodeli.com/task/add_update_db">数据库更新</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="ui simple dropdown item">
@@ -76,7 +83,7 @@
             </div>
         </div>
         <div class="right menu">
-            <a class="ui transparent inverted icon item" href="http://oms.miaodeli.com/user/edit">
+           <a class="ui transparent inverted icon item" href="http://oms.miaodeli.com/user/edit">
                 <i class="user icon"></i>
                  &nbsp;&nbsp;<span id=username></span>
             </a>
@@ -86,7 +93,7 @@
 </div>
 
 
-<div class="ui main text container">
+<div class="ui main container">
     <h1 class="ui header">机器列表</h1>
     <div id="task">
         <table class="ui single line table">
@@ -99,6 +106,7 @@
                 <th>所属机房</th>
                 <th>机器用途</th>
                 <th>是否初始化</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -121,7 +129,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="7">
+                <th colspan="8">
                     <div class="ui right floated pagination menu">
                         <a class="icon item">
                             <i class="left chevron icon"></i>
