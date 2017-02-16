@@ -15,12 +15,20 @@
     <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
     <script src="../lib/semantic/semantic.min.js"></script>
 
-    <script type="text/javascript" src="../js/task.js"></script>
+    <script type="text/javascript" src="../js/machine.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
+    <script>is_login()</script>
     <script>
         $(function() {
             $('.ui.dropdown').dropdown();
-        })
+        });
+        $(document)
+            .ready(function() {
+                $(".primary.button").click(function() {
+                    addMachine()
+                });
+            })
+        ;
     </script>
 
 
@@ -98,24 +106,24 @@
         <div class="field">
             <label>机器名称</label>
             <div class="ui input focus">
-                <input type="text" placeholder="Web01...">
+                <input id="machine_name" type="text" placeholder="Web01...">
             </div>
         </div>
         <div class="field">
             <label>内网IP</label>
             <div class="ui input focus">
-                <input type="text" placeholder="192.168.1.1">
+                <input id="inside_ip" type="text" placeholder="192.168.1.1">
             </div>
         </div>
         <div class="field">
             <label>外网IP</label>
             <div class="ui input focus">
-                <input type="text" placeholder="121.121.121.121">
+                <input id="outside_ip" type="text" placeholder="121.121.121.121">
             </div>
         </div>
         <div class="field">
             <label>所在机房</label>
-            <select class="ui dropdown">
+            <select id="location" class="ui dropdown">
                 <option value="aliyun-bj">阿里云-北京</option>
                 <option value="aliyun-sz">阿里云-深圳</option>
                 <option value="aliyun-hz">阿里云-杭州</option>
@@ -124,12 +132,12 @@
         <div class="field">
             <label>机器用途</label>
             <div class="ui input focus">
-                <input type="text" placeholder="前端机器">
+                <input id="usage" type="text" placeholder="前端机器">
             </div>
         </div>
         <div class="field">
             <label>是否初始化</label>
-            <select class="ui dropdown">
+            <select id="is_initialized" class="ui dropdown">
                 <option value="1">是</option>
                 <option value="0">否</option>
             </select>

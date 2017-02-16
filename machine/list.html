@@ -15,18 +15,17 @@
     <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
     <script src="../lib/semantic/semantic.min.js"></script>
 
-    <script type="text/javascript" src="../js/task.js"></script>
+    <script type="text/javascript" src="../js/machine.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script>
-        getTask();
-
+        getAllMachines();
     </script>
 
     <script>
         $(function () {
             $('.activating.element').popup();
         })
-        </script>
+    </script>
 
     <style type="text/css">
         body {
@@ -95,11 +94,11 @@
 
 <div class="ui main container">
     <h1 class="ui header">机器列表</h1>
-    <div id="task">
+    <div id="machine">
         <table class="ui single line table">
             <thead>
             <tr>
-                <th>id</th>
+                <th>ID</th>
                 <th>机器名称</th>
                 <th>内网IP</th>
                 <th>外网IP</th>

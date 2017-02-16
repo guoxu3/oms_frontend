@@ -1,8 +1,8 @@
 /**
  * Created by guoxu on 12/7/16.
  */
-function getTask() {
-    var URL = 'http://oms.miaodeli.com/api/task?start=0&count=10';
+function getAllMachines() {
+    var URL = 'http://oms.miaodeli.com/api/machine?start=0&count=10';
     $.ajax({
          type: "GET",
          url: URL,
@@ -13,15 +13,15 @@ function getTask() {
                 // $("#taskList").html(data);
                 var ser_data = models.info['data'];
                 var vm = new Vue({
-                    el: '#task',
+                    el: '#machine',
                     data: {
-                        tasks: ser_data,
+                        machines: ser_data,
                         has_data: true
                     }
                 })
             } else {
                 var vm = new Vue({
-                    el: '#task',
+                    el: '#machine',
                     data: {
                         has_data: false
                     }
@@ -35,26 +35,14 @@ function getTask() {
     });
 }
 
-function addTask() {
-    //获取文本框里的值,形成用逗号相隔的一行
-    var txt = $("#files").val();
-    var file_list = "";
-    var txts = txt.split('\n');
-    for (i=0; i<txts.length ;i++ ) {
-        if (txts[i] != '') {
-            file_list = file_list + "," + $.trim(txts[i])
-        }
-    }
-    var files = file_list.replace(/(^,)/g, "");
-
+function addMachine() {
     var data = {
-        creator: username,
-        action: $("#action").val(),
-        target: $("#target").val(),
-        ip: $("#ip").val(),
-        version: $("#version").val(),
-        content: files,
-        description: $("#description").val()
+        machine_name: $("#machine_name").val(),
+        inside_ip: $("#inside_ip").val(),
+        outside_ip: $("#outside_ip").val(),
+        location: $("#location").val(),
+        usage: $("#usage").val(),
+        is_initialized: $("#is_initialized").val()
     };
 
     var request = {
@@ -66,7 +54,7 @@ function addTask() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/api/task';
+    var URL = 'http://oms.miaodeli.com/api/machine';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -78,7 +66,7 @@ function addTask() {
             var models = data;
             if (models.ok == true) {
                 //alert(models.info);
-                window.location.href = "/task/list";
+                window.location.href = "/machine/list";
             } else {
                 alert(models.info);
             }
@@ -91,7 +79,7 @@ function addTask() {
 
 function deleteTask(){
     var task_id = $("#task_id").val();
-    var URL = 'http://oms.miaodeli.com/api/task?task_id=' + task_id;
+    var URL = 'http://oms.miaodeli.com/api/machine?task_id=' + task_id;
     $.ajax({
          type: "DELETE",
          url: URL,

@@ -17,10 +17,18 @@
 
     <script type="text/javascript" src="../js/task.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
+    <script>is_login();</script>
     <script>
         $(function() {
             $('.ui.dropdown').dropdown();
-        })
+        });
+        $(document)
+            .ready(function() {
+                $(".primary.button").click(function() {
+                    addTask()
+                });
+            })
+        ;
     </script>
 
 
@@ -81,7 +89,7 @@
         <div class="right menu">
            <a class="ui transparent inverted icon item" href="http://oms.miaodeli.com/user/edit">
                 <i class="user icon"></i>
-                 &nbsp;&nbsp;<span id=username></span>
+                 &nbsp;&nbsp;<span id="username"></span>
             </a>
             <a class="item" href="http://oms.miaodeli.com/logout">注销</a>
         </div>
@@ -94,9 +102,10 @@
     <div class="ui form">
         <h1 class="ui header">新增文件更新任务:</h1>
         <div class="ui divider"></div>
+        <input id="action" type="text" value="update_file" style="display: none">
         <div class="field">
             <label>请选择版本库</label>
-            <select class="ui dropdown">
+            <select id="target" class="ui dropdown">
                 <option value="pay">pay</option>
                 <option value="static">static</option>
                 <option value="card">card</option>
@@ -104,14 +113,14 @@
         </div>
         <div class="field">
             <label>请选择更新机器</label>
-            <select class="ui dropdown">
+            <select id="ip" class="ui dropdown">
                 <option value="192.168.1.1">release</option>
             </select>
         </div>
         <div class="field">
             <label>更新版本号</label>
             <div class="ui input focus">
-                <input type="text" placeholder="1234...">
+                <input id="version" type="text" placeholder="1234...">
             </div>
         </div>
         <div class="field">
@@ -124,7 +133,7 @@
         <div class="field">
             <label>更新描述</label>
             <div class="ui input focus">
-                <input type="text" placeholder="优化了xxx功能...">
+                <input id="description" type="text" placeholder="优化了xxx功能...">
             </div>
         </div>
     </div>

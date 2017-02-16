@@ -99,9 +99,10 @@
         <table class="ui single line table">
             <thead>
             <tr>
-                <th>id</th>
+                <th>ID</th>
                 <th>创建时间</th>
                 <th>创建者</th>
+                <th>任务类型</th>
                 <th>任务描述</th>
                 <th>操作</th>
             </tr>
@@ -109,8 +110,10 @@
             <tbody>
                 <tr v-for="task in tasks">
                     <td v-if="has_data">{{ task.id  }}</td>
+                    <td v-if="has_data"  style="display:none">{{ task.task_id  }}</td>
                     <td v-if="has_data">{{ task.create_time  }}</td>
                     <td v-if="has_data">{{ task.creator  }}</td>
+                    <td v-if="has_data">{{ task.action  }}</td>
                     <td v-if="has_data">{{ task.description  }}</td>
                     <td>
                         <div class="blue ui icon buttons">
@@ -125,7 +128,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="5">
+                <th colspan="6">
                     <div class="ui right floated pagination menu">
                         <a class="icon item">
                             <i class="left chevron icon"></i>
