@@ -11,11 +11,11 @@
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
     <script src="../lib/semantic/semantic.min.js"></script>
     <script src="../lib/vue.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript" src="../js/user.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
 
@@ -56,36 +56,12 @@
         ;
     </script>
 
-
-    <style type="text/css">
-        body {
-            background-color: #FFFFFF;
-        }
-
-        .ui.menu .item img.logo {
-            margin-right: 1.5em;
-        }
-
-        .main.container {
-            margin-top: 7em;
-        }
-
-        .wireframe {
-            margin-top: 2em;
-        }
-
-        .ui.footer.segment {
-            margin: 5em 0em 0em;
-            padding: 5em 0em;
-        }
-    </style>
-
 </head>
 <body>
 
 <!-- 头部导航栏 -->
-<div class="ui blue fixed inverted menu">
-    <div class="ui container">
+<div class="ui blue large fixed inverted menu">
+    <div class="ui  container">
         <a href="http://oms.miaodeli.com/login" class="header item">
             <img class="logo" src="../img/logo.jpg">
             XXX OMS
@@ -121,6 +97,7 @@
     </div>
 </div>
 
+
 <div class="ui main text container">
     <h1 class="ui header">个人中心</h1>
     <div class="ui divider"></div>
@@ -131,7 +108,7 @@
     </div>
     <div  class="ui bottom attached tab segment active" data-tab="first">
         <div id="userinfo">
-            <p>用户名：{{ username }}</p>
+            <p>用户名：{{ username }} </p>
             <p>昵称：{{ nickname }}</p>
             <p>邮箱：{{ mail }}</p>
             <p>所属部门：{{ department }}</p>
@@ -170,13 +147,13 @@
 
 
 <!-- 底部 -->
-<div class="ui inverted vertical footer segment">
+<div class="ui  inverted vertical  footer segment">
     <div class="ui center aligned container">
         <img src="../img/logo.jpg" class="ui centered mini image">
         <div class="ui horizontal inverted small divided link list">
-            <a class="item" href="#">Site Map</a>
+            <p class="item" href="#">©2017 X.Guo. All rights reserved.</p>
             <a class="item" href="#">Contact Us</a>
-            <a class="item" href="#">Terms and Conditions</a>
+            <a class="item" href="#">About</a>
             <a class="item" href="#">Privacy Policy</a>
         </div>
     </div>
