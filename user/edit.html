@@ -46,7 +46,14 @@
               })
             ;
             $('.menu .item').tab();
-        })
+        });
+        $(document)
+            .ready(function() {
+                $(".updatepasswd.button").click(function() {
+                    updateUserPassword()
+                });
+            })
+        ;
     </script>
 
 
@@ -136,22 +143,22 @@
             <div class="field">
                 <label>原密码</label>
                 <div class="ui input focus">
-                    <input type="text" placeholder="">
+                    <input id="old_passwd" type="password" placeholder="">
                 </div>
             </div>
             <div class="field">
                 <label>新密码</label>
                 <div class="ui input focus">
-                    <input type="text" placeholder="">
+                    <input id="new_passwd" type="password" placeholder="">
                 </div>
             </div>
             <div class="field">
                 <label>确认新密码</label>
                 <div class="ui input focus">
-                    <input type="text" placeholder="">
+                    <input id="confirm_new_passwd" type="password" placeholder="">
                 </div>
             </div>
-            <button class="ui blue button" type="submit">提交</button>
+            <button class="ui blue updatepasswd button" type="submit">提交</button>
         </div>
     </div>
 

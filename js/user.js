@@ -88,14 +88,64 @@ function addUser() {
     });
 }
 
-function updateUser() {
-    var data = {};
-    for (var i = 0; i < arguments.length; i++) {
-        console.log($("#"+arguments[i]).val());
-        if ($("#"+arguments[i]).val()){
-            data[arguments[i]] = $("#"+arguments[i]).val();
+
+// 更新用户密码
+function updateUserPassword(){
+    var new_passwd = $("#new_passwd").val();
+    var confirm_new_passwd = $("#confirm_new_passwd").val();
+    old_passwd = $("#old_passwd").val();
+    console.log(new_passwd,confirm_new_passwd);
+    if (new_passwd != "" && old_passwd != "" && confirm_new_passwd != "") {
+        if (new_passwd != confirm_new_passwd ) {
+            alert("两次输入密码必须一致")
+        } else {
+            var data = {
+                username: getCookie("username"),
+                old_passwd: old_passwd,
+                new_passwd: new_passwd
+            };
+            var request = {
+                action: 'update',
+                data: data
+            };
+            //调用了jquery.json 库
+            var encoded;
+            encoded = $.toJSON(request);
+            var jsonStr = encoded;
+            console.log(jsonStr);
+            var URL = 'http://oms.miaodeli.com/api/user';
+            $.ajax({
+                url: URL,
+                type: 'POST',
+                data: jsonStr,
+                dataType: 'json',
+                contentType: 'application/json;charset=utf8',
+                success: function (data) {
+                    // 解析收到的json数据
+                    var models = data;
+                    if (models.ok == true) {
+                        alert("密码修改成功，请重新登陆");
+                        window.location.href = "/login";
+                    } else {
+                        alert(models.info);
+                    }
+                },
+                Error: function (xhr, error, exception) {
+                    alert(exception.toString());
+                }
+            });
         }
+    } else {
+        alert("输入不可以为空")
     }
+}
+
+
+
+function updateUser() {
+
+    var data = {};
+
     var request = {
         action: 'update',
         data: data
