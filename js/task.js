@@ -35,6 +35,7 @@ function getTask() {
     });
 }
 
+
 function addTask() {
     //获取文本框里的值,形成用逗号相隔的一行
     var txt = $("#files").val();
@@ -57,9 +58,19 @@ function addTask() {
         description: $("#description").val()
     };
 
+    var obj = document.getElementsByName("mailto");
+    console.log(obj);
+    var mailto_list = [];
+    var k;
+    for(k in obj){
+        if(obj[k].checked)
+            mailto_list.push(obj[k].value);
+    }
+
     var request = {
         action: 'add',
-        data: data
+        data: data,
+        mailto: mailto_list
     };
     //调用了jquery.json 库
     var encoded;
