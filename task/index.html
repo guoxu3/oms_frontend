@@ -7,26 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>任务列表</title>
+    <title>任务详情</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
-    <script src="../lib/vue.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
     <script src="../lib/semantic/semantic.min.js"></script>
+    <script src="../lib/vue.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript" src="../js/task.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script>
-        getAllTask();
+        getTaskByID();
+    </script>
+    <script>
+        $(function() {
+            $('.ui.dropdown').dropdown();
+        });
     </script>
 
-    <script>
-        $(function () {
-            $('.activating.element').popup();
-        })
-        </script>
 </head>
 <body>
 
@@ -61,7 +61,7 @@
         <div class="right menu">
            <a class="ui transparent inverted icon item" href="http://oms.miaodeli.com/user/edit">
                 <i class="user icon"></i>
-                 &nbsp;&nbsp;<span id=username></span>
+                 &nbsp;&nbsp;<span id="username"></span>
             </a>
             <a class="item" href="http://oms.miaodeli.com/logout">注销</a>
         </div>
@@ -69,61 +69,21 @@
 </div>
 
 
+
 <div class="ui main text container">
-    <h1 class="ui header">任务列表:</h1>
-    <div id="task">
-        <table class="ui single line table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>创建时间</th>
-                <th>创建者</th>
-                <th>任务类型</th>
-                <th>任务描述</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr v-for="task in tasks">
-                    <td v-if="has_data">{{ task.id  }}</td>
-                    <td v-if="has_data"  style="display:none">{{ task.task_id  }}</td>
-                    <td v-if="has_data">{{ task.create_time  }}</td>
-                    <td v-if="has_data">{{ task.creator  }}</td>
-                    <td v-if="has_data">{{ task.action  }}</td>
-                    <td v-if="has_data">{{ task.description  }}</td>
-                    <td>
-                        <div class="blue ui icon buttons">
-                            <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i></div>
-                            <div class="ui button" data-tooltip="编辑" data-position="top center"><i class="edit icon"></i></div>
-                            <div class="ui button" data-tooltip="执行" data-position="top right"><i class="play icon"></i></div>
-                            <div class="ui button" data-tooltip="回退" data-position="top right"><i class="undo icon"></i></div>
-                            <div class="ui button" data-tooltip="删除" data-position="top right"><i class="trash icon"></i></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="6">
-                    <div class="ui right floated pagination menu">
-                        <a class="icon item">
-                            <i class="left chevron icon"></i>
-                        </a>
-                        <a class="item">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
-                        <a class="icon item">
-                            <i class="right chevron icon"></i>
-                        </a>
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
+    <div class="ui form">
+        <h1 id="update_db" class="ui header">查看任务详情:</h1>
+        <div class="ui divider"></div>
+        <div id="taskinfo">
+            <p>任务ID：{{ task_id }} </p>
+            <p>版本库：{{ target }}</p>
+            <p>机器：{{ ip }}</p>
+            <p>描述：{{ description }}</p>
+        </div>
     </div>
-    <p id="taskList"></p>
 </div>
+
+
 
 <!-- 底部 -->
 <div class="ui inverted vertical footer segment">

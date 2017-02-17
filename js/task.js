@@ -1,7 +1,52 @@
 /**
  * Created by guoxu on 12/7/16.
  */
-function getTask() {
+
+function getTask(task_id) {
+    var URL = 'http://oms.miaodeli.com/api/task?task_id=' + task_id;
+    $.ajax({
+         type: "GET",
+         url: URL,
+         success: function (data) {
+            // 解析收到的json数据
+            var models = $.parseJSON(data);
+            if (models.ok == true) {
+                // $("#taskList").html(data);
+                var ser_data = models.info['data'];
+                var vm = new Vue({
+                    el: '#taskinfo',
+                    data: ser_data
+                })
+            } else {
+                alert(models.info);
+            }
+         },
+         Error: function (xhr, error, exception) {
+            alert(exception.toString());
+         }
+    });
+}
+
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null) {
+         return  unescape(r[2]);
+     } else {
+         return null;
+     }
+}
+
+function getTaskByID(){
+    var task_id = GetQueryString("task_id");
+    if (task_id != null) {
+        getTask(task_id)
+    }
+}
+
+
+function getAllTask() {
     var URL = 'http://oms.miaodeli.com/api/task?start=0&count=10';
     $.ajax({
          type: "GET",
