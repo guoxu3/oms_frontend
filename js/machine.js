@@ -16,18 +16,25 @@ function getAllMachines() {
             } else {
                 alert(models.info);
             }
+            var machine = new Vue({
+                el: '#machine',
+                data: {
+                    machines: machine_data,
+                    show_button: show_button
+                }
+            })
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
+            var machine = new Vue({
+                el: '#machine',
+                data: {
+                    machines: machine_data,
+                    show_button: show_button
+                }
+            })
         }
     });
-    var vm = new Vue({
-        el: '#machine',
-        data: {
-            machines: machine_data,
-            show_button: show_button
-        }
-    })
 }
 
 function addMachine() {

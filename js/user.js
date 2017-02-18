@@ -15,15 +15,19 @@ function getUser(username) {
             } else {
                 alert(models.info);
             }
+            var userinfo = new Vue({
+                el: '#userinfo',
+                data: user_data
+            })
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
+            var userinfo = new Vue({
+                el: '#userinfo',
+                data: user_data
+            })
         }
     });
-    var vm = new Vue({
-        el: '#userinfo',
-        data: user_data
-    })
 }
 
 function getAllUser() {

@@ -16,18 +16,25 @@ function getTask(task_id) {
             } else {
                 alert(models.info);
             }
-            var vm = new Vue({
+            var taskinfo = new Vue({
                 el: '#taskinfo',
-                data: ser_data
+                data: task_data
             })
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
+            var taskinfo = new Vue({
+                el: '#taskinfo',
+                data: task_data
+            })
         }
     });
 }
 
 //获取url中的参数
+/**
+ * @return {null}
+ */
 function GetQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
@@ -53,28 +60,26 @@ function getAllTask() {
     $.ajax({
         type: "GET",
         url: URL,
-        async: false,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                var task_data = models.info['data'];
-                var show_button = true;
-
+                task_data = models.info['data'];
+                show_button = true;
             } else {
                 alert(models.info);
             }
-            var vm = new Vue({
-            el: '#task',
-            data: {
-                tasks: task_data,
-                show_button: show_button
+            var task = new Vue({
+                el: '#task',
+                data: {
+                    tasks: task_data,
+                    show_button: show_button
                 }
             });
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
             alert(task_data);
-            var vm = new Vue({
+            var task = new Vue({
                 el: '#task',
                 data: {
                     tasks: task_data,

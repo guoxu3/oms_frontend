@@ -16,28 +16,31 @@ function is_login() {
     if (username == null) {
         alert("Please log in first!");
         window.location.href = "../login";
-    } else {
-        var URL = 'http://oms.miaodeli.com/api/login';
-        $.ajax({
-            type: "GET",
-            url: URL,
-            success: function (data) {
-                var models = $.parseJSON(data);
-                if (models.ok == false) {
-                    alert(models.info);
-                    window.location.href = "../login";
-                }
-            },
-            error: function (xhr, error, exception) {
-                alert(exception.toString());
-            }
-        });
+        return;
     }
+
+    var URL = 'http://oms.miaodeli.com/api/login';
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok == false) {
+                alert(models.info);
+                window.location.href = "../login";
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+
 }
 
 // 自动填写html中的用户名
 window.onload = function fillUsername() {
-    var username = getCookie("username");
+    var username;
+    username = getCookie("username");
     document.getElementById("username").innerHTML = username;
 };
 

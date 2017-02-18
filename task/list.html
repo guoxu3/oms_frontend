@@ -26,10 +26,10 @@
         $(function () {
             $('.activating.element').popup();
         })
-        </script>
+    </script>
 </head>
-<body>
 
+<body>
 <!-- 头部导航栏 -->
 <div class="ui blue large fixed inverted menu">
     <div class="ui container">
@@ -59,9 +59,9 @@
             </div>
         </div>
         <div class="right menu">
-           <a class="ui transparent inverted icon item" href="../user/edit">
+            <a class="ui transparent inverted icon item" href="../user/edit">
                 <i class="user icon"></i>
-                 &nbsp;&nbsp;<span id=username></span>
+                &nbsp;&nbsp;<span id=username></span>
             </a>
             <a class="item" href="../logout">注销</a>
         </div>
@@ -84,23 +84,28 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="task in tasks">
-                    <td v-cloak>{{ task.id  }}</td>
-                    <td v-cloak style="display:none !important;">{{ task.task_id  }}</td>
-                    <td v-cloak>{{ task.create_time  }}</td>
-                    <td v-cloak>{{ task.creator  }}</td>
-                    <td v-cloak>{{ task.action  }}</td>
-                    <td v-cloak>{{ task.description  }}</td>
-                    <td v-cloak v-show="show_button">
-                        <div v-cloak class="blue ui icon buttons">
-                            <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i></div>
-                            <div class="ui button" data-tooltip="编辑" data-position="top center"><i class="edit icon"></i></div>
-                            <div class="ui button" data-tooltip="执行" data-position="top right"><i class="play icon"></i></div>
-                            <div class="ui button" data-tooltip="回退" data-position="top right"><i class="undo icon"></i></div>
-                            <div class="ui button" data-tooltip="删除" data-position="top right"><i class="trash icon"></i></div>
+            <tr v-for="task in tasks">
+                <td v-cloak>{{ task.id }}</td>
+                <td v-cloak style="display:none !important;">{{ task.task_id }}</td>
+                <td v-cloak>{{ task.create_time }}</td>
+                <td v-cloak>{{ task.creator }}</td>
+                <td v-cloak>{{ task.action }}</td>
+                <td v-cloak>{{ task.description }}</td>
+                <td v-cloak v-show="show_button">
+                    <div v-cloak class="blue ui icon buttons">
+                        <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i>
                         </div>
-                    </td>
-                </tr>
+                        <div class="ui button" data-tooltip="编辑" data-position="top center"><i class="edit icon"></i>
+                        </div>
+                        <div class="ui button" data-tooltip="执行" data-position="top right"><i class="play icon"></i>
+                        </div>
+                        <div class="ui button" data-tooltip="回退" data-position="top right"><i class="undo icon"></i>
+                        </div>
+                        <div class="ui button" data-tooltip="删除" data-position="top right"><i class="trash icon"></i>
+                        </div>
+                    </div>
+                </td>
+            </tr>
             </tbody>
             <tfoot>
             <tr>
