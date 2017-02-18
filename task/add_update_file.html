@@ -75,7 +75,7 @@
 
 
 <div class="ui main text container">
-    <div class="ui form">
+    <form class="ui form">
         <h1 class="ui header">新增文件更新任务:</h1>
         <div class="ui divider"></div>
         <input id="action" type="text" value="update_file" style="display: none">
@@ -102,8 +102,7 @@
         <div class="field">
             <label>更新文件名(多个文件分行写)</label>
             <div class="ui">
-                <textarea id="files" placeholder="example/example.php..." rows="10" cols="100">
-                </textarea>
+                <textarea id="files" placeholder="example/example.php..." rows="10" cols="100"></textarea>
             </div>
         </div>
         <div class="field">
@@ -129,14 +128,14 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="ui divider"></div>
-    <button class="ui primary button">
-        添加
-    </button>
-    <button class="ui button">
-        清空
-    </button>
+        <div class="ui divider"></div>
+        <button class="ui primary button">
+            添加
+        </button>
+        <button type="reset" class="ui button">
+            清空
+        </button>
+    </form>
 </div>
 
 

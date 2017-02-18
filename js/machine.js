@@ -3,36 +3,31 @@
  */
 function getAllMachines() {
     var URL = 'http://oms.miaodeli.com/api/machine?start=0&count=10';
+    var machine_data = [];
+    var show_button = false;
     $.ajax({
-         type: "GET",
-         url: URL,
-         success: function (data) {
-            // 解析收到的json数据
+        type: "GET",
+        url: URL,
+        success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                // $("#taskList").html(data);
-                var ser_data = models.info['data'];
-                var vm = new Vue({
-                    el: '#machine',
-                    data: {
-                        machines: ser_data,
-                        has_data: true
-                    }
-                })
+                machine_data = models.info['data'];
+                show_button = true;
             } else {
-                var vm = new Vue({
-                    el: '#machine',
-                    data: {
-                        has_data: false
-                    }
-                });
                 alert(models.info);
             }
-         },
-         Error: function (xhr, error, exception) {
+        },
+        error: function (xhr, error, exception) {
             alert(exception.toString());
-         }
+        }
     });
+    var vm = new Vue({
+        el: '#machine',
+        data: {
+            machines: machine_data,
+            show_button: show_button
+        }
+    })
 }
 
 function addMachine() {
@@ -49,7 +44,7 @@ function addMachine() {
         action: 'add',
         data: data
     };
-    //调用了jquery.json 库
+
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
@@ -62,38 +57,35 @@ function addMachine() {
         dataType: 'json',
         contentType: 'application/json;charset=utf8',
         success: function (data) {
-            // 解析收到的json数据
             var models = data;
             if (models.ok == true) {
-                //alert(models.info);
                 window.location.href = "/machine/list";
             } else {
                 alert(models.info);
             }
         },
-        Error: function (xhr, error, exception) {
+        error: function (xhr, error, exception) {
             alert(exception.toString());
         }
     });
 }
 
-function deleteTask(){
+function deleteTask() {
     var task_id = $("#task_id").val();
     var URL = 'http://oms.miaodeli.com/api/machine?task_id=' + task_id;
     $.ajax({
-         type: "DELETE",
-         url: URL,
-         success: function (data) {
-            // 解析收到的json数据
+        type: "DELETE",
+        url: URL,
+        success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 alert(models.info);
             } else {
                 alert(models.info);
             }
-         },
-         Error: function (xhr, error, exception) {
+        },
+        error: function (xhr, error, exception) {
             alert(exception.toString());
-         }
+        }
     });
 }

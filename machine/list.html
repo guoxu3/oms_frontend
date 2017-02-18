@@ -34,20 +34,20 @@
 <!-- 头部导航栏 -->
 <div class="ui blue large fixed inverted menu">
     <div class="ui container">
-        <a href="http://oms.miaodeli.com/login" class="header item">
+        <a href="../login" class="header item">
             <img class="logo" src="../img/logo.jpg">
             XXX OMS
         </a>
         <div class="ui simple dropdown item">
             任务管理 <i class="dropdown icon"></i>
             <div class="menu">
-                <a class="item" href="http://oms.miaodeli.com/task/list">任务列表</a>
+                <a class="item" href="../task/list">任务列表</a>
                 <div class="item">
                     <i class="dropdown icon"></i>
                     <span class="text">新增任务</span>
                     <div class="menu">
-                        <a class="item" href="http://oms.miaodeli.com/task/add_update_file">文件更新</a>
-                        <a class="item" href="http://oms.miaodeli.com/task/add_update_db">数据库更新</a>
+                        <a class="item" href="../task/add_update_file">文件更新</a>
+                        <a class="item" href="../task/add_update_db">数据库更新</a>
                     </div>
                 </div>
             </div>
@@ -55,16 +55,16 @@
         <div class="ui simple dropdown item">
             机器管理 <i class="dropdown icon"></i>
             <div class="menu">
-                <a class="item" href="http://oms.miaodeli.com/machine/list">机器列表</a>
-                <a class="item" href="http://oms.miaodeli.com/machine/add">新增机器</a>
+                <a class="item" href="../machine/list">机器列表</a>
+                <a class="item" href="../machine/add">新增机器</a>
             </div>
         </div>
         <div class="right menu">
-           <a class="ui transparent inverted icon item" href="http://oms.miaodeli.com/user/edit">
+           <a class="ui transparent inverted icon item" href="../user/edit">
                 <i class="user icon"></i>
                  &nbsp;&nbsp;<span id=username></span>
             </a>
-            <a class="item" href="http://oms.miaodeli.com/logout">注销</a>
+            <a class="item" href="../logout">注销</a>
         </div>
     </div>
 </div>
@@ -88,15 +88,15 @@
             </thead>
             <tbody>
                 <tr v-for="machine in machines">
-                    <td v-if="has_data">{{ machine.id  }}</td>
-                    <td v-if="has_data">{{ machine.machine_name  }}</td>
-                    <td v-if="has_data">{{ machine.inside_ip  }}</td>
-                    <td v-if="has_data">{{ machine.outside_ip  }}</td>
-                    <td v-if="has_data">{{ machine.location  }}</td>
-                    <td v-if="has_data">{{ machine.usage  }}</td>
-                    <td v-if="has_data">{{ machine.is_initialized  }}</td>
-                    <td>
-                        <div class="blue ui icon buttons">
+                    <td v-cloak>{{ machine.id  }}</td>
+                    <td v-cloak>{{ machine.machine_name  }}</td>
+                    <td v-cloak>{{ machine.inside_ip  }}</td>
+                    <td v-cloak>{{ machine.outside_ip  }}</td>
+                    <td v-cloak>{{ machine.location  }}</td>
+                    <td v-cloak>{{ machine.usage  }}</td>
+                    <td v-cloak>{{ machine.is_initialized  }}</td>
+                    <td v-cloak v-show="show_button">
+                        <div v-cloak class="blue ui icon buttons">
                             <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i></div>
                             <div class="ui button" data-tooltip="编辑" data-position="top center"><i class="edit icon"></i></div>
                             <div class="ui button" data-tooltip="删除" data-position="top right"><i class="trash icon"></i></div>

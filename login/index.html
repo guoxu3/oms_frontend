@@ -17,12 +17,12 @@
     <script src="../js/login.js"></script>
 
     <script>
-    $(document)
-        .ready(function() {
-            $(".button").click(function() {
-                login('username', 'passwd');
-            });
-        })
+    $(function() {
+        $("form").submit(function() {
+            login();
+            return false
+        });
+    })
     ;
     </script>
 
@@ -51,7 +51,7 @@
                         <input id="passwd" type="password" name="passwd" placeholder="Password">
                     </div>
                 </div>
-                <div class="ui fluid large teal submit button">Login</div>
+                <button type="submit" class="ui fluid large teal submit button">Login</button>
             </div>
 
             <div class="ui error message"></div>

@@ -7,7 +7,8 @@ body {
 }
 
 .main.container {
-    margin-top: 5em;
+    padding-top: 5em;
+    min-height: 74%;
 }
 
 .wireframe {
@@ -17,4 +18,12 @@ body {
 .ui.footer.segment {
     margin: 7em 0em 0em;
     padding: 2em 0em;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+[v-show] {
+    display: none;
 }

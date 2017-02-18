@@ -10,10 +10,9 @@ function getCookie(name) {
         return null;
 }
 
-var username = getCookie("username");
-
 // 判断是否登陆或者是否登陆超时
 function is_login() {
+    var username = getCookie("username");
     if (username == null) {
         alert("Please log in first!");
         window.location.href = "../login";
@@ -23,14 +22,13 @@ function is_login() {
             type: "GET",
             url: URL,
             success: function (data) {
-                // 解析收到的json数据
                 var models = $.parseJSON(data);
                 if (models.ok == false) {
                     alert(models.info);
                     window.location.href = "../login";
                 }
             },
-            Error: function (xhr, error, exception) {
+            error: function (xhr, error, exception) {
                 alert(exception.toString());
             }
         });
@@ -39,6 +37,7 @@ function is_login() {
 
 // 自动填写html中的用户名
 window.onload = function fillUsername() {
+    var username = getCookie("username");
     document.getElementById("username").innerHTML = username;
 };
 
