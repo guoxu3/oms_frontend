@@ -9,7 +9,6 @@ function getTask(task_id) {
         type: "GET",
         url: URL,
         success: function (data) {
-            // 解析收到的json数据
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 task_data = models.info['data'];
@@ -133,7 +132,7 @@ function addTask() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/api/task';
+    var URL = '/api/task';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -143,18 +142,13 @@ function addTask() {
         success: function (data) {
             var models = data;
             if (models.ok == true) {
-                alert("xxxx");
                 window.location.href = "/task/list";
             } else {
-                alert("xxxxssss");
-                console.log(models);
                 alert(models.info);
             }
         },
         error: function (xhr, error, exception) {
-            alert("sdsdsfs");
-            alert(error);
-            alert(exception.toString());
+            alert("erro: request failed");
         }
     });
 }

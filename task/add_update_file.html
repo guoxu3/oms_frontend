@@ -24,8 +24,9 @@
         });
         $(document)
             .ready(function() {
-                $(".primary.button").click(function() {
+                $("form").submit(function() {
                     addTask()
+                    return false
                 });
             })
         ;
@@ -96,19 +97,19 @@
         <div class="field">
             <label>更新版本号</label>
             <div class="ui input focus">
-                <input id="version" type="text" placeholder="1234...">
+                <input id="version" type="text" value="123" placeholder="1234...">
             </div>
         </div>
         <div class="field">
             <label>更新文件名(多个文件分行写)</label>
             <div class="ui">
-                <textarea id="files" placeholder="example/example.php..." rows="10" cols="100"></textarea>
+                <textarea id="files" placeholder="example/example.php..."  rows="10" cols="100">123123</textarea>
             </div>
         </div>
         <div class="field">
             <label>更新描述</label>
             <div class="ui input focus">
-                <input id="description" type="text" placeholder="优化了xxx功能...">
+                <input id="description" type="text" value="test" placeholder="优化了xxx功能...">
             </div>
         </div>
         <div class="field">
@@ -129,7 +130,7 @@
             </div>
         </div>
         <div class="ui divider"></div>
-        <button class="ui primary button">
+        <button class="ui primary button" type="submit">
             添加
         </button>
         <button type="reset" class="ui button">

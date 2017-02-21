@@ -24,8 +24,9 @@
         });
         $(document)
             .ready(function() {
-                $(".primary.button").click(function() {
-                    addMachine()
+                $("form").submit(function() {
+                    addMachine();
+                    return false
                 });
             })
         ;
@@ -73,28 +74,26 @@
 </div>
 
 
-
-
 <div class="ui main text container">
-    <div class="ui form">
+    <form class="ui form">
         <h1 class="ui header">新增机器</h1>
         <div class="ui divider"></div>
         <div class="field">
             <label>机器名称</label>
             <div class="ui input focus">
-                <input id="machine_name" type="text" placeholder="Web01...">
+                <input id="machine_name" type="text" value="web01" placeholder="Web01...">
             </div>
         </div>
         <div class="field">
             <label>内网IP</label>
             <div class="ui input focus">
-                <input id="inside_ip" type="text" placeholder="192.168.1.1">
+                <input id="inside_ip" type="text" value="192.168.1.1" placeholder="192.168.1.1">
             </div>
         </div>
         <div class="field">
             <label>外网IP</label>
             <div class="ui input focus">
-                <input id="outside_ip" type="text" placeholder="121.121.121.121">
+                <input id="outside_ip" type="text" value="121.21.21.11" placeholder="121.121.121.121">
             </div>
         </div>
         <div class="field">
@@ -108,7 +107,7 @@
         <div class="field">
             <label>机器用途</label>
             <div class="ui input focus">
-                <input id="usage" type="text" placeholder="前端机器">
+                <input id="usage" type="text" value="前端机器" placeholder="前端机器">
             </div>
         </div>
         <div class="field">
@@ -118,9 +117,9 @@
                 <option value="0">否</option>
             </select>
         </div>
-    </div>
+    </form>
     <div class="ui divider"></div>
-        <button class="ui primary button">
+        <button class="ui primary button" type="submit">
             添加
         </button>
         <button class="ui button">

@@ -24,8 +24,9 @@
         });
         $(document)
             .ready(function() {
-                $(".primary.button").click(function() {
-                    addTask()
+                $("form").submit(function() {
+                    addTask();
+                    return false
                 });
             })
         ;
@@ -73,7 +74,6 @@
 </div>
 
 
-
 <div class="ui main text container">
     <form class="ui form">
         <h1 id="update_db" class="ui header">新增数据库更新任务:</h1>
@@ -82,7 +82,7 @@
         <div class="field">
             <label>需要更新的库</label>
             <div class="ui input focus">
-                <input id="target" type="text" placeholder="db_name...">
+                <input id="target" type="text" value="db_name" placeholder="db_name...">
             </div>
         </div>
         <div class="field">
@@ -94,13 +94,13 @@
         <div class="field">
             <label>需要执行的sql文件(多个文件分行写)</label>
             <div class="ui input focus">
-                 <textarea id="files" placeholder="example/example.sql..." rows="10" cols="100"></textarea>
+                 <textarea id="files" placeholder="example/example.sql..." rows="10" cols="100">a.sql</textarea>
             </div>
         </div>
         <div class="field">
             <label>更新描述</label>
             <div class="ui input focus">
-                <input id="description" type="text" placeholder="新增了xxx字段...">
+                <input id="description" type="text" value="test" placeholder="新增了xxx字段...">
             </div>
         </div>
         <div class="field">
