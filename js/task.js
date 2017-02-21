@@ -104,6 +104,7 @@ function addTask() {
     }
     var files = file_list.replace(/(^,)/g, "");
 
+    var username = getCookie("username");
     var data = {
         creator: username,
         action: $("#action").val(),
@@ -142,12 +143,17 @@ function addTask() {
         success: function (data) {
             var models = data;
             if (models.ok == true) {
+                alert("xxxx");
                 window.location.href = "/task/list";
             } else {
+                alert("xxxxssss");
+                console.log(models);
                 alert(models.info);
             }
         },
         error: function (xhr, error, exception) {
+            alert("sdsdsfs");
+            alert(error);
             alert(exception.toString());
         }
     });

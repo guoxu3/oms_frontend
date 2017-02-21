@@ -20,6 +20,10 @@ body {
     padding: 2em 0em;
 }
 
+td tr {
+    text-align:center;
+}
+
 [v-cloak] {
   display: none;
 }

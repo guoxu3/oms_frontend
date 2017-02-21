@@ -66,6 +66,7 @@ function addMachine() {
         success: function (data) {
             var models = data;
             if (models.ok == true) {
+                alert("xxxx");
                 window.location.href = "/machine/list";
             } else {
                 alert(models.info);

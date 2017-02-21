@@ -73,7 +73,7 @@
 <div class="ui main container">
     <h1 class="ui header">机器列表</h1>
     <div id="machine">
-        <table class="ui single line table">
+        <table class="ui single line table" align="center">
             <thead>
             <tr>
                 <th>ID</th>
@@ -94,7 +94,8 @@
                     <td v-cloak>{{ machine.outside_ip  }}</td>
                     <td v-cloak>{{ machine.location  }}</td>
                     <td v-cloak>{{ machine.usage  }}</td>
-                    <td v-cloak>{{ machine.is_initialized  }}</td>
+                    <td v-cloak v-if="machine.is_initialized === 1">是</td>
+                    <td v-cloak v-if="machine.is_initialized === 0">否</td>
                     <td v-cloak v-show="show_button">
                         <div v-cloak class="blue ui icon buttons">
                             <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i></div>

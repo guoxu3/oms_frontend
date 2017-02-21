@@ -69,10 +69,10 @@
 </div>
 
 
-<div class="ui main text container">
+<div class="ui  main container">
     <h1 class="ui header">任务列表:</h1>
     <div id="task">
-        <table class="ui single line table">
+        <table class="ui single line center table">
             <thead>
             <tr>
                 <th>ID</th>
@@ -80,6 +80,8 @@
                 <th>创建者</th>
                 <th>任务类型</th>
                 <th>任务描述</th>
+                <th>执行人</th>
+                <th>执行时间</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -91,6 +93,8 @@
                 <td v-cloak>{{ task.creator }}</td>
                 <td v-cloak>{{ task.action }}</td>
                 <td v-cloak>{{ task.description }}</td>
+                <td v-cloak>{{ task.excutor }}</td>
+                <td v-cloak>{{ task.start_time }}</td>
                 <td v-cloak v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
                         <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i>
@@ -109,7 +113,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="6">
+                <th colspan="8">
                     <div class="ui right floated pagination menu">
                         <a class="icon item">
                             <i class="left chevron icon"></i>
