@@ -22,14 +22,12 @@
         $(function() {
             $('.ui.dropdown').dropdown();
         });
-        $(document)
-            .ready(function() {
-                $("form").submit(function() {
-                    addMachine();
-                    return false
-                });
-            })
-        ;
+        $(function() {
+            $("form").submit(function() {
+                addMachine();
+                return false
+            });
+        });
     </script>
 
 </head>
@@ -117,14 +115,14 @@
                 <option value="0">否</option>
             </select>
         </div>
-    </form>
-    <div class="ui divider"></div>
+        <div class="ui divider"></div>
         <button class="ui primary button" type="submit">
             添加
         </button>
         <button class="ui button">
             清空
         </button>
+    </form>
 </div>
 
 

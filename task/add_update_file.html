@@ -22,14 +22,12 @@
         $(function() {
             $('.ui.dropdown').dropdown();
         });
-        $(document)
-            .ready(function() {
-                $("form").submit(function() {
-                    addTask()
-                    return false
-                });
-            })
-        ;
+        $(function() {
+            $("form").submit(function() {
+                addMachine();
+                return false
+            });
+        });
     </script>
 
 </head>
