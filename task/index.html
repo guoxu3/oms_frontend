@@ -25,6 +25,12 @@
         $(function() {
             $('.ui.dropdown').dropdown();
         });
+        $(function() {
+            $('.ui.delete.button').click(function () {
+               deleteTask();
+               return false
+            })
+        });
     </script>
 
 </head>
@@ -71,16 +77,31 @@
 
 
 <div class="ui main text container">
-    <div class="ui form">
+    <form class="ui form">
         <h1 id="update_db" class="ui header">查看任务详情:</h1>
         <div class="ui divider"></div>
         <div id="taskinfo">
-            <p v-cloak>任务ID：{{ task_id }} </p>
+            <p v-cloak id="task_id">任务ID：{{ task_id }} </p>
+            <p v-cloak>创建人：{{ creator }}</p>
             <p v-cloak>版本库：{{ target }}</p>
+            <p v-cloak>版本号：{{ version }}</p>
+            <p v-cloak>任务内容：{{ content }}</p>
             <p v-cloak>机器：{{ ip }}</p>
-            <p v-cloak>描述：{{ description }}</p>
+            <p v-cloak>任务描述：{{ description }}</p>
+            <p v-cloak>是否执行：{{ status }}</p>
+            <p v-cloak>是否回退：{{ revert }}</p>
         </div>
-    </div>
+        <div class="ui divider"></div>
+        <button class="ui primary button" type="submit">
+            执行
+        </button>
+        <button class="ui return button" type="submit">
+            回退
+        </button>
+        <button class="ui delete button" type="submit">
+            删除
+        </button>
+    </form>
 </div>
 
 

@@ -97,16 +97,26 @@
                 <td v-cloak>{{ task.start_time }}</td>
                 <td v-cloak v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
-                        <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i>
-                        </div>
-                        <div class="ui button" data-tooltip="编辑" data-position="top center"><i class="edit icon"></i>
-                        </div>
-                        <div class="ui button" data-tooltip="执行" data-position="top right"><i class="play icon"></i>
-                        </div>
-                        <div class="ui button" data-tooltip="回退" data-position="top right"><i class="undo icon"></i>
-                        </div>
-                        <div class="ui button" data-tooltip="删除" data-position="top right"><i class="trash icon"></i>
-                        </div>
+                        <a v-bind:href="'../task/?task_id=' + task.task_id">
+                            <button class="ui button" data-tooltip="查看详情" data-position="top left">
+                                <i class="browser icon"></i>
+                            </button>
+                        </a>
+                        <a v-bind:href="'../task/?task_id=' + task.task_id">
+                            <div class="ui button" data-tooltip="执行" data-position="top right">
+                                <i class="play icon"></i>
+                            </div>
+                        </a>
+                        <a v-bind:href="'../task/?task_id=' + task.task_id">
+                            <div class="ui button" data-tooltip="回退" data-position="top right">
+                                <i class="undo icon"></i>
+                            </div>
+                        </a>
+                        <a v-bind:href="'../task/?task_id=' + task.task_id">
+                            <div class="ui button" data-tooltip="删除" data-position="top right">
+                                <i class="trash icon"></i>
+                            </div>
+                        </a>
                     </div>
                 </td>
             </tr>

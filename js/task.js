@@ -154,9 +154,13 @@ function addTask() {
 }
 
 function deleteTask() {
-    var task_id = $("#task_id").val();
+    var task_id = document.getElementById("task_id").innerHTML;
+    console.log(task_id)
     var URL = 'http://oms.miaodeli.com/api/task?task_id=' + task_id;
-    $.ajax({
+    if (confirm("请确认是否删除")) {
+        alert(task_id);
+        return
+        $.ajax({
         type: "DELETE",
         url: URL,
         success: function (data) {
@@ -170,5 +174,8 @@ function deleteTask() {
         error: function (xhr, error, exception) {
             alert(exception.toString());
         }
-    });
+        });
+    } else {
+        return false
+    }
 }
