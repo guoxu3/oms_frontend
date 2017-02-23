@@ -81,15 +81,42 @@
         <h1 id="update_db" class="ui header">查看任务详情:</h1>
         <div class="ui divider"></div>
         <div id="taskinfo">
-            <p v-cloak id="task_id">任务ID：{{ task_id }} </p>
-            <p v-cloak>创建人：{{ creator }}</p>
-            <p v-cloak>版本库：{{ target }}</p>
-            <p v-cloak>版本号：{{ version }}</p>
-            <p v-cloak>任务内容：{{ content }}</p>
-            <p v-cloak>机器：{{ ip }}</p>
-            <p v-cloak>任务描述：{{ description }}</p>
-            <p v-cloak>是否执行：{{ status }}</p>
-            <p v-cloak>是否回退：{{ revert }}</p>
+            <p v-cloak>
+                <span>任务ID:&nbsp&nbsp</span>
+                <span id="task_id">{{ task_id }} </span>
+            </p>
+            <p v-cloak>
+                <span>创建人:&nbsp&nbsp</span>
+                <span>{{ creator }}</span>
+            </p>
+            <p v-cloak>
+                <span>版本库:&nbsp&nbsp</span>
+                <span>{{ target }}</span>
+            </p>
+            <p v-cloak>
+                <span>版本号:&nbsp&nbsp</span>
+                <span>{{ version }}</span>
+            </p>
+            <p v-cloak>
+                <span>任务内容:&nbsp&nbsp</span>
+                <span>{{ content }}</span>
+            </p>
+            <p v-cloak>
+                <span>机器:&nbsp&nbsp</span>
+                <span>{{ ip }}</span>
+            </p>
+            <p v-cloak>
+                <span>任务描述:&nbsp&nbsp</span>
+                <span>{{ description }}</span>
+            </p>
+            <p v-cloak>
+                <span>是否执行:&nbsp&nbsp</span>
+                <span>{{ status }}</span>
+            </p>
+            <p v-cloak>
+                <span>是否回退:&nbsp&nbsp</span>
+                <span>{{ revert }}</span>
+            </p>
         </div>
         <div class="ui divider"></div>
         <button class="ui primary button" type="submit">

@@ -25,7 +25,13 @@
     <script>
         $(function () {
             $('.activating.element').popup();
-        })
+        });
+        $(function() {
+            $('.ui.delete.button').click(function () {
+               deleteTask();
+               return false
+            })
+        });
     </script>
 </head>
 
@@ -112,11 +118,9 @@
                                 <i class="undo icon"></i>
                             </div>
                         </a>
-                        <a v-bind:href="'../task/?task_id=' + task.task_id">
-                            <div class="ui button" data-tooltip="删除" data-position="top right">
-                                <i class="trash icon"></i>
-                            </div>
-                        </a>
+                        <button class="ui delete button" data-tooltip="删除" data-position="top right" type="submit">
+                            <i class="trash icon"></i>
+                        </button>
                     </div>
                 </td>
             </tr>

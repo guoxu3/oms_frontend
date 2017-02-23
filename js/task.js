@@ -148,7 +148,7 @@ function addTask() {
             }
         },
         error: function (xhr, error, exception) {
-            alert("erro: request failed");
+            alert(exception.toString());
         }
     });
 }
@@ -157,9 +157,7 @@ function deleteTask() {
     var task_id = document.getElementById("task_id").innerHTML;
     console.log(task_id)
     var URL = 'http://oms.miaodeli.com/api/task?task_id=' + task_id;
-    if (confirm("请确认是否删除")) {
-        alert(task_id);
-        return
+    if (confirm("即将删除一条任务,是否确认？")) {
         $.ajax({
         type: "DELETE",
         url: URL,
@@ -167,6 +165,8 @@ function deleteTask() {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 alert(models.info);
+                window.location.href = "/task/list";
+
             } else {
                 alert(models.info);
             }
