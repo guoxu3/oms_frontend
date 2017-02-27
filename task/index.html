@@ -19,6 +19,7 @@
     <script type="text/javascript" src="../js/task.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
+    <script type="text/javascript" src="../js/update.js"></script>
     <script>
         getTaskByID();
     </script>
@@ -30,7 +31,15 @@
             $('.ui.delete.button').click(function () {
                deleteTask();
                return false
-            })
+            });
+            $('.ui.update.button').click(function () {
+               update('update');
+               return false
+            });
+            $('.ui.revert.button').click(function () {
+               update('revert');
+               return false
+            });
         });
     </script>
 
@@ -120,10 +129,10 @@
             </p>
         </div>
         <div class="ui divider"></div>
-        <button class="ui primary button" type="submit">
+        <button class="ui update button" type="submit">
             执行
         </button>
-        <button class="ui return button" type="submit">
+        <button class="ui revert button" type="submit">
             回退
         </button>
         <button class="ui delete button" type="submit">
