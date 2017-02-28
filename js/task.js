@@ -77,7 +77,6 @@ function getAllTask() {
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
-            alert(task_data);
             var task = new Vue({
                 el: '#task',
                 data: {

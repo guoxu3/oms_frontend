@@ -32,29 +32,52 @@ function getUser(username) {
 
 function getAllUser() {
     var URL = 'http://oms.miaodeli.com/api/user?start=0&count=10';
+    var user_data = [];
+    var show_button = false;
     $.ajax({
         type: "GET",
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                $("#p1").html(data);
+                user_data = models.info['data'];
+                show_button = true;
             } else {
                 alert(models.info);
             }
+            var user = new Vue({
+                el: '#user',
+                data: {
+                    users: user_data,
+                    show_button: show_button
+                }
+            });
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
+            var user = new Vue({
+                el: '#user',
+                data: {
+                    users: user_data,
+                    show_button: show_button
+                }
+            });
         }
     });
+
 }
 
+
 function addUser() {
-    var data = {};
-    for (var i = 0; i < arguments.length; i++) {
-        console.log("#" + arguments[i]);
-        data[arguments[i]] = $("#" + arguments[i]).val();
-    }
+    var data = {
+        username: $("#usermame").val(),
+        nickname: $("#nickname").val(),
+        mail: $("#mail").val(),
+        passwd: $("#passwd").val(),
+        department: $("#department").val(),
+        permissions: $("#permissions").val()
+    };
+
     var request = {
         action: 'add',
         data: data
@@ -73,7 +96,8 @@ function addUser() {
         success: function (data) {
             var models = data;
             if (models.ok == true) {
-                window.location.href = "showuser.html";
+                alert(models.info);
+                window.location.href = "/admin/user_list";
             } else {
                 alert(models.info);
             }

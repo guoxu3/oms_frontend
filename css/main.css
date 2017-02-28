@@ -31,3 +31,7 @@ td tr {
 [v-show] {
     display: none;
 }
+
+.ui.sidebar {
+    top: 3em ;
+}
