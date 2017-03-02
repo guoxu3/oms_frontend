@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>用户列表</title>
+    <title>权限列表</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
@@ -105,7 +105,7 @@
             </div>
         </div>
     </div>
-    <h1 class="ui header">用户列表:</h1>
+    <h1 class="ui header">权限列表:</h1>
     <div id="permission">
         <table class="ui single line center table">
             <thead>
@@ -125,7 +125,7 @@
                 <td v-cloak>{{ permission.permission_code }}</td>
                 <td v-cloak v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
-                        <a v-bind:href="'../admin/?username=' + user.username">
+                        <a v-bind:href="'../admin/?permission=' + permission.id">
                             <button class="ui button" data-tooltip="查看详情" data-position="top left">
                                 <i class="browser icon"></i>
                             </button>

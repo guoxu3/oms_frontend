@@ -2,34 +2,6 @@
  * Created by guoxu on 12/7/16.
  */
 
-function getTask(task_id) {
-    var URL = 'http://oms.miaodeli.com/api/task?task_id=' + task_id;
-    var task_data = {};
-    $.ajax({
-        type: "GET",
-        url: URL,
-        success: function (data) {
-            var models = $.parseJSON(data);
-            if (models.ok == true) {
-                task_data = models.info['data'];
-            } else {
-                alert(models.info);
-            }
-            var taskinfo = new Vue({
-                el: '#taskinfo',
-                data: task_data
-            })
-        },
-        error: function (xhr, error, exception) {
-            alert(exception.toString());
-            var taskinfo = new Vue({
-                el: '#taskinfo',
-                data: task_data
-            })
-        }
-    });
-}
-
 
 function getAllPermission() {
     var URL = 'http://oms.miaodeli.com/api/permission?start=0&count=10';
@@ -42,6 +14,7 @@ function getAllPermission() {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 permission_data = models.info['data'];
+                console.log(permission_data);
                 show_button = true;
             } else {
                 alert(models.info);
@@ -49,7 +22,7 @@ function getAllPermission() {
             var permission = new Vue({
                 el: '#permission',
                 data: {
-                    tasks: permission_data,
+                    permissions: permission_data,
                     show_button: show_button
                 }
             });
@@ -59,7 +32,7 @@ function getAllPermission() {
             var permission = new Vue({
                 el: '#permission',
                 data: {
-                    tasks: permission_data,
+                    permissions: permission_data,
                     show_button: show_button
                 }
             });
@@ -71,7 +44,7 @@ function getAllPermission() {
 
 function addPermission() {
     var data = {
-        permission: $("#permission_desc").val(),
+        permission: $("#permission").val(),
         permission_desc: $("#permission_desc").val(),
         permission_code: $("#permission_code").val()
     };
