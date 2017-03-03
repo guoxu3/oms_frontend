@@ -11,15 +11,15 @@
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../lib/semantic/semantic.min.css">
-    <script src="../lib/semantic/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
+    <script src="../lib/semantic.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/user.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
 
-    <script>is_login()</script>
+    <script>isLogin();</script>
     <script>
         $(function() {
             $('.ui.dropdown').dropdown();
@@ -31,27 +31,26 @@
             });
         });
     </script>
-
 </head>
-<body>
 
-<!-- 头部导航栏 -->
+<body>
+<!--navigater-begin-->
 <div class="ui large fixed inverted menu">
     <div class="ui container">
-        <a href="../login" class="header item">
-            <img class="logo" src="../img/logo.jpg">
+        <a href="/login" class="header item">
+            <img class="logo" src="/img/logo.jpg">
             XXX OMS
         </a>
         <div class="ui simple dropdown item">
             任务管理 <i class="dropdown icon"></i>
             <div class="menu">
-                <a class="item" href="../task/list">任务列表</a>
+                <a class="item" href="/task/list">任务列表</a>
                 <div class="item">
                     <i class="dropdown icon"></i>
                     <span class="text">新增任务</span>
                     <div class="menu">
-                        <a class="item" href="../task/add_update_file">文件更新</a>
-                        <a class="item" href="../task/add_update_db">数据库更新</a>
+                        <a class="item" href="/task/add_update_file">文件更新</a>
+                        <a class="item" href="/task/add_update_db">数据库更新</a>
                     </div>
                 </div>
             </div>
@@ -59,50 +58,45 @@
         <div class="ui simple dropdown item">
             机器管理 <i class="dropdown icon"></i>
             <div class="menu">
-                <a class="item" href="../machine/list">机器列表</a>
-                <a class="item" href="../machine/add">新增机器</a>
+                <a class="item" href="/machine/list">机器列表</a>
+                <a class="item" href="/machine/add">新增机器</a>
+            </div>
+        </div>
+        <div id="admin" class="ui simple dropdown item" v-cloak v-show="show_admin">
+            管理功能 <i class="dropdown icon"></i>
+            <div class="menu">
+                 <div class="item">
+                    <i class="dropdown icon"></i>
+                    <span class="text">用户管理</span>
+                    <div class="menu">
+                        <a class="item" href="/admin/add_user">新增用户</a>
+                        <a class="item" href="/admin/user_list">用户列表</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="dropdown icon"></i>
+                    <span class="text">权限管理</span>
+                    <div class="menu">
+                        <a class="item" href="/admin/add_permission">新增权限</a>
+                        <a class="item" href="/admin/permission_list">权限管理</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="right menu">
-           <a class="ui transparent inverted icon item" href="../user/edit">
+            <a class="ui transparent inverted icon item" href="/user/edit">
                 <i class="user icon"></i>
-                 &nbsp;&nbsp;<span id=username></span>
+                &nbsp;&nbsp;<span id=login_user></span>
             </a>
             <a class="item" href="javascript:logout();">注销</a>
         </div>
     </div>
 </div>
+<!--navigater-end-->
 
 
 
 <div class="ui main text container">
-    <div class="ui vertical inverted sidebar menu left visible" id="toc">
-        <div class="item">
-            <div class="header">用户管理</div>
-            <div class="menu">
-                <a class="item" href="/admin/add_user">
-                    新增用户
-                </a>
-                <a class="item" href="/admin/modify_user">
-                    修改用户信息
-                </a>
-                <a class="item" href="/admin/user_list">
-                    用户列表
-                </a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="header">权限管理</div>
-            <div class="menu">
-                <a class="item" href="/admin/add_permission">
-                    新增权限
-                </a>
-                <a class="item" href="/admin/permission_list">
-                    权限列表
-                </a>
-            </div>
-        </div>
-    </div>
     <form class="ui form">
         <h1 class="ui header">新增用户</h1>
         <div class="ui divider"></div>
@@ -156,18 +150,19 @@
 
 
 
-<!-- 底部 -->
-<div class="ui inverted vertical footer segment">
+<!--footer-begin-->
+<div class="ui  inverted vertical  footer segment">
     <div class="ui center aligned container">
-        <img src="../img/logo.jpg" class="ui centered mini image">
+        <img src="/img/logo.jpg" class="ui centered mini image">
         <div class="ui horizontal inverted small divided link list">
-            <a class="item" href="#">Site Map</a>
+            <p class="item" href="#">©2017 X.Guo. All rights reserved.</p>
             <a class="item" href="#">Contact Us</a>
-            <a class="item" href="#">Terms and Conditions</a>
+            <a class="item" href="#">About</a>
             <a class="item" href="#">Privacy Policy</a>
         </div>
     </div>
 </div>
+<!--footer-end-->
 </body>
 
 </html>

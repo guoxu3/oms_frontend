@@ -22,7 +22,7 @@ var login = function () {
         success: function (data) {
             var models = data;
             if (models.ok == true) {
-                window.location.href = "../task/list";
+                window.location.href = "/task/list";
             } else {
                 alert(models.info);
             }

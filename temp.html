@@ -7,26 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>机器列表</title>
+    <title>任务列表</title>
 
-    <script src="../lib/jquery-3.1.1.min.js"></script>
-    <script src="../lib/jquery.json.min.js"></script>
-    <script src="../lib/vue.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
-    <script src="../lib/semantic.min.js"></script>
+    <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="lib/jquery.json.min.js"></script>
+    <script src="lib/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/semantic/semantic.min.css">
+    <script src="lib/semantic/semantic.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/machine.js"></script>
-    <script type="text/javascript" src="../js/public.js"></script>
-    <script type="text/javascript" src="../js/logout.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="js/task.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script type="text/javascript" src="js/logout.js"></script>
 
     <script>isLogin();</script>
-    <script>getAllMachines();</script>
 
     <script>
         $(function () {
             $('.activating.element').popup();
-        })
+        });
+        $(function() {
+            $('.ui.delete.button').click(function () {
+               deleteTask();
+               return false
+            })
+        });
     </script>
 </head>
 
@@ -91,64 +96,6 @@
 </div>
 <!--navigater-end-->
 
-
-<div class="ui main container">
-    <h1 class="ui header">机器列表</h1>
-    <div id="machine">
-        <table class="ui single line table" align="center">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>机器名称</th>
-                <th>内网IP</th>
-                <th>外网IP</th>
-                <th>所属机房</th>
-                <th>机器用途</th>
-                <th>是否初始化</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr v-for="machine in machines">
-                    <td v-cloak>{{ machine.id  }}</td>
-                    <td v-cloak>{{ machine.machine_name  }}</td>
-                    <td v-cloak>{{ machine.inside_ip  }}</td>
-                    <td v-cloak>{{ machine.outside_ip  }}</td>
-                    <td v-cloak>{{ machine.location  }}</td>
-                    <td v-cloak>{{ machine.usage  }}</td>
-                    <td v-cloak v-if="machine.is_initialized === 1">是</td>
-                    <td v-cloak v-if="machine.is_initialized === 0">否</td>
-                    <td v-cloak v-show="show_button">
-                        <div v-cloak class="blue ui icon buttons">
-                            <div class="ui button" data-tooltip="查看详情" data-position="top left"><i class="browser icon"></i></div>
-                            <div class="ui button" data-tooltip="编辑" data-position="top center"><i class="edit icon"></i></div>
-                            <div class="ui button" data-tooltip="删除" data-position="top right"><i class="trash icon"></i></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="8">
-                    <div class="ui right floated pagination menu">
-                        <a class="icon item">
-                            <i class="left chevron icon"></i>
-                        </a>
-                        <a class="item">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
-                        <a class="icon item">
-                            <i class="right chevron icon"></i>
-                        </a>
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
-    </div>
-    <p id="taskList"></p>
-</div>
 
 <!--footer-begin-->
 <div class="ui  inverted vertical  footer segment">
