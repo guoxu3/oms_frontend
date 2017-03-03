@@ -30,20 +30,6 @@ function getTask(task_id) {
     });
 }
 
-//获取url中的参数
-/**
- * @return {null}
- */
-function GetQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) {
-        return unescape(r[2]);
-    } else {
-        return null;
-    }
-}
-
 function getTaskByID() {
     var task_id = GetQueryString("task_id");
     if (task_id != null) {
@@ -51,9 +37,15 @@ function getTaskByID() {
     }
 }
 
-
 function getAllTask() {
-    var URL = 'http://oms.miaodeli.com/api/task?start=0&count=10';
+    var page = GetQueryString('page');
+    var count = GetQueryString('count');
+    if (page === null || count === null) {
+        page = 0;
+        count = 10
+    }
+    var start = (page * count);
+    var URL = 'http://oms.miaodeli.com/api/task?start=' + start +'&count=' + count;
     var task_data = [];
     var show_button = false;
     $.ajax({

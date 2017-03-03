@@ -11,9 +11,9 @@
 
     <script src="lib/jquery-3.1.1.min.js"></script>
     <script src="lib/jquery.json.min.js"></script>
-    <script src="lib/vue.js"></script>
-    <link rel="stylesheet" type="text/css" href="lib/semantic/semantic.min.css">
-    <script src="lib/semantic/semantic.min.js"></script>
+    <script src="lib/vue.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/semantic.min.css">
+    <script src="lib/semantic.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script type="text/javascript" src="js/task.js"></script>
@@ -23,6 +23,10 @@
     <script>isLogin();</script>
 
     <script>
+        $(function () {
+            showPage();
+            return false;
+        });
         $(function () {
             $('.activating.element').popup();
         });
@@ -96,6 +100,15 @@
 </div>
 <!--navigater-end-->
 
+<div class="ui main text container">
+
+        <span id="dqPage" hidden="hidden" class="disabled1 current">5</span>
+        <p>aaa</p>
+        <div id="pageBtn" class="ui right floated pagination menu">
+        </div>
+        <p>bbb</p>
+
+</div>
 
 <!--footer-begin-->
 <div class="ui  inverted vertical  footer segment">
