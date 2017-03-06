@@ -31,7 +31,15 @@ function getUser(username) {
 }
 
 function getAllUser() {
-    var URL = 'http://oms.miaodeli.com/api/user?start=0&count=10';
+    var cur_page = GetQueryString('page');
+    var user_num = 10;
+    var count = GetQueryString('count');
+    if (cur_page === null || count === null) {
+        cur_page = 1;
+        count = 10
+    }
+    var start = ((cur_page - 1) * count);
+    var URL = 'http://oms.miaodeli.com/api/user?start=' + start +'&count=' + count;
     var user_data = [];
     var show_button = false;
     $.ajax({
@@ -41,6 +49,7 @@ function getAllUser() {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 user_data = models.info['data'];
+                user_num = models.info['count'];
                 show_button = true;
             } else {
                 alert(models.info);
@@ -52,6 +61,7 @@ function getAllUser() {
                     show_button: show_button
                 }
             });
+            showPage(cur_page, Math.ceil(user_num/count), count);
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());

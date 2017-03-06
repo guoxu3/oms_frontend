@@ -71,111 +71,103 @@ function GetQueryString(name) {
     }
 }
 
-function showPage() {
-    var dqPage = $("#dqPage").text();//得到当前页数
-    dqPage = parseInt(dqPage);//得到的文本转成int
-    //var pageCount = $("#pageCount").text();//得到总页数
-    var pageCount = '9';
-    pageCount = parseInt(pageCount);
+function showPage(curPage, totalPage, count) {
+    if (count === null) {
+        count = 10;
+    }
     var i = 1;
-    i = parseInt(i);
     var item="";
-    var href = "/task/list?page=";
-    if (pageCount <= 2) {
-        for (i; i <= pageCount; i++) {
-            if (i == dqPage) {
+    var href = "?page=";
+
+    if (totalPage <= 2) {
+        for (i; i <= totalPage; i++) {
+            if (i == curPage) {
                 item += "<a class='disabled item'>" + i + "</a>";
             }else {
-                item += "<a class='item' href='" + href + i + "&count=10" + "'>" + i + "</a>";
+                item += "<a class='item' href='" + href + i + "&count=" + count + "'>" + i + "</a>";
             }
         }
-        $('#pageBtn').append(item);
-        return;
-    } else if (pageCount > 2 && pageCount <= 5 ) {
-        if ( dqPage == 1 ) {
+    } else if (totalPage > 2 && totalPage <= 5 ) {
+        if ( curPage == 1 ) {
             item += "<a class='disabled icon item'><i class='left chevron icon'></i></a>";
         } else {
-            item += "<a class='icon item' href='" + href + (dqPage-1) + "&count=10" + "'><i class='left chevron icon'></i></a>";
+            item += "<a class='icon item' href='" + href + (curPage-1) + "&count=" + count + "'><i class='left chevron icon'></i></a>";
         }
-        for (i; i <= pageCount; i++) {
-            if (i == dqPage) {
+        for (i; i <= totalPage; i++) {
+            if (i == curPage) {
                 item += "<a class='disabled item'>" + i + "</a>";
             }else {
-                item += "<a class='item' href='" + href + i + "&count=10" + "'>" + i + "</a>";
+                item += "<a class='item' href='" + href + i + "&count=" + count + "'>" + i + "</a>";
             }
         }
-        if ( dqPage == pageCount ) {
+        if ( curPage == totalPage ) {
             item += "<a class='disabled icon item'><i class='right chevron icon'></i></a>";
         } else {
-            item += "<a class='icon item' href='" + href + (dqPage+1) + "&count=10" + "'><i class='right chevron icon'></i></a>";
+            item += "<a class='icon item' href='" + href + (curPage+1) + "&count=" + count + "'><i class='right chevron icon'></i></a>";
         }
-        $("#pageBtn").append(item);
-        return;
-    } else if (pageCount > 5) {//总页数大于五页，则加载五页
-        console.log("bbb")
-        if ( dqPage == 1 ) {
+    } else if (totalPage > 5) {
+        if ( curPage == 1 ) {
             item += "<a class='disabled icon item'><i class='left chevron icon'></i></a>";
         } else {
-            item += "<a class='icon item' href='" + href + (dqPage-1) + "&count=10" + "'><i class='left chevron icon'></i></a>";
+            item += "<a class='icon item' href='" + href + (curPage-1) + "&count=" + count + "'><i class='left chevron icon'></i></a>";
         }
-        if (dqPage < 4) {//当前页小于5，加载1-5页
+        if (curPage < 4) {
             for (i; i <= 4; i++) {
-                if (i == dqPage) {
+                if (i == curPage) {
                     item += "<a class='disabled item'>" + i + "</a>";
                 }else {
-                    item += "<a class='item' href='" + href + i + "&count=10" + "'>" + i + "</a>";
+                    item += "<a class='item' href='" + href + i + "&count=" + count + "'>" + i + "</a>";
                 }
             }
-            item += "<span> . . . </span>";
-            item += "<a class='item' href='" + href + pageCount + "&count=10" + "'>" + pageCount + "</a>";
-        }else if (dqPage >= 3) {//当前页大于5页
-            for (i; i <= 2; i++) {//1,2页码始终显示
-                item += "<a class='item' href='" + href + i + "&count=10" + "'>" + i + "</a>";
+            item += "<div class='disabled item'>...</div>";
+            item += "<a class='item' href='" + href + totalPage + "&count=" + count + "'>" + totalPage + "</a>";
+        }else if (curPage >= 3) {
+            for (i; i <= 2; i++) {
+                item += "<a class='item' href='" + href + i + "&count=" + count + "'>" + i + "</a>";
             }
-            item += "<span> . . . </span>";//2页码后面用...代替部分未显示的页码
-            if (dqPage+1 == pageCount) {//当前页+1等于总页码
-                for (i = dqPage - 1; i <= pageCount; i++) {//“...”后面跟三个页码当前页居中显示
-                    if (i == dqPage) {
+            item += "<div class='disabled item'>...</div>";
+            if (curPage+1 == totalPage) {
+                for (i = curPage - 1; i <= totalPage; i++) {
+                    if (i == curPage) {
                         item += "<a class='disabled item'>" + i + "</a>";
                     } else {
-                        item += "<a class='item' href='" + href + i + "&count=10" + "'>" + i + "</a>";
+                        item += "<a class='item' href='" + href + i + "&count=" + count + "'>" + i + "</a>";
                     }
                 }
-            } else if (dqPage+2 == pageCount) {
-                for (i = dqPage; i <= pageCount; i++) {//“...”后面跟三个页码当前页居中显示
-                    if (i == dqPage) {
+            } else if (curPage+2 == totalPage) {
+                for (i = curPage; i <= totalPage; i++) {
+                    if (i == curPage) {
                         item += "<a class='disabled item'>" + i + "</a>";
                     } else {
-                        item += "<a class='item' href='" + href + i + "&count=10" + "'>" + i + "</a>";
+                        item += "<a class='item' href='" + href + i + "&count=" + count + "'>" + i + "</a>";
                     }
                 }
-            }else if (dqPage == pageCount) {//当前页数等于总页数则是最后一页页码显示在最后
-                for(i = dqPage-2; i <= pageCount; i++){//...后面跟三个页码当前页居中显示
-                    if (i == dqPage) {
+            }else if (curPage == totalPage) {
+                for(i = curPage-2; i <= totalPage; i++){
+                    if (i == curPage) {
                         item += "<a class='disabled item'>" + i + "</a>";
                     } else {
-                        item += "<a class='item' href='" + href + i + "&count=10" + "'>" + i + "</a>";
+                        item += "<a class='item' href='" + href + i + "&count=" + count + "'>" + i + "</a>";
                     }
                 }
-            }else{//当前页小于总页数，则最后一页后面跟...
-                for(i = dqPage-1; i <= dqPage+1; i++){//dqPage+1页后面...
-                    if (i == dqPage) {
+            }else{
+                for(i = curPage-1; i <= curPage+1; i++){
+                    if (i == curPage) {
                         item += "<a class='disabled item'>" + i + "</a>";
                     } else {
-                        item += "<a class='item' href='" + href + i + "&count=10" + "'>" + i + "</a>";
+                        item += "<a class='item' href='" + href + i + "&count=" + count + "'>" + i + "</a>";
                     }
                 }
-                item += "<span> . . . </span>";
-                item += "<a class='item' href='" + href + pageCount + "&count=10" + "'>" + pageCount + "</a>";
+                item += "<div class='disabled item'>...</div>";
+                item += "<a class='item' href='" + href + totalPage + "&count=" + count + "'>" + totalPage + "</a>";
             }
         }
-
-        if ( dqPage == pageCount ) {
+        if ( curPage == totalPage ) {
             item += "<a class='disabled icon item'><i class='right chevron icon'></i></a>";
         } else {
-            item += "<a class='icon item' href='" + href + (dqPage+1) + "&count=10" + "'><i class='right chevron icon'></i></a>";
+            item += "<a class='icon item' href='" + href + (curPage+1) + "&count=" + count + "'><i class='right chevron icon'></i></a>";
         }
-        $('#pageBtn').append(item);
-        return;
     }
+    $('#pages').append(item);
+    return;
 }

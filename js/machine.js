@@ -2,7 +2,15 @@
  * Created by guoxu on 12/7/16.
  */
 function getAllMachines() {
-    var URL = 'http://oms.miaodeli.com/api/machine?start=0&count=10';
+    var cur_page = GetQueryString('page');
+    var machine_num = 10;
+    var count = GetQueryString('count');
+    if (cur_page === null || count === null) {
+        cur_page = 1;
+        count = 10
+    }
+    var start = ((cur_page - 1) * count);
+    var URL = 'http://oms.miaodeli.com/api/machine?start=' + start +'&count=' + count;
     var machine_data = [];
     var show_button = false;
     $.ajax({
@@ -12,6 +20,7 @@ function getAllMachines() {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 machine_data = models.info['data'];
+                machine_num = models.info['count'];
                 show_button = true;
             } else {
                 alert(models.info);
@@ -22,7 +31,8 @@ function getAllMachines() {
                     machines: machine_data,
                     show_button: show_button
                 }
-            })
+            });
+            showPage(cur_page, Math.ceil(machine_num/count), count);
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());

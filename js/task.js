@@ -37,14 +37,16 @@ function getTaskByID() {
     }
 }
 
+
 function getAllTask() {
-    var page = GetQueryString('page');
+    var cur_page = GetQueryString('page');
+    var task_num = 10;
     var count = GetQueryString('count');
-    if (page === null || count === null) {
-        page = 0;
+    if (cur_page === null || count === null) {
+        cur_page = 1;
         count = 10
     }
-    var start = (page * count);
+    var start = ((cur_page - 1) * count);
     var URL = 'http://oms.miaodeli.com/api/task?start=' + start +'&count=' + count;
     var task_data = [];
     var show_button = false;
@@ -55,6 +57,7 @@ function getAllTask() {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 task_data = models.info['data'];
+                task_num = models.info['count'];
                 show_button = true;
             } else {
                 alert(models.info);
@@ -66,6 +69,7 @@ function getAllTask() {
                     show_button: show_button
                 }
             });
+            showPage(cur_page, Math.ceil(task_num/count), count);
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
@@ -78,7 +82,6 @@ function getAllTask() {
             });
         }
     });
-
 }
 
 

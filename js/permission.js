@@ -4,7 +4,15 @@
 
 
 function getAllPermission() {
-    var URL = 'http://oms.miaodeli.com/api/permission?start=0&count=10';
+    var cur_page = GetQueryString('page');
+    var permission_num = 10;
+    var count = GetQueryString('count');
+    if (cur_page === null || count === null) {
+        cur_page = 1;
+        count = 10
+    }
+    var start = ((cur_page - 1) * count);
+    var URL = 'http://oms.miaodeli.com/api/permission?start=' + start +'&count=' + count;
     var permission_data = [];
     var show_button = false;
     $.ajax({
@@ -14,7 +22,7 @@ function getAllPermission() {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 permission_data = models.info['data'];
-                console.log(permission_data);
+                permission_num = models.info['count']
                 show_button = true;
             } else {
                 alert(models.info);
@@ -26,6 +34,7 @@ function getAllPermission() {
                     show_button: show_button
                 }
             });
+            showPage(cur_page, Math.ceil(permission_num/count), count);
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
