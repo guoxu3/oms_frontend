@@ -10,7 +10,7 @@ function getAllMachines() {
         count = 10
     }
     var start = ((cur_page - 1) * count);
-    var URL = 'http://oms.miaodeli.com/api/machine?start=' + start +'&count=' + count;
+    var URL = '/api/machine?start=' + start +'&count=' + count;
     var machine_data = [];
     var show_button = false;
     $.ajax({
@@ -66,7 +66,7 @@ function addMachine() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/api/machine';
+    var URL = '/api/machine';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -90,7 +90,7 @@ function addMachine() {
 
 function deleteTask() {
     var task_id = $("#task_id").val();
-    var URL = 'http://oms.miaodeli.com/api/machine?task_id=' + task_id;
+    var URL = '/api/machine?task_id=' + task_id;
     $.ajax({
         type: "DELETE",
         url: URL,

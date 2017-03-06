@@ -3,7 +3,7 @@
  */
 
 function logout() {
-    var URL = 'http://oms.miaodeli.com/api/logout';
+    var URL = '/api/logout';
     $.ajax({
         type: "GET",
         url: URL,

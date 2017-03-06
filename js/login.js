@@ -3,16 +3,21 @@
  */
 
 var login = function () {
+    var junp_url = "/task/list";
+    var url_before_login = window.location.search.replace(new RegExp('^\\?', 'g'), '');
+    if (url_before_login !== null) {
+        junp_url = url_before_login;
+    }
+
     var request = {
         username: $("#username").val(),
         passwd: $("#passwd").val()
 
     };
-
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    var URL = 'http://oms.miaodeli.com/api/login';
+    var URL = '/api/login';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -22,7 +27,7 @@ var login = function () {
         success: function (data) {
             var models = data;
             if (models.ok == true) {
-                window.location.href = "/task/list";
+                window.location.href = junp_url;
             } else {
                 alert(models.info);
             }

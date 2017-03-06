@@ -3,7 +3,7 @@
  */
 
 function getUser(username) {
-    var URL = 'http://oms.miaodeli.com/api/user?username=' + username;
+    var URL = '/api/user?username=' + username;
     var user_data = {};
     $.ajax({
         type: "GET",
@@ -39,7 +39,7 @@ function getAllUser() {
         count = 10
     }
     var start = ((cur_page - 1) * count);
-    var URL = 'http://oms.miaodeli.com/api/user?start=' + start +'&count=' + count;
+    var URL = '/api/user?start=' + start +'&count=' + count;
     var user_data = [];
     var show_button = false;
     $.ajax({
@@ -96,7 +96,7 @@ function addUser() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/api/user';
+    var URL = '/api/user';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -148,7 +148,7 @@ function updateUserPassword() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/api/user';
+    var URL = '/api/user';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -184,7 +184,7 @@ function updateUser() {
     encoded = $.toJSON(request);
     var jsonStr = encoded;
     console.log(jsonStr);
-    var URL = 'http://oms.miaodeli.com/api/user';
+    var URL = '/api/user';
     $.ajax({
         url: URL,
         type: 'POST',
@@ -207,7 +207,7 @@ function updateUser() {
 
 function deleteUser() {
     var username = $("#username").val();
-    var URL = 'http://oms.miaodeli.com/api/user?username=' + username;
+    var URL = '/api/user?username=' + username;
     $.ajax({
         type: "DELETE",
         url: URL,

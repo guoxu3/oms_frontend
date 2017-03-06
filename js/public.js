@@ -19,8 +19,8 @@ function isLogin() {
         window.location.href = "/login";
         return;
     }
-
-    var URL = 'http://oms.miaodeli.com/api/login';
+    var cur_path = window.location.pathname;
+    var URL = '/api/login';
     $.ajax({
         type: "GET",
         url: URL,
@@ -28,7 +28,7 @@ function isLogin() {
             var models = $.parseJSON(data);
             if (models.ok == false) {
                 alert(models.info);
-                window.location.href = "/login";
+                window.location.href = "/login?" + cur_path;
             }
             else {
                 is_admin = models.info['is_admin'];

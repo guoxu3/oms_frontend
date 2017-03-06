@@ -12,7 +12,7 @@ function getAllPermission() {
         count = 10
     }
     var start = ((cur_page - 1) * count);
-    var URL = 'http://oms.miaodeli.com/api/permission?start=' + start +'&count=' + count;
+    var URL = '/api/permission?start=' + start +'&count=' + count;
     var permission_data = [];
     var show_button = false;
     $.ajax({
@@ -22,7 +22,7 @@ function getAllPermission() {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 permission_data = models.info['data'];
-                permission_num = models.info['count']
+                permission_num = models.info['count'];
                 show_button = true;
             } else {
                 alert(models.info);

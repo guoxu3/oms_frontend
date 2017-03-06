@@ -3,7 +3,7 @@
  */
 
 function getTask(task_id) {
-    var URL = 'http://oms.miaodeli.com/api/task?task_id=' + task_id;
+    var URL = '/api/task?task_id=' + task_id;
     var task_data = {};
     $.ajax({
         type: "GET",
@@ -47,7 +47,7 @@ function getAllTask() {
         count = 10
     }
     var start = ((cur_page - 1) * count);
-    var URL = 'http://oms.miaodeli.com/api/task?start=' + start +'&count=' + count;
+    var URL = '/api/task?start=' + start +'&count=' + count;
     var task_data = [];
     var show_button = false;
     $.ajax({
@@ -150,7 +150,7 @@ function addTask() {
 function deleteTask() {
     var task_id = document.getElementById("task_id").innerHTML;
     console.log(task_id)
-    var URL = 'http://oms.miaodeli.com/api/task?task_id=' + task_id;
+    var URL = '/api/task?task_id=' + task_id;
     if (confirm("即将删除一条任务,是否确认？")) {
         $.ajax({
         type: "DELETE",
