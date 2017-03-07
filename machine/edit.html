@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>任务详情</title>
+    <title>编辑机器信息</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
@@ -20,11 +20,14 @@
     <script type="text/javascript" src="../js/logout.js"></script>
     <script type="text/javascript" src="../js/machine.js"></script>
     <script>isLogin();</script>
-    <script>getMachineByName();</script>
     <script>
         $(function() {
             $('.ui.dropdown').dropdown();
         });
+        $(function() {
+            getMachineByName();
+        });
+
     </script>
 </head>
 
@@ -96,19 +99,19 @@
         <div class="field">
             <label>机器名称</label>
             <div class="ui input focus">
-                <input id="machine_name" type="text" v-model="machine_name" readonly="true">
+                <input id="machine_name" type="text" v-bind:value="machine_name" readonly="true">
             </div>
         </div>
         <div class="field">
             <label>内网IP</label>
             <div class="ui input focus">
-                <input id="inside_ip" type="text" v-model="inside_ip">
+                <input id="inside_ip" type="text" v-bind:value="inside_ip">
             </div>
         </div>
         <div class="field">
             <label>外网IP</label>
             <div class="ui input focus">
-                <input id="outside_ip" type="text" v-model="outside_ip">
+                <input id="outside_ip" type="text" v-bind:value="outside_ip">
             </div>
         </div>
         <div class="field">
@@ -122,7 +125,7 @@
         <div class="field">
             <label>机器用途</label>
             <div class="ui input focus">
-                <input id="usage" type="text" v-model="usage">
+                <input id="usage" type="text" v-bind:value="usage">
             </div>
         </div>
         <div class="field">
@@ -132,15 +135,14 @@
                 <option v-cloak v-if="is_initialized === 1"value="0">否</option>
                 <option v-cloak v-if="is_initialized === 0"value="0">否</option>
                 <option v-cloak v-if="is_initialized === 0"value="1">是</option>
-
             </select>
         </div>
         <div class="ui divider"></div>
         <button class="ui primary button" type="submit">
             修改
         </button>
-        <button class="ui button">
-            取消
+        <button class="ui back button" onclick="window.history.go(-1)">
+            返回
         </button>
     </form>
 </div>

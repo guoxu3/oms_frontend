@@ -18,14 +18,14 @@ function getMachine(machine_name) {
             var machineinfo = new Vue({
                 el: '#machineinfo',
                 data: machine_data
-            })
+            });
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
             var machineinfo = new Vue({
                 el: '#machineinfo',
                 data: machine_data
-            })
+            });
         }
     });
 }
@@ -127,19 +127,23 @@ function addMachine() {
 
 function deleteMachine(machine_name) {
     var URL = '/api/machine?machine_name=' + machine_name;
-    $.ajax({
-        type: "DELETE",
-        url: URL,
-        success: function (data) {
-            var models = $.parseJSON(data);
-            if (models.ok == true) {
-                alert(models.info);
-            } else {
-                alert(models.info);
+    if (confirm("即将删除一条任务,是否确认？")) {
+        $.ajax({
+            type: "DELETE",
+            url: URL,
+            success: function (data) {
+                var models = $.parseJSON(data);
+                if (models.ok == true) {
+                    alert(models.info);
+                } else {
+                    alert(models.info);
+                }
+            },
+            error: function (xhr, error, exception) {
+                alert(exception.toString());
             }
-        },
-        error: function (xhr, error, exception) {
-            alert(exception.toString());
-        }
-    });
+        });
+    } else {
+        return false
+    }
 }
