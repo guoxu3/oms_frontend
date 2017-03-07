@@ -147,8 +147,7 @@ function addTask() {
     });
 }
 
-function deleteTask() {
-    var task_id = document.getElementById("task_id").innerHTML;
+function deleteTask(task_id) {
     console.log(task_id)
     var URL = '/api/task?task_id=' + task_id;
     if (confirm("即将删除一条任务,是否确认？")) {

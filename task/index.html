@@ -27,16 +27,17 @@
             $('.ui.dropdown').dropdown();
         });
         $(function() {
+            var task_id = document.getElementById("task_id").innerHTML;
             $('.ui.delete.button').click(function () {
-               deleteTask();
+               deleteTask(task_id);
                return false
             });
             $('.ui.update.button').click(function () {
-               update('update');
+               update('update',  task_id);
                return false
             });
             $('.ui.revert.button').click(function () {
-               update('revert');
+               update('revert', task_id);
                return false
             });
         });
@@ -104,8 +105,6 @@
 </div>
 <!--navigater-end-->
 
-
-
 <div class="ui main text container">
     <form class="ui form">
         <h1 id="update_db" class="ui header">查看任务详情:</h1>
@@ -118,6 +117,10 @@
             <p v-cloak>
                 <span>创建人:&nbsp&nbsp</span>
                 <span>{{ creator }}</span>
+            </p>
+            <p v-cloak>
+                <span>任务类型:&nbsp&nbsp</span>
+                <span id="type">{{ type }}</span>
             </p>
             <p v-cloak>
                 <span>版本库:&nbsp&nbsp</span>
@@ -160,8 +163,6 @@
         </button>
     </form>
 </div>
-
-
 
 <!--footer-begin-->
 <div class="ui  inverted vertical  footer segment">

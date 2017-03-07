@@ -19,6 +19,7 @@
     <script type="text/javascript" src="../js/task.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
+    <script type="text/javascript" src="../js/update.js"></script>
 
     <script>isLogin();</script>
     <script>
@@ -30,12 +31,6 @@
     <script>
         $(function () {
             $('.activating.element').popup();
-        });
-        $(function() {
-            $('.ui.delete.button').click(function () {
-               deleteTask();
-               return false
-            })
         });
     </script>
 </head>
@@ -123,7 +118,7 @@
                 <td v-cloak style="display:none !important;">{{ task.task_id }}</td>
                 <td v-cloak>{{ task.create_time }}</td>
                 <td v-cloak>{{ task.creator }}</td>
-                <td v-cloak>{{ task.action }}</td>
+                <td v-cloak>{{ task.type }}</td>
                 <td v-cloak>{{ task.description }}</td>
                 <td v-cloak>{{ task.excutor }}</td>
                 <td v-cloak>{{ task.start_time }}</td>
@@ -134,19 +129,21 @@
                                 <i class="browser icon"></i>
                             </button>
                         </a>
-                        <a v-bind:href="'/task/?task_id=' + task.task_id">
+                        <a v-bind:href="'javascript:update(\'update\' ,\'' + task.task_id + '\');'">
                             <div class="ui button" data-tooltip="执行" data-position="top right">
                                 <i class="play icon"></i>
                             </div>
                         </a>
-                        <a v-bind:href="'/task/?task_id=' + task.task_id">
+                        <a v-bind:href="'javascript:update(\'revert\' ,\'' + task.task_id + '\');'">
                             <div class="ui button" data-tooltip="回退" data-position="top right">
                                 <i class="undo icon"></i>
                             </div>
                         </a>
-                        <button class="ui delete button" data-tooltip="删除" data-position="top right" type="submit">
-                            <i class="trash icon"></i>
-                        </button>
+                        <a v-bind:href="'javascript:deleteTask(\'' + task.task_id + '\');'">
+                            <div class="ui button" data-tooltip="删除" data-position="top right">
+                                <i class="trash icon"></i>
+                            </div>
+                        </a>
                     </div>
                 </td>
             </tr>

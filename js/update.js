@@ -2,9 +2,8 @@
  * Created by guoxu on 2/27/17.
  */
 
-function update(action) {
+function update(action, task_id) {
     var username = getCookie("username");
-    var task_id = document.getElementById("task_id").innerHTML;
     var data = {
         executor: username,
         task_id: task_id,
@@ -12,7 +11,7 @@ function update(action) {
 
     var request = {
         action: action,
-        data: data,
+        data: data
     };
     var encoded;
     encoded = $.toJSON(request);
