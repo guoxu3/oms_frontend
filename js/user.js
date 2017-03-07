@@ -224,3 +224,61 @@ function deleteUser() {
         }
     });
 }
+
+
+function showNav() {
+
+    var first = "<script> \
+                username = getCookie('username');\
+                getUser(username); \
+            </script><div id='userinfo'> \
+            <p v-cloak>用户名：{{ username }} </p> \
+            <p v-cloak>昵称：{{ nickname }}</p> \
+            <p v-cloak>邮箱：{{ mail }}</p> \
+            <p v-cloak>所属部门：{{ department }}</p></div>"
+
+    var second = "<div class='ui form'> \
+            <div class='field'> \
+                <label>原密码</label> \
+                <div class='ui input focus'> \
+                    <input id='old_passwd' type='password' placeholder=''> \
+                </div> \
+            </div> \
+            <div class='field'> \
+                <label>新密码</label> \
+                <div class='ui input focus'>\
+                    <input id='new_passwd' type='password' placeholder=''> \
+                </div> \
+            </div> \
+            <div class='field'> \
+                <label>确认新密码</label> \
+                <div class='ui input focus'> \
+                    <input id='confirm_new_passwd' type='password' placeholder=''> \
+                </div> \
+            </div> \
+            <button class='ui blue updatepasswd button' type='submit'>提交</button> \
+        </div>"
+
+    var third = "# todo"
+
+    $('.main.container .menu .item')
+        .tab({
+            cache: false,
+            // faking API request
+            apiSettings: {
+                loadingDuration: 150,
+                mockResponse: function (settings) {
+                    var response = {
+                        first: first,
+                        second: second,
+                        third: third
+                    };
+                    return response[settings.urlData.tab];
+                }
+            },
+            context: 'parent',
+            auto: true,
+            path: '/'
+        });
+
+}

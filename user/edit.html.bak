@@ -7,51 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>任务列表</title>
+    <title>编辑个人资料</title>
 
-    <script src="lib/jquery-3.1.1.min.js"></script>
-    <script src="lib/jquery.json.min.js"></script>
-    <script src="lib/vue.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="lib/semantic.min.css">
-    <script src="lib/semantic.min.js"></script>
+    <script src="../lib/jquery-3.1.1.min.js"></script>
+    <script src="../lib/jquery.json.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
+    <script src="../lib/semantic.min.js"></script>
+    <script src="../lib/vue.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript" src="js/task.js"></script>
-    <script type="text/javascript" src="js/public.js"></script>
-    <script type="text/javascript" src="js/logout.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script type="text/javascript" src="../js/user.js"></script>
+    <script type="text/javascript" src="../js/public.js"></script>
+    <script type="text/javascript" src="../js/logout.js"></script>
 
-
+    <script>isLogin();</script>
     <script>
-        $(function () {
-            $('.dynamic.example .menu .item')
+        username = getCookie("username");
+        getUser(username);
+    </script>
+    <script>
+        $(function() {
+            $('.main.container .menu .item')
                 .tab({
                     cache: false,
                     // faking API request
                     apiSettings: {
-                        loadingDuration: 300,
-                        mockResponse: function (settings) {
+                        loadingDuration : 300,
+                        mockResponse    : function(settings) {
                             var response = {
-                                first: 'AJAX Tab One',
-                                second: '',
-                                third: 'AJAX Tab Three'
+                                first  : 'AJAX Tab One',
+                                second : 'AJAX Tab Two',
+                                third  : 'AJAX Tab Three'
                             };
                             return response[settings.urlData.tab];
                         }
                     },
-                    context: 'parent',
-                    auto: true,
-                    path: '/'
+                context : 'parent',
+                auto    : true,
+                path    : 'edit.html'
+              })
+            ;
+            $('.menu .item').tab();
+        });
+        $(document)
+            .ready(function() {
+                $(".updatepasswd.button").click(function() {
+                    updateUserPassword()
                 });
-        })
-        $(function () {
-            $('.activating.element').popup();
-        });
-        $(function () {
-            $('.ui.delete.button').click(function () {
-                deleteTask();
-                return false
             })
-        });
+        ;
     </script>
 </head>
 
@@ -87,7 +91,7 @@
         <div id="admin" class="ui simple dropdown item" v-cloak v-show="show_admin">
             管理功能 <i class="dropdown icon"></i>
             <div class="menu">
-                <div class="item">
+                 <div class="item">
                     <i class="dropdown icon"></i>
                     <span class="text">用户管理</span>
                     <div class="menu">
@@ -116,28 +120,53 @@
 </div>
 <!--navigater-end-->
 
-<div class="ui main text container">
-    <div class="dynamic example">
-        <div class="ui pointing secondary menu">
-            <a class="active item" data-tab="first">First</a>
-            <a class="item" data-tab="second">Second</a>
-            <a class="item" data-tab="third">Third</a>
-        </div>
-        <div class="ui active tab segment" data-tab="first">
 
-        </div>
-        <div class="ui tab segment" data-tab="second">
-            <h3 class="ui header">AJAX Tab Two</h3>
-            <img class="ui wireframe image" src="/images/wireframe/paragraph.png">
-            <img class="ui wireframe image" src="/images/wireframe/paragraph.png">
-        </div>
-        <div class="ui tab segment" data-tab="third">
-            <h3 class="ui header">AJAX Tab Three</h3>
-            <img class="ui wireframe image" src="/images/wireframe/paragraph.png">
-            <img class="ui wireframe image" src="/images/wireframe/paragraph.png">
+<div class="ui main text container">
+    <h1 class="ui header">个人中心</h1>
+    <div class="ui divider"></div>
+    <div class="ui top attached tabular menu">
+          <a class="item active" data-tab="first">我的资料</a>
+          <a class="item" data-tab="second">密码修改</a>
+          <a class="item" data-tab="third">我的统计</a>
+    </div>
+    <div class="ui bottom attached tab segment active" data-tab="first">
+        <div id="userinfo">
+            <p v-cloak>用户名：{{ username }} </p>
+            <p v-cloak>昵称：{{ nickname }}</p>
+            <p v-cloak>邮箱：{{ mail }}</p>
+            <p v-cloak>所属部门：{{ department }}</p>
         </div>
     </div>
+
+    <div class="ui bottom attached tab segment " data-tab="second">
+        <div class="ui form">
+            <div class="field">
+                <label>原密码</label>
+                <div class="ui input focus">
+                    <input id="old_passwd" type="password" placeholder="">
+                </div>
+            </div>
+            <div class="field">
+                <label>新密码</label>
+                <div class="ui input focus">
+                    <input id="new_passwd" type="password" placeholder="">
+                </div>
+            </div>
+            <div class="field">
+                <label>确认新密码</label>
+                <div class="ui input focus">
+                    <input id="confirm_new_passwd" type="password" placeholder="">
+                </div>
+            </div>
+            <button class="ui blue updatepasswd button" type="submit">提交</button>
+        </div>
+    </div>
+
+    <div class="ui bottom attached tab segment" data-tab="third">
+        # todo
+    </div>
 </div>
+
 
 <!--footer-begin-->
 <div class="ui  inverted vertical  footer segment">
