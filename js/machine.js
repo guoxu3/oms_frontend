@@ -1,6 +1,43 @@
 /**
  * Created by guoxu on 12/7/16.
  */
+
+function getMachine(machine_name) {
+    var URL = '/api/machine?machine_name=' + machine_name;
+    var machine_data = {};
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok == true) {
+                machine_data = models.info['data'];
+            } else {
+                alert(models.info);
+            }
+            var machineinfo = new Vue({
+                el: '#machineinfo',
+                data: machine_data
+            })
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+            var machineinfo = new Vue({
+                el: '#machineinfo',
+                data: machine_data
+            })
+        }
+    });
+}
+
+function getMachineByName() {
+    var machine_name = GetQueryString("machine_name");
+    if (machine_name != null) {
+        getMachine(machine_name)
+    }
+}
+
+
 function getAllMachines() {
     var cur_page = GetQueryString('page');
     var machine_num = 10;
@@ -88,9 +125,8 @@ function addMachine() {
     });
 }
 
-function deleteTask() {
-    var task_id = $("#task_id").val();
-    var URL = '/api/machine?task_id=' + task_id;
+function deleteMachine(machine_name) {
+    var URL = '/api/machine?machine_name=' + machine_name;
     $.ajax({
         type: "DELETE",
         url: URL,
