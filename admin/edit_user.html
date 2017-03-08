@@ -24,13 +24,12 @@
         $(function() {
             getUserByName();
         });
-        $(document)
-            .ready(function() {
-                $("form").submit(function(){
-                    updateUser();
-                    return false
-                });
-        })
+        $(function() {
+            $("form").submit(function() {
+                updateUser();
+            });
+            return false;
+        });
     </script>
 </head>
 
@@ -139,7 +138,7 @@
         <button class="ui primary button" type="submit">
             修改
         </button>
-        <button class="ui back button" onclick="window.history.go(-1)">
+        <button class="ui back button" onclick="window.history.go(-1)" type="button">
             返回
         </button>
     </form>

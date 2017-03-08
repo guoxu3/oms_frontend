@@ -100,7 +100,7 @@ function addTask() {
     var username = getCookie("username");
     var data = {
         creator: username,
-        action: $("#action").val(),
+        type: $("#type").val(),
         target: $("#target").val(),
         ip: $("#ip").val(),
         version: $("#version").val(),
