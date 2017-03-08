@@ -32,7 +32,7 @@ function getMachine(machine_name) {
 
 function getMachineByName() {
     var machine_name = GetQueryString("machine_name");
-    if (machine_name != null) {
+    if (machine_name != "") {
         getMachine(machine_name)
     }
 }

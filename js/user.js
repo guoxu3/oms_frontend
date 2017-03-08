@@ -30,6 +30,14 @@ function getUser(username) {
     });
 }
 
+function getUserByName() {
+    var username = GetQueryString("username");
+    if (username != "") {
+        getUser(username)
+    }
+}
+
+
 function getAllUser() {
     var cur_page = GetQueryString('page');
     var user_num = 10;
@@ -74,7 +82,6 @@ function getAllUser() {
             });
         }
     });
-
 }
 
 
@@ -173,13 +180,25 @@ function updateUserPassword() {
 
 
 function updateUser() {
+    var username = $("#username").val();
+    var nickname = $("#nickname").val();
+    var mail = $("#mail").val();
+    var passwd = $("#passwd").val();
+    var department = $("#department").val();
+    var permissions = $("#permissions").val();
 
-    var data = {};
+    var data = {
+        username: username,
+        nickname: nickname,
+        mail: mail,
+        passwd: passwd,
+        deparment: department,
+        permissions: permissions
+    };
     var request = {
-        action: 'update',
+        action: 'update_all',
         data: data
     };
-
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
@@ -204,6 +223,8 @@ function updateUser() {
         }
     });
 }
+
+
 
 function deleteUser() {
     var username = $("#username").val();

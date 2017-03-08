@@ -32,7 +32,7 @@ function getTask(task_id) {
 
 function getTaskByID() {
     var task_id = GetQueryString("task_id");
-    if (task_id != null) {
+    if (task_id != "") {
         getTask(task_id)
     }
 }

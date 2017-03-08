@@ -3,12 +3,11 @@
  */
 
 var login = function () {
-    var junp_url = "/task/list";
+    var jump_url = "/task/list";
     var url_before_login = window.location.search.replace(new RegExp('^\\?', 'g'), '');
-    if (url_before_login !== null) {
-        junp_url = url_before_login;
+    if (url_before_login !== "") {
+        jump_url = url_before_login;
     }
-
     var request = {
         username: $("#username").val(),
         passwd: $("#passwd").val()
@@ -27,7 +26,7 @@ var login = function () {
         success: function (data) {
             var models = data;
             if (models.ok == true) {
-                window.location.href = junp_url;
+                window.location.href = jump_url;
             } else {
                 alert(models.info);
             }
