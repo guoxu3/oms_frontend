@@ -21,9 +21,10 @@
     <script type="text/javascript" src="../js/logout.js"></script>
 
     <script>isLogin();</script>
-    <script>getAllMachines();</script>
-
     <script>
+        $(function () {
+            getAllMachine();
+        });
         $(function () {
             $('.activating.element').popup();
         })
@@ -94,7 +95,7 @@
 
 <div class="ui main container">
     <h1 class="ui header">机器列表</h1>
-    <div id="machine">
+    <div id="machinelist">
         <table class="ui single line table" align="center">
             <thead>
             <tr>
@@ -109,15 +110,15 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="machine in machines">
+                <tr v-for="machine in machine_list">
                     <td v-cloak>{{ machine.id  }}</td>
                     <td v-cloak>{{ machine.machine_name  }}</td>
                     <td v-cloak>{{ machine.inside_ip  }}</td>
                     <td v-cloak>{{ machine.outside_ip  }}</td>
                     <td v-cloak>{{ machine.location  }}</td>
                     <td v-cloak>{{ machine.usage  }}</td>
-                    <td v-cloak v-if="machine.is_initialized === 1">是</td>
-                    <td v-cloak v-if="machine.is_initialized === 0">否</td>
+                    <td v-cloak v-if="machine.is_initialized == true">是</td>
+                    <td v-cloak v-if="machine.is_initialized == false">否</td>
                     <td v-cloak v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
                         <a v-bind:href="'/machine/edit?machine_name=' + machine.machine_name">

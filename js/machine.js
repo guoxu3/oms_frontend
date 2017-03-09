@@ -2,43 +2,78 @@
  * Created by guoxu on 12/7/16.
  */
 
-function getMachine(machine_name) {
+$(function () {
+    window.machineinfo = new Vue({
+        el: '#machineinfo',
+        data: {
+            id: '',
+            machine_name: '',
+            inside_ip: '',
+            outside_ip: '',
+            usage: '',
+            location: '',
+            location_options: [
+                { text: '阿里云-北京', value: 'aliyun-bj'},
+                { text: '阿里云-深圳', value: 'aliyun-sz'},
+                { text: '阿里云-杭州', value: 'aliyun-hz'}
+            ],
+            is_initialized: '',
+            initialized_options: [
+                { text: '是', value: true},
+                { text: '否', value: false}
+            ]
+        },
+    });
+
+    window.machinelist = new Vue({
+        el: '#machinelist',
+        data: {
+            machine_list: [],
+            show_button: false
+        }
+    });
+});
+
+function getMachineData(callback, machine_name) {
     var URL = '/api/machine?machine_name=' + machine_name;
-    var machine_data = {};
     $.ajax({
         type: "GET",
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                machine_data = models.info['data'];
+                callback(null, models.info['data'])
             } else {
-                alert(models.info);
+                callback(models.info, {});
             }
-            var machineinfo = new Vue({
-                el: '#machineinfo',
-                data: machine_data
-            });
         },
         error: function (xhr, error, exception) {
-            alert(exception.toString());
-            var machineinfo = new Vue({
-                el: '#machineinfo',
-                data: machine_data
-            });
+            callback(exception.toString(), {});
         }
     });
 }
 
-function getMachineByName() {
-    var machine_name = GetQueryString("machine_name");
+function getMachineByName(machine_name) {
     if (machine_name != "") {
-        getMachine(machine_name)
+        getMachineData(function (err, data) {
+            if (err) {
+                alert(err)
+                return
+            }
+            machineinfo.$data.id = data['id'];
+            machineinfo.$data.machine_name = data['machine_name'];
+            machineinfo.$data.inside_ip = data['inside_ip'];
+            machineinfo.$data.outside_ip = data['outside_ip'];
+            machineinfo.$data.usage = data['usage'];
+            machineinfo.$data.is_initialized = data['is_initialized'];
+            machineinfo.$data.location = data['location'];
+            console.log(data['is_initialized']);
+        }, machine_name)
     }
 }
 
 
-function getAllMachines() {
+function getAllMachineData(callback) {
     var cur_page = GetQueryString('page');
     var machine_num = 10;
     var count = GetQueryString('count');
@@ -48,40 +83,34 @@ function getAllMachines() {
     }
     var start = ((cur_page - 1) * count);
     var URL = '/api/machine?start=' + start +'&count=' + count;
-    var machine_data = [];
-    var show_button = false;
     $.ajax({
         type: "GET",
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                machine_data = models.info['data'];
+                callback(null, models.info['data'], true)
                 machine_num = models.info['count'];
-                show_button = true;
             } else {
-                alert(models.info);
+                callback(models.info, {} ,false);
             }
-            var machine = new Vue({
-                el: '#machine',
-                data: {
-                    machines: machine_data,
-                    show_button: show_button
-                }
-            });
             showPage(cur_page, Math.ceil(machine_num/count), count);
         },
         error: function (xhr, error, exception) {
-            alert(exception.toString());
-            var machine = new Vue({
-                el: '#machine',
-                data: {
-                    machines: machine_data,
-                    show_button: show_button
-                }
-            })
+            callback(exception.toString(), {}, false);
         }
     });
+}
+
+function getAllMachine() {
+    getAllMachineData(function (err, data, show) {
+        if (err){
+            alert(err);
+            return
+        }
+        machinelist.$data.machine_list = data;
+        machinelist.$data.show_button = show
+    })
 }
 
 function addMachine() {

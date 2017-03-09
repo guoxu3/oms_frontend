@@ -22,12 +22,14 @@
     <script>isLogin();</script>
     <script>
         $(function() {
+            var machineName = GetQueryString("machine_name");
+            if (machineName != "") {
+                getMachineByName(machineName)
+            }
+        });
+        setTimeout(function() {
             $('.ui.dropdown').dropdown();
-        });
-        $(function() {
-            getMachineByName();
-        });
-
+        }, 200);
     </script>
 </head>
 
@@ -116,10 +118,15 @@
         </div>
         <div class="field">
             <label>所在机房</label>
-            <select id="location" class="ui dropdown">
-                <option value="aliyun-bj">阿里云-北京</option>
-                <option value="aliyun-sz">阿里云-深圳</option>
-                <option value="aliyun-hz">阿里云-杭州</option>
+            <select id="location" class="ui dropdown" v-model="location">
+                <template v-for="option in location_options" >
+                    <option  :value="option.value" v-if="option.value == location" selected>
+                        {{ option.text }}
+                    </option>
+                    <option :value="option" v-else>
+                        {{ option.text }}
+                    </option>
+                </template>
             </select>
         </div>
         <div class="field">
@@ -130,11 +137,15 @@
         </div>
         <div class="field">
             <label>是否初始化</label>
-            <select id="is_initialized" class="ui dropdown">
-                <option v-cloak v-if="is_initialized === 1"value="1">是</option>
-                <option v-cloak v-if="is_initialized === 1"value="0">否</option>
-                <option v-cloak v-if="is_initialized === 0"value="0">否</option>
-                <option v-cloak v-if="is_initialized === 0"value="1">是</option>
+            <select id="is_initialized" class="ui dropdown" v-midel="is_initialized">
+                <template v-for="option in initialized_options" >
+                    <option  :value="option.value" v-if="option.value == is_initialized" selected>
+                        {{ option.text }}
+                    </option>
+                    <option :value="option" v-else>
+                        {{ option.text }}
+                    </option>
+                </template>
             </select>
         </div>
         <div class="ui divider"></div>

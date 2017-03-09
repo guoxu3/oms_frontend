@@ -78,7 +78,7 @@ function getAllUserData(callback) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 callback(null, models.info['data'], true)
-                count = models.info['count'];
+                user_num = models.info['count'];
             } else {
                 callback(models.info, {} ,false);
             }
