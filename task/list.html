@@ -98,7 +98,7 @@
 
 <div class="ui  main container">
     <h1 class="ui header">任务列表:</h1>
-    <div id="task">
+    <div id="tasklist">
         <table class="ui single line center table">
             <thead>
             <tr>
@@ -113,7 +113,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="task in tasks">
+            <tr v-for="task in task_list">
                 <td v-cloak>{{ task.id }}</td>
                 <td v-cloak style="display:none !important;">{{ task.task_id }}</td>
                 <td v-cloak>{{ task.create_time }}</td>

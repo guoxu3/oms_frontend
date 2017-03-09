@@ -21,7 +21,14 @@
     <script type="text/javascript" src="../js/logout.js"></script>
     <script type="text/javascript" src="../js/update.js"></script>
     <script>isLogin();</script>
-    <script>getTaskByID();</script>
+    <script>
+        $(function () {
+            var taskId = GetQueryString("task_id");
+            if (taskId != "") {
+                getTaskByID(taskId)
+             }
+        })
+    </script>
     <script>
         $(function() {
             $('.ui.dropdown').dropdown();
@@ -152,10 +159,10 @@
             </p>
         </div>
         <div class="ui divider"></div>
-        <button class="ui update button" type="submit">
+        <button class="ui update primary button" type="submit">
             执行
         </button>
-        <button class="ui revert button" type="submit">
+        <button class="ui revert secondary button" type="submit">
             回退
         </button>
         <button class="ui delete button" type="submit">

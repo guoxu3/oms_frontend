@@ -21,15 +21,10 @@
     <script type="text/javascript" src="../js/user.js"></script>
     <script>isLogin();</script>
     <script>
-        $(function() {
-            getUserByName();
-        });
-        $(function() {
-            $("form").submit(function() {
-                updateUser();
-            });
-            return false;
-        });
+        $(function () {
+            var user_name = GetQueryString('username');
+            getUserByName(user_name);
+        })
     </script>
 </head>
 
@@ -95,7 +90,7 @@
 <!--navigater-end-->
 
 <div class="ui main text container">
-    <form id="userinfo" class="ui form">
+    <form id="userinfo" class="ui form" onsubmit="updateUser(); return false;">
         <h1 class="ui header">修改机器信息</h1>
         <div class="ui divider"></div>
         <div class="field">

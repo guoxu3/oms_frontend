@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/vue.min.js"></script>
+    <script>
+        window.onload = function () {
+            // page abstraction via vue.js
+            var ui = new Vue({
+                el: '#main',
+                data: {
+                    user_list: []
+                },
+                methods: {
+                    refresh: function() {
+                        load_data(function(err, data) {
+                            if (err) {
+                                alert(err)
+                                return
+                            }
+
+                            ui.$data.user_list = data
+                        })
+                    }
+                }
+            })
+        }
+
+        function load_data(cb, a) {
+            // ...
+                a = 2
+                console.log(a)
+                var data = [
+                    {
+                        username: 'zhangsan' + Math.random(),
+                        email: 'zhangsan@gmail.com',
+                        is_vip: false,
+                        ctime: new Date()
+                    }
+                ]
+                cb(null, data)
+
+        }
+
+    </script>
+</head>
+<body>
+
+<div id="main">
+
+    <form id="mainform" v-on:submit.prevent="refresh">
+        <button type="submit">Refresh</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>username</th>
+                <th>email</th>
+                <th>is_vip</th>
+                <th>ctime</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="user in user_list">
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.is_vip}}</td>
+                <td>{{user.ctime}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+</html>

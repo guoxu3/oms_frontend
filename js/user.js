@@ -2,43 +2,66 @@
  * Created by guoxu on 12/7/16.
  */
 
-function getUser(username) {
+$(function () {
+    window.userinfo = new Vue({
+        el: '#userinfo',
+        data: {
+            id: '',
+            username: '',
+            nickname: '',
+            mail: '',
+            department: '',
+            permissions: ''
+        }
+    });
+
+    window.userlist = new Vue({
+        el: '#userlist',
+        data: {
+            user_list: [],
+            show_button: false
+        }
+    });
+});
+
+function getUserData(callback, username) {
     var URL = '/api/user?username=' + username;
-    var user_data = {};
     $.ajax({
         type: "GET",
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                user_data = models.info['data']
+                callback(null, models.info['data'])
             } else {
-                alert(models.info);
+                callback(models.info, {});
             }
-            var userinfo = new Vue({
-                el: '#userinfo',
-                data: user_data
-            })
         },
         error: function (xhr, error, exception) {
-            alert(exception.toString());
-            var userinfo = new Vue({
-                el: '#userinfo',
-                data: user_data
-            })
+            callback(exception.toString(), {});
         }
     });
 }
 
-function getUserByName() {
-    var username = GetQueryString("username");
+function getUserByName(username) {
     if (username != "") {
-        getUser(username)
+        getUserData(function (err, data) {
+            if (err) {
+                alert(err)
+                return
+            }
+            userinfo.$data.id = data['id'];
+            userinfo.$data.username = data['username'];
+            userinfo.$data.nickname = data['nickname'];
+            userinfo.$data.mail = data['mail'];
+            userinfo.$data.department = data['department'];
+            userinfo.$data.permissions = data['permissions'];
+        }, username)
     }
 }
 
 
-function getAllUser() {
+function getAllUserData(callback) {
     var cur_page = GetQueryString('page');
     var user_num = 10;
     var count = GetQueryString('count');
@@ -48,42 +71,35 @@ function getAllUser() {
     }
     var start = ((cur_page - 1) * count);
     var URL = '/api/user?start=' + start +'&count=' + count;
-    var user_data = [];
-    var show_button = false;
     $.ajax({
         type: "GET",
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                user_data = models.info['data'];
-                user_num = models.info['count'];
-                show_button = true;
+                callback(null, models.info['data'], true)
+                count = models.info['count'];
             } else {
-                alert(models.info);
+                callback(models.info, {} ,false);
             }
-            var user = new Vue({
-                el: '#user',
-                data: {
-                    users: user_data,
-                    show_button: show_button
-                }
-            });
             showPage(cur_page, Math.ceil(user_num/count), count);
         },
         error: function (xhr, error, exception) {
-            alert(exception.toString());
-            var user = new Vue({
-                el: '#user',
-                data: {
-                    users: user_data,
-                    show_button: show_button
-                }
-            });
+            callback(exception.toString(), {}, false);
         }
     });
 }
 
+function getAllUser() {
+    getAllUserData(function (err, data, show) {
+        if (err){
+            alert(err);
+            return
+        }
+        userlist.$data.user_list = data;
+        userlist.$data.show_button = show
+    })
+}
 
 function addUser() {
     var data = {
@@ -178,7 +194,6 @@ function updateUserPassword() {
 
 }
 
-
 function updateUser() {
     var username = $("#username").val();
     var nickname = $("#nickname").val();
@@ -249,14 +264,15 @@ function deleteUser() {
 
 function showNav() {
 
-    var first = "<script> \
-                username = getCookie('username');\
-                getUser(username); \
-            </script><div id='userinfo'> \
+    var first = "<div id='userinfo'> \
             <p v-cloak>用户名：{{ username }} </p> \
             <p v-cloak>昵称：{{ nickname }}</p> \
             <p v-cloak>邮箱：{{ mail }}</p> \
-            <p v-cloak>所属部门：{{ department }}</p></div>"
+            <p v-cloak>所属部门：{{ department }}</p></div>\
+            <script>\
+                var user_name = getCookie('username');\
+                getUserByName(user_name);\
+            </script>"
 
     var second = "<div class='ui form'> \
             <div class='field'> \

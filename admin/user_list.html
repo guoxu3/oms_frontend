@@ -21,7 +21,11 @@
     <script type="text/javascript" src="../js/logout.js"></script>
 
     <script>isLogin();</script>
-    <script>getAllUser();</script>
+    <script>
+        $(function () {
+            getAllUser();
+        })
+    </script>
     <script>
         $(function () {
             $('.activating.element').popup();
@@ -93,7 +97,7 @@
 
 <div class="ui main text container">
     <h1 class="ui header">用户列表:</h1>
-    <div id="user">
+    <div id="userlist">
         <table class="ui single line center table">
             <thead>
             <tr>
@@ -106,7 +110,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="user in users">
+            <tr v-for="user in user_list">
                 <td v-cloak>{{ user.id }}</td>
                 <td v-cloak>{{ user.username }}</td>
                 <td v-cloak>{{ user.nickname }}</td>

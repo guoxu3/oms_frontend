@@ -13,7 +13,7 @@
     <script src="../lib/jquery.json.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
     <script src="../lib/semantic.min.js"></script>
-    <script src="../lib/vue.min.js"></script>
+    <script src="../lib/vue.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript" src="../js/user.js"></script>
@@ -22,9 +22,12 @@
 
     <script>isLogin();</script>
     <script>
-        username = getCookie("username");
-        getUser(username);
+        $(function () {
+            var user_name = getCookie('username');
+            getUserByName(user_name);
+        })
     </script>
+
     <script>
         $(function () {
             showNav();

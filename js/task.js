@@ -2,43 +2,85 @@
  * Created by guoxu on 12/7/16.
  */
 
-function getTask(task_id) {
+$(function () {
+    window.taskinfo = new Vue({
+        el: '#taskinfo',
+        data: {
+            id: '',
+            task_id: '',
+            creator: '',
+            ip: '',
+            target: '',
+            version: '',
+            type: '',
+            content: '',
+            create_time: '',
+            description: '',
+            executor: '',
+            start_time: '',
+            revert_time: '',
+            status: '',
+            percent: '',
+            revert: ''
+        }
+    });
+
+    window.tasklist = new Vue({
+        el: '#tasklist',
+        data: {
+            task_list: [],
+            show_button: false
+        }
+    });
+});
+
+function getTaskData(callback, task_id) {
     var URL = '/api/task?task_id=' + task_id;
-    var task_data = {};
     $.ajax({
         type: "GET",
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                task_data = models.info['data'];
+                callback(null, models.info['data'])
             } else {
-                alert(models.info);
+                callback(models.info, {});
             }
-            var taskinfo = new Vue({
-                el: '#taskinfo',
-                data: task_data
-            })
         },
         error: function (xhr, error, exception) {
-            alert(exception.toString());
-            var taskinfo = new Vue({
-                el: '#taskinfo',
-                data: task_data
-            })
+            callback(exception.toString(), {});
         }
     });
 }
 
-function getTaskByID() {
-    var task_id = GetQueryString("task_id");
+function getTaskByID(task_id) {
     if (task_id != "") {
-        getTask(task_id)
+        getTaskData(function (err, data) {
+            if (err) {
+                alert(err)
+                return
+            }
+            taskinfo.$data.id = data['id'];
+            taskinfo.$data.task_id = data['task_id'];
+            taskinfo.$data.creator = data['creator'];
+            taskinfo.$data.ip = data['ip'];
+            taskinfo.$data.target = data['target'];
+            taskinfo.$data.version = data['version'];
+            taskinfo.$data.type = data['type'];
+            taskinfo.$data.content = data['content'];
+            taskinfo.$data.create_time = data['create_time'];
+            taskinfo.$data.executor = data['executor'];
+            taskinfo.$data.start_time = data['start_time'];
+            taskinfo.$data.revert_time = data['revert_time'];
+            taskinfo.$data.status = data['status'];
+            taskinfo.$data.percent = data['percent'];
+            taskinfo.$data.revert = data['revert'];
+        }, task_id)
     }
 }
 
 
-function getAllTask() {
+function getAllTaskData(callback) {
     var cur_page = GetQueryString('page');
     var task_num = 10;
     var count = GetQueryString('count');
@@ -48,40 +90,34 @@ function getAllTask() {
     }
     var start = ((cur_page - 1) * count);
     var URL = '/api/task?start=' + start +'&count=' + count;
-    var task_data = [];
-    var show_button = false;
     $.ajax({
         type: "GET",
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                task_data = models.info['data'];
+                callback(null, models.info['data'], true);
                 task_num = models.info['count'];
-                show_button = true;
             } else {
-                alert(models.info);
+                callback(models.info, {} ,false);
             }
-            var task = new Vue({
-                el: '#task',
-                data: {
-                    tasks: task_data,
-                    show_button: show_button
-                }
-            });
             showPage(cur_page, Math.ceil(task_num/count), count);
         },
         error: function (xhr, error, exception) {
-            alert(exception.toString());
-            var task = new Vue({
-                el: '#task',
-                data: {
-                    tasks: task_data,
-                    show_button: show_button
-                }
-            });
+            callback(exception.toString(), {}, false);
         }
     });
+}
+
+function getAllTask() {
+    getAllTaskData(function (err, data, show) {
+        if (err){
+            alert(err);
+            return
+        }
+        tasklist.$data.task_list = data;
+        tasklist.$data.show_button = show
+    })
 }
 
 
