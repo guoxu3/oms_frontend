@@ -126,8 +126,16 @@
                 <span>{{ creator }}</span>
             </p>
             <p v-cloak>
+                <span>创建时间:&nbsp&nbsp</span>
+                <span>{{ create_time | time }} </span>
+            </p>
+            <p v-cloak>
                 <span>任务类型:&nbsp&nbsp</span>
                 <span id="type">{{ type }}</span>
+            </p>
+            <p v-cloak>
+                <span>任务描述:&nbsp&nbsp</span>
+                <span>{{ description }}</span>
             </p>
             <p v-cloak>
                 <span>版本库:&nbsp&nbsp</span>
@@ -146,8 +154,16 @@
                 <span>{{ ip }}</span>
             </p>
             <p v-cloak>
-                <span>任务描述:&nbsp&nbsp</span>
-                <span>{{ description }}</span>
+                <span>执行者:&nbsp&nbsp</span>
+                <span>{{ exectuor }} </span>
+            </p>
+            <p v-cloak>
+                <span>执行时间:&nbsp&nbsp</span>
+                <span>{{ start_time | time }} </span>
+            </p>
+            <p v-cloak>
+                <span>回退时间:&nbsp&nbsp</span>
+                <span>{{ revert_time | time }} </span>
             </p>
             <p v-cloak>
                 <span>是否执行:&nbsp&nbsp</span>

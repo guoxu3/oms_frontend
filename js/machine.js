@@ -67,11 +67,9 @@ function getMachineByName(machine_name) {
             machineinfo.$data.usage = data['usage'];
             machineinfo.$data.is_initialized = data['is_initialized'];
             machineinfo.$data.location = data['location'];
-            console.log(data['is_initialized']);
         }, machine_name)
     }
 }
-
 
 function getAllMachineData(callback) {
     var cur_page = GetQueryString('page');
@@ -131,7 +129,6 @@ function addMachine() {
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    console.log(jsonStr);
     var URL = '/api/machine';
     $.ajax({
         url: URL,

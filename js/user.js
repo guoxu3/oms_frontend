@@ -22,6 +22,7 @@ $(function () {
             show_button: false
         }
     });
+
 });
 
 function getUserData(callback, username) {
@@ -118,7 +119,6 @@ function addUser() {
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    console.log(jsonStr);
     var URL = '/api/user';
     $.ajax({
         url: URL,
@@ -170,7 +170,6 @@ function updateUserPassword() {
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    console.log(jsonStr);
     var URL = '/api/user';
     $.ajax({
         url: URL,
@@ -191,7 +190,6 @@ function updateUserPassword() {
             alert(exception.toString());
         }
     });
-
 }
 
 function updateUser() {
@@ -217,7 +215,6 @@ function updateUser() {
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    console.log(jsonStr);
     var URL = '/api/user';
     $.ajax({
         url: URL,

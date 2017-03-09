@@ -66,6 +66,7 @@ function getTaskByID(task_id) {
             taskinfo.$data.ip = data['ip'];
             taskinfo.$data.target = data['target'];
             taskinfo.$data.version = data['version'];
+            taskinfo.$data.description = data['description'];
             taskinfo.$data.type = data['type'];
             taskinfo.$data.content = data['content'];
             taskinfo.$data.create_time = data['create_time'];
@@ -145,7 +146,6 @@ function addTask() {
     };
 
     var obj = document.getElementsByName("mailto");
-    console.log(obj);
     var mailto_list = [];
     var k;
     for (k in obj) {
@@ -161,7 +161,6 @@ function addTask() {
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    console.log(jsonStr);
     var URL = '/api/task';
     $.ajax({
         url: URL,

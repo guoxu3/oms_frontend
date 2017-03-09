@@ -16,7 +16,6 @@ function update(action, task_id) {
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    console.log(jsonStr);
     var URL = '/api/update';
     $.ajax({
         url: URL,

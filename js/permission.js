@@ -65,7 +65,6 @@ function addPermission() {
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    console.log(jsonStr);
     var URL = '/api/permission';
     $.ajax({
         url: URL,

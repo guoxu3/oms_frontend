@@ -171,3 +171,22 @@ function showPage(curPage, totalPage, count) {
     $('#pages').append(item);
     return;
 }
+
+
+Vue.filter('time', function (unix_time) {
+    if (unix_time == 0 || unix_time == null) {
+        return 0
+    }
+
+    if (unix_time.toString().length == 10) {
+        unix_time = unix_time * 10
+    }
+    var date = new Date(unix_time);   //10位unix时间戳可通过value*1000转换为13位格式
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var D = date.getDate() + ' ';
+    var h = date.getHours() + ':';
+    var m = date.getMinutes() + ':';
+    var s = date.getSeconds();
+    return Y+M+D+h+m+s;
+})
