@@ -27,7 +27,6 @@ function update(action, task_id) {
             var models = data;
             if (models.ok == true) {
                 alert(models.info);
-               // window.location.href = "/task/list";
             } else {
                 alert(models.info);
             }
