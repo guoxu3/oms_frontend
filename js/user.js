@@ -268,7 +268,7 @@ function showNav() {
             <p v-cloak>所属部门：{{ department }}</p></div>\
             <script>\
                 var user_name = getCookie('username');\
-                getUserByName(user_name);\
+                setTimeout($(function() { getUserByName(user_name);}), 2000)\
             </script>"
 
     var second = "<div class='ui form'> \
@@ -293,7 +293,10 @@ function showNav() {
             <button class='ui blue updatepasswd button' type='submit'>提交</button> \
         </div>"
 
-    var third = "# todo"
+    var third = "<canvas id='myChart' width='400' height='400'></canvas>\
+                <script>\
+                setTimeout($(function() { create_image()}), 200)\
+                </script>"
 
     $('.main.container .menu .item')
         .tab({
