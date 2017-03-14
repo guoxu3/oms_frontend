@@ -179,7 +179,7 @@ Vue.filter('time', function (unix_time) {
     }
 
     if (unix_time.toString().length == 10) {
-        unix_time = unix_time * 10
+        unix_time = unix_time * 1000
     }
     var date = new Date(unix_time);   //10位unix时间戳可通过value*1000转换为13位格式
     var Y = date.getFullYear() + '-';

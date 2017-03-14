@@ -293,9 +293,14 @@ function showNav() {
             <button class='ui blue updatepasswd button' type='submit'>提交</button> \
         </div>"
 
-    var third = "<canvas id='myChart' width='400' height='400'></canvas>\
+    var third = " <label for='begin'>开始日期:</label><input id='begin' type='date' value='2014-01-13'/>\
+                <label for='end'>结束日期:</label><input id='end' type='date' value='2014-01-13'/>\
+                <button class='ui button'>查询</button>\
+                <button class='ui button' onclick='javascript:self_statistic_image_by_day(7)'>最近一周</button>\
+                <button class='ui button' onclick='javascript:self_statistic_image_by_day(30)'>最近一月</button>\
+                <canvas id='myChart' width='200' height='200'></canvas>\
                 <script>\
-                setTimeout($(function() { create_image()}), 200)\
+                setTimeout($(function() { self_statistic_image_by_day(7)}), 200)\
                 </script>"
 
     $('.main.container .menu .item')
