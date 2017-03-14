@@ -59,20 +59,24 @@ function get_days_before(days) {
     return dateArray
 }
 
-function self_statistic_image_by_day(days) {
+function statistic_image_by_day(days, is_all) {
     var labels = [];
     var data_list = [];
     var day;
+    var URL;
     var end_time = new Date(new Date().toLocaleDateString()).getTime() / 1000 + (24 * 60 * 60 - 1);
     var begin_time = end_time - (days * 24 * 60 * 60 - 1);
-    var user_name = getCookie("username");
     var date_arry = get_days_before(days);
 
-    var URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time + '&username=' + user_name;
+    if (is_all) {
+        URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time
+    } else {
+        var user_name = getCookie("username");
+        URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time + '&username=' + user_name;
+    }
     $.ajax({
         type: "GET",
         url: URL,
-        async: false,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
@@ -97,11 +101,11 @@ function self_statistic_image_by_day(days) {
     });
 }
 
-function self_statistic_image_by_select(){
+function statistic_image_by_select(is_all){
     var labels = [];
     var data_list = [];
     var day;
-    var user_name = getCookie("username");
+    var URL;
     var begin_date = $("#begin_date").val();
     var end_date = $("#end_date").val();
     var begin_time = new Date(begin_date.replace(/-/g,'/')).getTime() / 1000;
@@ -114,18 +118,22 @@ function self_statistic_image_by_select(){
     var startTime = new Date(begin_date.replace(/-/g,'/'));
     var endTime = new Date(end_date.replace(/-/g,'/'));
     while((endTime.getTime()-startTime.getTime())>=0){
-        var year = startTime.getFullYear().toString();
-        var month = (startTime.getMonth()+1 < 10 ? '0'+(startTime.getMonth()+1) : startTime.getMonth()+1).toString();
-        var day = (startTime.getDate() < 10 ? '0'+(startTime.getDate()) : startTime.getDate()).toString();
-        date_arry.push(year+month+day);
+        var _year = startTime.getFullYear().toString();
+        var _month = (startTime.getMonth()+1 < 10 ? '0'+(startTime.getMonth()+1) : startTime.getMonth()+1).toString();
+        var _day = (startTime.getDate() < 10 ? '0'+(startTime.getDate()) : startTime.getDate()).toString();
+        date_arry.push(_year + _month + _day);
         startTime.setDate(startTime.getDate()+1);
     }
 
-    var URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time + '&username=' + user_name;
+    if (is_all) {
+        URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time
+    } else {
+        var user_name = getCookie("username");
+        URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time + '&username=' + user_name;
+    }
     $.ajax({
         type: "GET",
         url: URL,
-        async: false,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
@@ -148,5 +156,4 @@ function self_statistic_image_by_select(){
             alert(exception.toString());
         }
     });
-
 }

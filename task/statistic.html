@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>个人中心</title>
+    <title>任务统计</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
@@ -17,31 +17,15 @@
     <script src="../lib/Chart.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/user.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
     <script type="text/javascript" src="../js/task_statistic.js"></script>
 
     <script>isLogin();</script>
     <script>
-        $(function () {
-            var user_name = getCookie('username');
-            getUserByName(user_name);
-        })
-    </script>
-
-    <script>
-        $(function () {
-            showNav();
-        });
-        $(document)
-            .ready(function () {
-                $(".updatepasswd.button").click(function () {
-                    updateUserPassword()
-                });
-            })
-        ;
-
+        setTimeout($(function () {
+            statistic_image_by_day(7, true);
+        }), 200)
     </script>
 </head>
 
@@ -108,45 +92,14 @@
 
 
 <div class="ui main container">
-    <div class="ui pointing secondary menu">
-        <a class="active item" data-tab="first">基本资料</a>
-        <a class="item" data-tab="second">修改密码</a>
-        <a class="item" data-tab="third">我的统计</a>
-    </div>
-    <div class="ui active tab " data-tab="first">
-        <div id="userinfo">
-            <p v-cloak>用户名：{{ username }} </p>
-            <p v-cloak>昵称：{{ nickname }}</p>
-            <p v-cloak>邮箱：{{ mail }}</p>
-            <p v-cloak>所属部门：{{ department }}</p>
-        </div>
-    </div>
-    <div class="ui tab " data-tab="second">
-        <div class="ui form">
-            <div class="field">
-                <label>原密码</label>
-                <div class="ui input focus">
-                    <input id="old_passwd" type="password" placeholder="">
-                </div>
-            </div>
-            <div class="field">
-                <label>新密码</label>
-                <div class="ui input focus">
-                    <input id="new_passwd" type="password" placeholder="">
-                </div>
-            </div>
-            <div class="field">
-                <label>确认新密码</label>
-                <div class="ui input focus">
-                    <input id="confirm_new_passwd" type="password" placeholder="">
-                </div>
-            </div>
-            <button class="ui blue updatepasswd button" type="submit">提交</button>
-        </div>
-    </div>
-    <div class="ui tab " data-tab="third">
-        # todo
-    </div>
+    <label for='begin_date'>开始日期:</label>
+    <input id='begin_date' type='date' value='2014-01-13'/>
+    <label for='end_date'>结束日期:</label>
+    <input id='end_date' type='date' value='2014-01-13'/>
+    <button class='ui button' onclick='javascript:statistic_image_by_select(true)'>查询</button>
+    <button class='ui button' onclick='javascript:statistic_image_by_day(7, true)'>最近一周</button>
+    <button class='ui button' onclick='javascript:statistic_image_by_day(30, true)'>最近一月</button>
+    <canvas id='myChart' width='200' height='200'></canvas>
 </div>
 
 
