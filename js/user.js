@@ -293,9 +293,9 @@ function showNav() {
             <button class='ui blue updatepasswd button' type='submit'>提交</button> \
         </div>"
 
-    var third = " <label for='begin'>开始日期:</label><input id='begin' type='date' value='2014-01-13'/>\
-                <label for='end'>结束日期:</label><input id='end' type='date' value='2014-01-13'/>\
-                <button class='ui button'>查询</button>\
+    var third = " <label for='begin_date'>开始日期:</label><input id='begin_date' type='date' value='2014-01-13'/>\
+                <label for='end_date'>结束日期:</label><input id='end_date' type='date' value='2014-01-13'/>\
+                <button class='ui button' onclick='javascript:self_statistic_image_by_select()'>查询</button>\
                 <button class='ui button' onclick='javascript:self_statistic_image_by_day(7)'>最近一周</button>\
                 <button class='ui button' onclick='javascript:self_statistic_image_by_day(30)'>最近一月</button>\
                 <canvas id='myChart' width='200' height='200'></canvas>\
