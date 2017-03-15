@@ -293,12 +293,12 @@ function showNav() {
             <button class='ui blue updatepasswd button' type='submit'>提交</button> \
         </div>"
 
-    var third = " <label for='begin_date'>开始日期:</label><input id='begin_date' type='date' value='2014-01-13'/>\
-                <label for='end_date'>结束日期:</label><input id='end_date' type='date' value='2014-01-13'/>\
+    var third = " <label for='begin_date'>开始日期:</label><input id='begin_date' type='date' value='2017-02-01'/>\
+                <label for='end_date'>结束日期:</label><input id='end_date' type='date' value='2017-12-31'/>\
                 <button class='ui button' onclick='javascript:statistic_image_by_select(false)'>查询</button>\
                 <button class='ui button' onclick='javascript:statistic_image_by_day(7, false)'>最近一周</button>\
                 <button class='ui button' onclick='javascript:statistic_image_by_day(30, false)'>最近一月</button>\
-                <canvas id='myChart' width='200' height='200'></canvas>\
+                <div id='myChart' style='width: 550px; height: 400px; margin: 0 auto'></div>\
                 <script>\
                 setTimeout($(function() { statistic_image_by_day(7)}), 200)\
                 </script>"

@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
     <script src="../lib/semantic.min.js"></script>
     <script src="../lib/vue.js"></script>
-    <script src="../lib/Chart.min.js"></script>
+    <script src="../lib/echarts.common.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript" src="../js/public.js"></script>
@@ -93,13 +93,13 @@
 
 <div class="ui main container">
     <label for='begin_date'>开始日期:</label>
-    <input id='begin_date' type='date' value='2014-01-13'/>
+    <input id='begin_date' type='date' value='2017-02-01'/>
     <label for='end_date'>结束日期:</label>
-    <input id='end_date' type='date' value='2014-01-13'/>
+    <input id='end_date' type='date' value='2017-12-31'/>
     <button class='ui button' onclick='javascript:statistic_image_by_select(true)'>查询</button>
     <button class='ui button' onclick='javascript:statistic_image_by_day(7, true)'>最近一周</button>
     <button class='ui button' onclick='javascript:statistic_image_by_day(30, true)'>最近一月</button>
-    <canvas id='myChart' width='200' height='200'></canvas>
+    <div id="myChart" style="width: 600px;height:400px;"></div>
 </div>
 
 
