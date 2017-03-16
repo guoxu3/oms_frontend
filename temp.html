@@ -13,19 +13,23 @@
     <script src="lib/jquery.json.min.js"></script>
     <script src="lib/vue.min.js"></script>
     <link rel="stylesheet" type="text/css" href="lib/semantic.min.css">
+    <link rel="stylesheet" href="lib/zTreeStyle.css" type="text/css">
     <script src="lib/semantic.min.js"></script>
-    <script src="lib/Chart.min.js"></script>
+    <script src="lib/jquery.ztree.core.min.js"></script>
+    <script src="lib/jquery.ztree.excheck.min.js"></script>
+    <script src="lib/jquery.ztree.exedit.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script type="text/javascript" src="js/task_statistic.js"></script>
     <script type="text/javascript" src="js/public.js"></script>
     <script type="text/javascript" src="js/logout.js"></script>
+    <script type="text/javascript" src="js/permission.js"></script>
 
 
     <script>
-        setTimeout($(function () {
-            create_image();
-        }), 200)
+       $(function () {
+           showPermissionTree();
+       })
     </script>
 </head>
 
@@ -99,7 +103,9 @@
 <!--navigater-end-->
 
 <div class="ui main text container">
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <div class="tree">
+		<ul id="treeDemo" class="ztree"></ul>
+	</div>
 </div>
 
 <!--footer-begin-->
