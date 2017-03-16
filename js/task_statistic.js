@@ -200,7 +200,7 @@ function create_detailed_image(legend, labels, series) {
 }
 
 function detailed_statistic_image_by_day(days) {
-    var user_list = ['guoxu', 'guoxu1'];
+    var user_list;
     var labels = [];
     var series = [];
     var user;
@@ -219,6 +219,7 @@ function detailed_statistic_image_by_day(days) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 var statistic_data = models.info['data'];
+                user_list = models.info['user_list'];
                 for (var i = 0; i < user_list.length; i++) {
                     user = user_list[i];
                     var data_list = [];
@@ -256,7 +257,7 @@ function detailed_statistic_image_by_day(days) {
 
 
 function detailed_statistic_image_by_select() {
-    var user_list = ['guoxu', 'guoxu1'];
+    var user_list;
     var labels = [];
     var series = [];
     var user;
@@ -281,6 +282,7 @@ function detailed_statistic_image_by_select() {
             var models = $.parseJSON(data);
             if (models.ok == true) {
                 var statistic_data = models.info['data'];
+                user_list = models.info['user_list'];
                 for (var i = 0; i < user_list.length; i++) {
                     user = user_list[i];
                     var data_list = [];
