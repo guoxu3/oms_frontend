@@ -33,7 +33,7 @@ function getUserData(callback, username) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                callback(null, models.info['data'])
+                callback(null, models.info['data']);
             } else {
                 callback(models.info, {});
             }
@@ -47,6 +47,44 @@ function getUserData(callback, username) {
 function getUserByName(username) {
     if (username != "") {
         getUserData(function (err, data) {
+            if (err) {
+                alert(err)
+                return
+            }
+            userinfo.$data.id = data['id'];
+            userinfo.$data.username = data['username'];
+            userinfo.$data.nickname = data['nickname'];
+            userinfo.$data.mail = data['mail'];
+            userinfo.$data.department = data['department'];
+            userinfo.$data.permissions = data['permissions'];
+        }, username)
+    }
+}
+
+function adminGetUserData(callback, username) {
+    var URL = '/api/user?username=' + username;
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok == true) {
+                callback(null, models.info['data']);
+                var user_permission_list = models.info['data']['permissions'].split(",");
+                createUserPermissionTree(user_permission_list)
+            } else {
+                callback(models.info, {});
+            }
+        },
+        error: function (xhr, error, exception) {
+            callback(exception.toString(), {});
+        }
+    });
+}
+
+function adminGetUserByName(username) {
+    if (username != "") {
+        adminGetUserData(function (err, data) {
             if (err) {
                 alert(err)
                 return
@@ -78,7 +116,7 @@ function getAllUserData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                callback(null, models.info['data'], true)
+                callback(null, models.info['data'], true);
                 user_num = models.info['count'];
             } else {
                 callback(models.info, {} ,false);

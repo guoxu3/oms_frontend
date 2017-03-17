@@ -246,3 +246,35 @@ function createPermissionTree() {
         }
     });
 }
+
+function createUserPermissionTree(user_permission_list) {
+    var zNodes = [];
+    var URL = '/api/permission?all=true';
+    var permission_data = [];
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok == true) {
+                permission_data = models.info['data'];
+                for (var i = 0; i < permission_data.length; i++) {
+                    var node = permission_data[i];
+                    if (!$.inArray(node['id'], user_permission_list)) {
+                        node['checked'] = true;
+                        zNodes.push(node)
+                    }
+                    else {
+                        zNodes.push(node)
+                    }
+                }
+                showPermissionTree(zNodes);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
