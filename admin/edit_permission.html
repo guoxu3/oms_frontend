@@ -7,31 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>任务列表</title>
+    <title>编辑权限信息</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
-    <script src="../lib/vue.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
     <script src="../lib/semantic.min.js"></script>
+    <script src="../lib/vue.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/task.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
-    <script type="text/javascript" src="../js/update.js"></script>
-
+    <script type="text/javascript" src="../js/user.js"></script>
+    <script type="text/javascript" src="../js/permission.js"></script>
     <script>isLogin();</script>
     <script>
         $(function () {
-            getAllTask();
-        });
-    </script>
-
-    <script>
-        $(function () {
-            $('.activating.element').popup();
-        });
+            var permission_name = GetQueryString('permission');
+            getPermissionByName(permission_name);
+        })
     </script>
 </head>
 
@@ -104,68 +98,36 @@
 </div>
 <!--navigater-end-->
 
-<div class="ui  main container">
-    <h1 class="ui header">任务列表:</h1>
-    <div id="tasklist">
-        <table class="ui single line center table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>创建时间</th>
-                <th>创建者</th>
-                <th>任务类型</th>
-                <th>任务描述</th>
-                <th>执行人</th>
-                <th>执行时间</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="task in task_list">
-                <td v-cloak>{{ task.id }}</td>
-                <td v-cloak style="display:none !important;">{{ task.task_id }}</td>
-                <td v-cloak>{{ task.create_time | time }}</td>
-                <td v-cloak>{{ task.creator }}</td>
-                <td v-cloak>{{ task.type }}</td>
-                <td v-cloak>{{ task.description }}</td>
-                <td v-cloak>{{ task.excutor }}</td>
-                <td v-cloak>{{ task.start_time | time}}</td>
-                <td v-cloak v-show="show_button">
-                    <div v-cloak class="blue ui icon buttons">
-                        <a v-bind:href="'/task/?task_id=' + task.task_id">
-                            <button class="ui button" data-tooltip="查看详情" data-position="top left">
-                                <i class="browser icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'javascript:update(\'update\' ,\'' + task.task_id + '\');'">
-                            <div class="ui button" data-tooltip="执行" data-position="top right">
-                                <i class="play icon"></i>
-                            </div>
-                        </a>
-                        <a v-bind:href="'javascript:update(\'revert\' ,\'' + task.task_id + '\');'">
-                            <div class="ui button" data-tooltip="回退" data-position="top right">
-                                <i class="undo icon"></i>
-                            </div>
-                        </a>
-                        <a v-bind:href="'javascript:deleteTask(\'' + task.task_id + '\');'">
-                            <div class="ui button" data-tooltip="删除" data-position="top right">
-                                <i class="trash icon"></i>
-                            </div>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="8">
-                    <div id="pages" class="ui right floated pagination menu">
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
-    </div>
+<div class="ui main text container">
+    <form id="permissioninfo" class="ui form" onsubmit="updatePermission(); return false;">
+        <h1 class="ui header">修改权限信息</h1>
+        <div class="ui divider"></div>
+        <div class="field">
+            <label>权限名</label>
+            <div class="ui input focus">
+                <input id="permission" type="text" v-bind:value="permission" readonly="true">
+            </div>
+        </div>
+        <div class="field">
+            <label>权限描述</label>
+            <div class="ui input focus">
+                <input id="permission_desc" type="text" v-bind:value="permission_desc">
+            </div>
+        </div>
+        <div class="field">
+            <label>权限代码</label>
+            <div class="ui input focus">
+                <input id="permission_code" type="text" v-bind:value="permission_code">
+            </div>
+        </div>
+        <div class="ui divider"></div>
+        <button class="ui primary button" type="submit">
+            修改
+        </button>
+        <button class="ui back button" onclick="window.history.go(-1)" type="button">
+            返回
+        </button>
+    </form>
 </div>
 
 <!--footer-begin-->

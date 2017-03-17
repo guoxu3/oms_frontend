@@ -2,8 +2,27 @@
  * Created by guoxu on 12/7/16.
  */
 
+$(function () {
+    window.permissioninfo = new Vue({
+        el: '#permissioninfo',
+        data: {
+            id: '',
+            permission: '',
+            permission_desc: '',
+            permission_code: ''
+        }
+    });
 
-function getAllPermission() {
+    window.permissionlist = new Vue({
+        el: '#permissionlist',
+        data: {
+            permission_list: [],
+            show_button: false
+        }
+    });
+});
+
+function getAllPermissionData(callback) {
     var cur_page = GetQueryString('page');
     var permission_num = 10;
     var count = GetQueryString('count');
@@ -12,42 +31,35 @@ function getAllPermission() {
         count = 10
     }
     var start = ((cur_page - 1) * count);
-    var URL = '/api/permission?start=' + start + '&count=' + count;
-    var permission_data = [];
-    var show_button = false;
+    var URL = '/api/permission?start=' + start +'&count=' + count;
     $.ajax({
         type: "GET",
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                permission_data = models.info['data'];
+                callback(null, models.info['data'], true);
                 permission_num = models.info['count'];
-                show_button = true;
             } else {
-                alert(models.info);
+                callback(models.info, {} ,false);
             }
-            var permission = new Vue({
-                el: '#permission',
-                data: {
-                    permissions: permission_data,
-                    show_button: show_button
-                }
-            });
-            showPage(cur_page, Math.ceil(permission_num / count), count);
+            showPage(cur_page, Math.ceil(permission_num/count), count);
         },
         error: function (xhr, error, exception) {
-            alert(exception.toString());
-            var permission = new Vue({
-                el: '#permission',
-                data: {
-                    permissions: permission_data,
-                    show_button: show_button
-                }
-            });
+            callback(exception.toString(), {}, false);
         }
     });
+}
 
+function getAllPermission() {
+    getAllPermissionData(function (err, data, show) {
+        if (err){
+            alert(err);
+            return
+        }
+        permissionlist.$data.permission_list = data;
+        permissionlist.$data.show_button = show
+    })
 }
 
 
@@ -60,7 +72,7 @@ function addPermission() {
 
     var request = {
         action: 'add',
-        data: data,
+        data: data
     };
     var encoded;
     encoded = $.toJSON(request);
@@ -86,8 +98,100 @@ function addPermission() {
     });
 }
 
+function getPermissionData(callback, permission) {
+    var URL = '/api/permission?permission=' + permission;
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok == true) {
+                callback(null, models.info['data'])
+                console.log(models.info['data'])
+            } else {
+                callback(models.info, {});
+            }
+        },
+        error: function (xhr, error, exception) {
+            callback(exception.toString(), {});
+        }
+    });
+}
 
-function showPermissionTree() {
+function getPermissionByName(permission) {
+    if (permission != "") {
+        getPermissionData(function (err, data) {
+            if (err) {
+                alert(err);
+                return
+            }
+            permissioninfo.$data.id = data['id'];
+            permissioninfo.$data.permission = data['permission'];
+            permissioninfo.$data.permission_desc = data['permission_desc'];
+            permissioninfo.$data.permission_code = data['permission_code'];
+        }, permission)
+    }
+}
+
+function updatePermission() {
+    var permission = $("#permission").val();
+    var permission_desc = $("#permission_desc").val();
+    var permission_code = $("#permission_code").val();
+
+    var data = {
+        permission: permission,
+        permission_desc: permission_desc,
+        permission_code: permission_code
+    };
+    var request = {
+        action: 'update',
+        data: data
+    };
+    var encoded;
+    encoded = $.toJSON(request);
+    var jsonStr = encoded;
+    var URL = '/api/permission';
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data: jsonStr,
+        dataType: 'json',
+        contentType: 'application/json;charset=utf8',
+        success: function (data) {
+            var models = data;
+            if (models.ok == true) {
+                alert(models.info);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
+
+function deletePermission(permission) {
+    var URL = '/api/permission?permission=' + permission;
+    $.ajax({
+        type: "DELETE",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok == true) {
+                alert(models.info);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
+
+
+function showPermissionTree(zNodes) {
     var setting = {
         check: {
             enable: true
@@ -99,34 +203,14 @@ function showPermissionTree() {
         }
     };
 
-    var zNodes = [
-        {id: 1, pId: 0, name: "随意勾选 1", open: true},
-        {id: 11, pId: 1, name: "随意勾选 1-1", open: true},
-        {id: 111, pId: 11, name: "随意勾选 1-1-1"},
-        {id: 112, pId: 11, name: "随意勾选 1-1-2"},
-        {id: 999, pId: 11, name: "随意勾选 19-19-2"},
-        {id: 12, pId: 1, name: "随意勾选 1-2", open: true},
-        {id: 121, pId: 12, name: "随意勾选 1-2-1"},
-        {id: 122, pId: 12, name: "随意勾选 1-2-2"},
-        {id: 2, pId: 0, name: "随意勾选 2", checked: true, open: true},
-        {id: 21, pId: 2, name: "随意勾选 2-1"},
-        {id: 22, pId: 2, name: "随意勾选 2-2", open: true},
-        {id: 221, pId: 22, name: "随意勾选 2-2-1", checked: true},
-        {id: 222, pId: 22, name: "随意勾选 2-2-2"},
-        {id: 23, pId: 2, name: "随意勾选 2-3"}
-    ];
+    var zNodes = zNodes;
 
     var code;
 
     function setCheck() {
-        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-            py = $("#py").attr("checked") ? "p" : "",
-            sy = $("#sy").attr("checked") ? "s" : "",
-            pn = $("#pn").attr("checked") ? "p" : "",
-            sn = $("#sn").attr("checked") ? "s" : "",
-            type = {"Y": py + sy, "N": pn + sn};
-        zTree.setting.check.chkboxType = type;
-        showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+        var zTree = $.fn.zTree.getZTreeObj("permissionTree");
+        zTree.setting.check.chkboxType = {"Y": '', "N": ''};
+        showCode('setting.check.chkboxType = { "Y" : "", "N" : "" };');
     }
 
     function showCode(str) {
@@ -136,11 +220,29 @@ function showPermissionTree() {
     }
 
     $(document).ready(function () {
-        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        $.fn.zTree.init($("#permissionTree"), setting, zNodes);
         setCheck();
-        $("#py").bind("change", setCheck);
-        $("#sy").bind("change", setCheck);
-        $("#pn").bind("change", setCheck);
-        $("#sn").bind("change", setCheck);
+    });
+}
+
+
+function createPermissionTree() {
+    var URL = '/api/permission?all=true';
+    var permission_data = [];
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok == true) {
+                permission_data = models.info['data'];
+                showPermissionTree(permission_data);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
     });
 }

@@ -84,7 +84,7 @@
                     <span class="text">权限管理</span>
                     <div class="menu">
                         <a class="item" href="/admin/add_permission">新增权限</a>
-                        <a class="item" href="/admin/permission_list">权限管理</a>
+                        <a class="item" href="/admin/permission_list">权限列表</a>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                     <div v-cloak class="blue ui icon buttons">
                         <a v-bind:href="'/machine/edit?machine_name=' + machine.machine_name">
                             <button class="ui button" data-tooltip="编辑" data-position="top left">
-                                <i class="browser icon"></i>
+                                <i class="edit icon"></i>
                             </button>
                         </a>
                         <a v-bind:href="'javascript:deleteMachine(\'' + machine.machine_name + '\');'">

@@ -87,7 +87,7 @@ function getAllMachineData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == true) {
-                callback(null, models.info['data'], true)
+                callback(null, models.info['data'], true);
                 machine_num = models.info['count'];
             } else {
                 callback(models.info, {} ,false);

@@ -21,17 +21,12 @@
     <script type="text/javascript" src="../js/logout.js"></script>
 
     <script>isLogin();</script>
-    <script>getAllPermission();</script>
-
     <script>
         $(function () {
             $('.activating.element').popup();
         });
         $(function() {
-            $('.ui.delete.button').click(function () {
-               // deleteUser();
-               return false
-            })
+            getAllPermission();
         });
     </script>
 </head>
@@ -89,7 +84,7 @@
                     <span class="text">权限管理</span>
                     <div class="menu">
                         <a class="item" href="/admin/add_permission">新增权限</a>
-                        <a class="item" href="/admin/permission_list">权限管理</a>
+                        <a class="item" href="/admin/permission_list">权限列表</a>
                     </div>
                 </div>
             </div>
@@ -108,7 +103,7 @@
 
 <div class="ui main text container">
     <h1 class="ui header">权限列表:</h1>
-    <div id="permission">
+    <div id="permissionlist">
         <table class="ui single line center table">
             <thead>
             <tr>
@@ -120,27 +115,36 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="permission in permissions">
+            <tr v-for="permission in permission_list">
                 <td v-cloak>{{ permission.id }}</td>
                 <td v-cloak>{{ permission.permission }}</td>
                 <td v-cloak>{{ permission.permission_desc }}</td>
                 <td v-cloak>{{ permission.permission_code }}</td>
                 <td v-cloak v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
-                        <a v-bind:href="'/admin/?permission=' + permission.id">
-                            <button class="ui button" data-tooltip="查看详情" data-position="top left">
-                                <i class="browser icon"></i>
+                        <a v-bind:href="'/admin/edit_permission?permission=' + permission.permission">
+                            <button class="ui button" data-tooltip="编辑" data-position="top left">
+                                <i class="edit icon"></i>
                             </button>
                         </a>
-                        <button class="ui delete button" data-tooltip="删除" data-position="top right" type="submit">
-                            <i class="trash icon"></i>
-                        </button>
+                        <a v-bind:href="'javascript:deletePermission(\'' + permission.permission + '\');'">
+                            <div class="ui button" data-tooltip="删除" data-position="top right">
+                                <i class="trash icon"></i>
+                            </div>
+                        </a>
                     </div>
                 </td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
+                <th colspan="1">
+                    <a href="/admin/permission_tree">
+                        <button class="ui primary button">
+                            查看权限树
+                        </button>
+                    </a>
+                </th>
                 <th colspan="5">
                     <div id="pages" class="ui right floated pagination menu">
                     </div>
