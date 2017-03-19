@@ -237,7 +237,7 @@ function updateUser() {
     var passwd = $("#passwd").val();
     var department = $("#department").val();
     var permissions = getCheckPermissionList();
-    
+
     var data = {
         username: username,
         nickname: nickname,
