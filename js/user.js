@@ -141,15 +141,15 @@ function getAllUser() {
 }
 
 function addUser() {
+
     var data = {
-        username: $("#usermame").val(),
+        username: $("#username").val(),
         nickname: $("#nickname").val(),
         mail: $("#mail").val(),
         passwd: $("#passwd").val(),
         department: $("#department").val(),
-        permissions: $("#permissions").val()
+        permissions: getCheckPermissionList()
     };
-
     var request = {
         action: 'add',
         data: data
@@ -192,7 +192,7 @@ function updateUserPassword() {
     }
 
     if (new_passwd != confirm_new_passwd) {
-        alert("两次输入密码必须一致")
+        alert("两次输入密码必须一致");
         return;
     }
 
@@ -236,8 +236,8 @@ function updateUser() {
     var mail = $("#mail").val();
     var passwd = $("#passwd").val();
     var department = $("#department").val();
-    var permissions = $("#permissions").val();
-
+    var permissions = getCheckPermissionList();
+    
     var data = {
         username: username,
         nickname: nickname,

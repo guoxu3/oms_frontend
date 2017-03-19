@@ -278,3 +278,13 @@ function createUserPermissionTree(user_permission_list) {
         }
     });
 }
+
+function getCheckPermissionList() {
+	var permission_list = [];
+	var zTree = $.fn.zTree.getZTreeObj("permissionTree");
+	var checkedNodes = zTree.getCheckedNodes(true);
+	for (var i = 0 ; i < checkedNodes.length; i++ ) {
+		permission_list.push(checkedNodes[i]['id']);
+	}
+	return permission_list.join(",")
+}
