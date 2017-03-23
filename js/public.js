@@ -33,7 +33,7 @@ function isLogin() {
                 window.location.href = "/login?" + cur_path;
             }
             else {
-                is_admin = models.info.is_admin;
+                is_admin = models.info['is_admin'];
             }
             var admin = new Vue({
                 el: '#admin',

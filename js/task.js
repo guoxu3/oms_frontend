@@ -42,7 +42,7 @@ function getTaskData(callback, task_id) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info.data);
+                callback(null, models.info['data']);
             } else {
                 callback(models.info, {});
             }
@@ -60,22 +60,22 @@ function getTaskByID(task_id) {
                 alert(err);
                 return;
             }
-            taskinfo.$data.id = data.id;
-            taskinfo.$data.task_id = data.task_id;
-            taskinfo.$data.creator = data.creator;
-            taskinfo.$data.ip = data.ip;
-            taskinfo.$data.target = data.target;
-            taskinfo.$data.version = data.version;
-            taskinfo.$data.description = data.description;
-            taskinfo.$data.type = data.type;
-            taskinfo.$data.content = data.content;
-            taskinfo.$data.create_time = data.create_time;
-            taskinfo.$data.executor = data.executor;
-            taskinfo.$data.start_time = data.start_time;
-            taskinfo.$data.revert_time = data.revert_time;
-            taskinfo.$data.status = data.status;
-            taskinfo.$data.percent = data.percent;
-            taskinfo.$data.revert = data.revert;
+            taskinfo.$data.id = data['id'];
+            taskinfo.$data.task_id = data['task_id'];
+            taskinfo.$data.creator = data['creator'];
+            taskinfo.$data.ip = data['ip'];
+            taskinfo.$data.target = data['target'];
+            taskinfo.$data.version = data['version'];
+            taskinfo.$data.description = data['description'];
+            taskinfo.$data.type = data['type'];
+            taskinfo.$data.content = data['content'];
+            taskinfo.$data.create_time = data['create_time'];
+            taskinfo.$data.executor = data['executor'];
+            taskinfo.$data.start_time = data['start_time'];
+            taskinfo.$data.revert_time = data['revert_time'];
+            taskinfo.$data.status = data['status'];
+            taskinfo.$data.percent = data['percent'];
+            taskinfo.$data.revert = data['revert'];
         }, task_id);
     }
 }
@@ -97,8 +97,8 @@ function getAllTaskData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info.data, true);
-                task_num = models.info.count;
+                callback(null, models.info['data'], true);
+                task_num = models.info['count'];
             } else {
                 callback(models.info, {} ,false);
             }

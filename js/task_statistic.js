@@ -94,7 +94,7 @@ function statistic_image_by_select(is_all) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                var statistic_data = models.info.data;
+                var statistic_data = models.info['data'];
                 for (var i = 0; i < date_array.length; i++) {
                     day = date_array[i];
                     labels.push(day);
@@ -137,7 +137,7 @@ function statistic_image_by_day(days, is_all) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                var statistic_data = models.info.data;
+                var statistic_data = models.info['data'];
                 for (var i = 0; i < date_array.length; i++) {
                     day = date_array[i];
                     labels.push(day);
@@ -218,7 +218,7 @@ function detailed_statistic_image_by_day(days) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                var statistic_data = models.info.data;
+                var statistic_data = models.info['data'];
                 user_list = models.info.user_list;
                 for (var i = 0; i < user_list.length; i++) {
                     user = user_list[i];
@@ -283,7 +283,7 @@ function detailed_statistic_image_by_select() {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                var statistic_data = models.info.data;
+                var statistic_data = models.info['data'];
                 user_list = models.info.user_list;
                 for (var i = 0; i < user_list.length; i++) {
                     user = user_list[i];

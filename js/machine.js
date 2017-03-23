@@ -42,7 +42,7 @@ function getMachineData(callback, machine_name) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info.data);
+                callback(null, models.info['data']);
             } else {
                 callback(models.info, {});
             }
@@ -60,13 +60,13 @@ function getMachineByName(machine_name) {
                 alert(err);
                 return;
             }
-            machineinfo.$data.id = data.id;
-            machineinfo.$data.machine_name = data.machine_name;
-            machineinfo.$data.inside_ip = data.inside_ip;
-            machineinfo.$data.outside_ip = data.outside_ip;
-            machineinfo.$data.usage = data.usage;
-            machineinfo.$data.is_initialized = data.is_initialized;
-            machineinfo.$data.location = data.location;
+            machineinfo.$data.id = data['id'];
+            machineinfo.$data.machine_name = data['machine_name'];
+            machineinfo.$data.inside_ip = data['inside_ip'];
+            machineinfo.$data.outside_ip = data['outside_ip'];
+            machineinfo.$data.usage = data['usage'];
+            machineinfo.$data.is_initialized = data['is_initialized'];
+            machineinfo.$data.location = data['location'];
         }, machine_name);
     }
 }
@@ -87,7 +87,7 @@ function getAllMachineData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info.data, true);
+                callback(null, models.info['data'], true);
                 machine_num = models.info.count;
             } else {
                 callback(models.info, {} ,false);

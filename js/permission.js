@@ -38,7 +38,7 @@ function getAllPermissionData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info.data, true);
+                callback(null, models.info['data'], true);
                 permission_num = models.info.count;
             } else {
                 callback(models.info, {} ,false);
@@ -106,8 +106,8 @@ function getPermissionData(callback, permission) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info.data);
-                console.log(models.info.data);
+                callback(null, models.info['data']);
+                console.log(models.info['data']);
             } else {
                 callback(models.info, {});
             }
@@ -125,10 +125,10 @@ function getPermissionByName(permission) {
                 alert(err);
                 return;
             }
-            permissioninfo.$data.id = data.id;
-            permissioninfo.$data.permission = data.permission;
-            permissioninfo.$data.permission_desc = data.permission_desc;
-            permissioninfo.$data.permission_code = data.permission_code;
+            permissioninfo.$data.id = data['id'];
+            permissioninfo.$data.permission = data['permission'];
+            permissioninfo.$data.permission_desc = data['permission_desc'];
+            permissioninfo.$data.permission_code = data['permission_code'];
         }, permission);
     }
 }
@@ -233,7 +233,7 @@ function createPermissionTree() {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                permission_data = models.info.data;
+                permission_data = models.info['data'];
                 showPermissionTree(permission_data);
             } else {
                 alert(models.info);
@@ -255,10 +255,10 @@ function createUserPermissionTree(user_permission_list) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                permission_data = models.info.data;
+                permission_data = models.info['data'];
                 for (var i = 0; i < permission_data.length; i++) {
                     var node = permission_data[i];
-                    if (!$.inArray(node.id, user_permission_list)) {
+                    if (!$.inArray(node['id'], user_permission_list)) {
                         node.checked = true;
                         zNodes.push(node);
                     }
@@ -282,7 +282,7 @@ function getCheckPermissionList() {
 	var zTree = $.fn.zTree.getZTreeObj("permissionTree");
 	var checkedNodes = zTree.getCheckedNodes(true);
 	for (var i = 0 ; i < checkedNodes.length; i++ ) {
-		permission_list.push(checkedNodes[i].id);
+		permission_list.push(checkedNodes[i]['id']);
 	}
 	return permission_list.join(",");
 }
