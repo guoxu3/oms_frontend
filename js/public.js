@@ -13,7 +13,7 @@ function getCookie(name) {
 // 判断是否登陆或者是否登陆超时
 function isLogin() {
     var username = getCookie("username");
-    var is_admin = false
+    var is_admin = false;
     if (username == null) {
         alert("Please log in first!");
         window.location.href = "/login";
@@ -24,10 +24,12 @@ function isLogin() {
     $.ajax({
         type: "GET",
         url: URL,
+        async: false,
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok == false) {
                 alert(models.info);
+                alert("bbb");
                 window.location.href = "/login?" + cur_path;
             }
             else {
