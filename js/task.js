@@ -41,8 +41,8 @@ function getTaskData(callback, task_id) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data'])
+            if (models.ok === true) {
+                callback(null, models.info.data);
             } else {
                 callback(models.info, {});
             }
@@ -54,29 +54,29 @@ function getTaskData(callback, task_id) {
 }
 
 function getTaskByID(task_id) {
-    if (task_id != "") {
+    if (task_id !== "") {
         getTaskData(function (err, data) {
             if (err) {
-                alert(err)
-                return
+                alert(err);
+                return;
             }
-            taskinfo.$data.id = data['id'];
-            taskinfo.$data.task_id = data['task_id'];
-            taskinfo.$data.creator = data['creator'];
-            taskinfo.$data.ip = data['ip'];
-            taskinfo.$data.target = data['target'];
-            taskinfo.$data.version = data['version'];
-            taskinfo.$data.description = data['description'];
-            taskinfo.$data.type = data['type'];
-            taskinfo.$data.content = data['content'];
-            taskinfo.$data.create_time = data['create_time'];
-            taskinfo.$data.executor = data['executor'];
-            taskinfo.$data.start_time = data['start_time'];
-            taskinfo.$data.revert_time = data['revert_time'];
-            taskinfo.$data.status = data['status'];
-            taskinfo.$data.percent = data['percent'];
-            taskinfo.$data.revert = data['revert'];
-        }, task_id)
+            taskinfo.$data.id = data.id;
+            taskinfo.$data.task_id = data.task_id;
+            taskinfo.$data.creator = data.creator;
+            taskinfo.$data.ip = data.ip;
+            taskinfo.$data.target = data.target;
+            taskinfo.$data.version = data.version;
+            taskinfo.$data.description = data.description;
+            taskinfo.$data.type = data.type;
+            taskinfo.$data.content = data.content;
+            taskinfo.$data.create_time = data.create_time;
+            taskinfo.$data.executor = data.executor;
+            taskinfo.$data.start_time = data.start_time;
+            taskinfo.$data.revert_time = data.revert_time;
+            taskinfo.$data.status = data.status;
+            taskinfo.$data.percent = data.percent;
+            taskinfo.$data.revert = data.revert;
+        }, task_id);
     }
 }
 
@@ -87,7 +87,7 @@ function getAllTaskData(callback) {
     var count = GetQueryString('count');
     if (cur_page === null || count === null) {
         cur_page = 1;
-        count = 10
+        count = 10;
     }
     var start = ((cur_page - 1) * count);
     var URL = '/api/task?start=' + start +'&count=' + count;
@@ -96,9 +96,9 @@ function getAllTaskData(callback) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data'], true);
-                task_num = models.info['count'];
+            if (models.ok === true) {
+                callback(null, models.info.data, true);
+                task_num = models.info.count;
             } else {
                 callback(models.info, {} ,false);
             }
@@ -114,11 +114,11 @@ function getAllTask() {
     getAllTaskData(function (err, data, show) {
         if (err){
             alert(err);
-            return
+            return;
         }
         tasklist.$data.task_list = data;
-        tasklist.$data.show_button = show
-    })
+        tasklist.$data.show_button = show;
+    });
 }
 
 
@@ -128,8 +128,8 @@ function addTask() {
     var file_list = "";
     var txts = txt.split('\n');
     for (i = 0; i < txts.length; i++) {
-        if (txts[i] != '') {
-            file_list = file_list + "," + $.trim(txts[i])
+        if (txts[i] !== '') {
+            file_list = file_list + "," + $.trim(txts[i]);
         }
     }
     var files = file_list.replace(/(^,)/g, "");
@@ -170,7 +170,7 @@ function addTask() {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
+            if (models.ok === true) {
                 window.location.href = "/task/list";
             } else {
                 alert(models.info);
@@ -190,7 +190,7 @@ function deleteTask(task_id) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert(models.info);
                 window.location.href = "/task/list";
 
@@ -203,6 +203,6 @@ function deleteTask(task_id) {
         }
         });
     } else {
-        return false
+        return false;
     }
 }

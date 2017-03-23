@@ -6,7 +6,7 @@ function update(action, task_id) {
     var username = getCookie("username");
     var data = {
         executor: username,
-        task_id: task_id,
+        task_id: task_id
     };
 
     var request = {
@@ -25,7 +25,7 @@ function update(action, task_id) {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert(models.info);
             } else {
                 alert(models.info);

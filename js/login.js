@@ -25,7 +25,7 @@ var login = function () {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
+            if (models.ok === true) {
                 window.location.href = jump_url;
             } else {
                 alert(models.info);

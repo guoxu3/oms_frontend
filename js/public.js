@@ -3,8 +3,9 @@
  */
 
 function getCookie(name) {
-    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-    if(arr=document.cookie.match(reg))
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    arr = document.cookie.match(reg);
+    if( arr )
         return unescape(arr[2]);
     else
         return null;
@@ -14,7 +15,7 @@ function getCookie(name) {
 function isLogin() {
     var username = getCookie("username");
     var is_admin = false;
-    if (username == null) {
+    if (username === null) {
         alert("Please log in first!");
         window.location.href = "/login";
         return;
@@ -27,13 +28,12 @@ function isLogin() {
         async: false,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == false) {
+            if (models.ok === false) {
                 alert(models.info);
-                alert("bbb");
                 window.location.href = "/login?" + cur_path;
             }
             else {
-                is_admin = models.info['is_admin'];
+                is_admin = models.info.is_admin;
             }
             var admin = new Vue({
                 el: '#admin',
@@ -66,7 +66,7 @@ window.onload = function fillUsername() {
 function GetQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
-    if (r != null) {
+    if (r !== null) {
         return unescape(r[2]);
     } else {
         return null;
@@ -176,12 +176,12 @@ function showPage(curPage, totalPage, count) {
 
 
 Vue.filter('time', function (unix_time) {
-    if (unix_time == 0 || unix_time == null) {
-        return 0
+    if (unix_time === 0 || unix_time === null) {
+        return 0;
     }
 
-    if (unix_time.toString().length == 10) {
-        unix_time = unix_time * 1000
+    if (unix_time.toString().length === 10) {
+        unix_time = unix_time * 1000;
     }
     var date = new Date(unix_time);   //10位unix时间戳可通过value*1000转换为13位格式
     var Y = date.getFullYear() + '-';
@@ -191,4 +191,4 @@ Vue.filter('time', function (unix_time) {
     var m = date.getMinutes() + ':';
     var s = date.getSeconds();
     return Y+M+D+h+m+s;
-})
+});

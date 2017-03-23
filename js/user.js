@@ -1,3 +1,4 @@
+/*jshint multistr: true */
 /**
  * Created by guoxu on 12/7/16.
  */
@@ -32,8 +33,8 @@ function getUserData(callback, username) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data']);
+            if (models.ok === true) {
+                callback(null, models.info.data);
             } else {
                 callback(models.info, {});
             }
@@ -45,19 +46,19 @@ function getUserData(callback, username) {
 }
 
 function getUserByName(username) {
-    if (username != "") {
+    if (username !== "") {
         getUserData(function (err, data) {
             if (err) {
-                alert(err)
-                return
+                alert(err);
+                return;
             }
-            userinfo.$data.id = data['id'];
-            userinfo.$data.username = data['username'];
-            userinfo.$data.nickname = data['nickname'];
-            userinfo.$data.mail = data['mail'];
-            userinfo.$data.department = data['department'];
-            userinfo.$data.permissions = data['permissions'];
-        }, username)
+            userinfo.$data.id = data.id;
+            userinfo.$data.username = data.username;
+            userinfo.$data.nickname = data.nickname;
+            userinfo.$data.mail = data.mail;
+            userinfo.$data.department = data.department;
+            userinfo.$data.permissions = data.permissions;
+        }, username);
     }
 }
 
@@ -68,10 +69,10 @@ function adminGetUserData(callback, username) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data']);
-                var user_permission_list = models.info['data']['permissions'].split(",");
-                createUserPermissionTree(user_permission_list)
+            if (models.ok === true) {
+                callback(null, models.info.data);
+                var user_permission_list = models.info.data.permissions.split(",");
+                createUserPermissionTree(user_permission_list);
             } else {
                 callback(models.info, {});
             }
@@ -83,19 +84,19 @@ function adminGetUserData(callback, username) {
 }
 
 function adminGetUserByName(username) {
-    if (username != "") {
+    if (username !== "") {
         adminGetUserData(function (err, data) {
             if (err) {
-                alert(err)
-                return
+                alert(err);
+                return;
             }
-            userinfo.$data.id = data['id'];
-            userinfo.$data.username = data['username'];
-            userinfo.$data.nickname = data['nickname'];
-            userinfo.$data.mail = data['mail'];
-            userinfo.$data.department = data['department'];
-            userinfo.$data.permissions = data['permissions'];
-        }, username)
+            userinfo.$data.id = data.id;
+            userinfo.$data.username = data.username;
+            userinfo.$data.nickname = data.nickname;
+            userinfo.$data.mail = data.mail;
+            userinfo.$data.department = data.department;
+            userinfo.$data.permissions = data.permissions;
+        }, username);
     }
 }
 
@@ -106,7 +107,7 @@ function getAllUserData(callback) {
     var count = GetQueryString('count');
     if (cur_page === null || count === null) {
         cur_page = 1;
-        count = 10
+        count = 10;
     }
     var start = ((cur_page - 1) * count);
     var URL = '/api/user?start=' + start +'&count=' + count;
@@ -115,9 +116,9 @@ function getAllUserData(callback) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data'], true);
-                user_num = models.info['count'];
+            if (models.ok === true) {
+                callback(null, models.info.data, true);
+                user_num = models.info.count;
             } else {
                 callback(models.info, {} ,false);
             }
@@ -133,11 +134,11 @@ function getAllUser() {
     getAllUserData(function (err, data, show) {
         if (err){
             alert(err);
-            return
+            return;
         }
         userlist.$data.user_list = data;
-        userlist.$data.show_button = show
-    })
+        userlist.$data.show_button = show;
+    });
 }
 
 function addUser() {
@@ -166,7 +167,7 @@ function addUser() {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert(models.info);
                 window.location.href = "/admin/user_list";
             } else {
@@ -186,12 +187,12 @@ function updateUserPassword() {
     var confirm_new_passwd = $("#confirm_new_passwd").val();
     var old_passwd = $("#old_passwd").val();
 
-    if (new_passwd == "" ||  old_passwd == "" || confirm_new_passwd != "") {
+    if (new_passwd === "" ||  old_passwd === "" || confirm_new_passwd !== "") {
         alert("密码输入不能为空");
         return;
     }
 
-    if (new_passwd != confirm_new_passwd) {
+    if (new_passwd !== confirm_new_passwd) {
         alert("两次输入密码必须一致");
         return;
     }
@@ -217,7 +218,7 @@ function updateUserPassword() {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert("密码修改成功，请重新登陆");
                 window.location.href = "/login";
             } else {
@@ -262,7 +263,7 @@ function updateUser() {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert(models.info);
             } else {
                 alert(models.info);
@@ -284,7 +285,7 @@ function deleteUser() {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert(models.info);
             } else {
                 alert(models.info);
@@ -307,7 +308,7 @@ function showNav() {
             <script>\
                 var user_name = getCookie('username');\
                 setTimeout($(function() { getUserByName(user_name);}), 2000)\
-            </script>"
+            </script>";
 
     var second = "<div class='ui form'> \
             <div class='field'> \
@@ -329,7 +330,7 @@ function showNav() {
                 </div> \
             </div> \
             <button class='ui blue updatepasswd button' type='submit'>提交</button> \
-        </div>"
+        </div>";
 
     var third = " <label for='begin_date'>开始日期:</label><input id='begin_date' type='date' value='2017-02-01'/>\
                 <label for='end_date'>结束日期:</label><input id='end_date' type='date' value='2017-12-31'/>\
@@ -339,7 +340,7 @@ function showNav() {
                 <div id='myChart' style='width: 550px; height: 400px; margin: 0 auto'></div>\
                 <script>\
                 setTimeout($(function() { statistic_image_by_day(7)}), 200)\
-                </script>"
+                </script>";
 
     $('.main.container .menu .item')
         .tab({

@@ -9,7 +9,7 @@ function logout() {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert(models.info);
                 window.location.href = "/login";
             } else {

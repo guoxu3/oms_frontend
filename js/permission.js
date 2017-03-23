@@ -28,7 +28,7 @@ function getAllPermissionData(callback) {
     var count = GetQueryString('count');
     if (cur_page === null || count === null) {
         cur_page = 1;
-        count = 10
+        count = 10;
     }
     var start = ((cur_page - 1) * count);
     var URL = '/api/permission?start=' + start +'&count=' + count;
@@ -37,9 +37,9 @@ function getAllPermissionData(callback) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data'], true);
-                permission_num = models.info['count'];
+            if (models.ok === true) {
+                callback(null, models.info.data, true);
+                permission_num = models.info.count;
             } else {
                 callback(models.info, {} ,false);
             }
@@ -55,11 +55,11 @@ function getAllPermission() {
     getAllPermissionData(function (err, data, show) {
         if (err){
             alert(err);
-            return
+            return;
         }
         permissionlist.$data.permission_list = data;
-        permissionlist.$data.show_button = show
-    })
+        permissionlist.$data.show_button = show;
+    });
 }
 
 
@@ -86,7 +86,7 @@ function addPermission() {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
+            if (models.ok === true) {
                 window.location.href = "/admin/permission_list";
             } else {
                 alert(models.info);
@@ -105,9 +105,9 @@ function getPermissionData(callback, permission) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data'])
-                console.log(models.info['data'])
+            if (models.ok === true) {
+                callback(null, models.info.data);
+                console.log(models.info.data);
             } else {
                 callback(models.info, {});
             }
@@ -119,17 +119,17 @@ function getPermissionData(callback, permission) {
 }
 
 function getPermissionByName(permission) {
-    if (permission != "") {
+    if (permission !== "") {
         getPermissionData(function (err, data) {
             if (err) {
                 alert(err);
-                return
+                return;
             }
-            permissioninfo.$data.id = data['id'];
-            permissioninfo.$data.permission = data['permission'];
-            permissioninfo.$data.permission_desc = data['permission_desc'];
-            permissioninfo.$data.permission_code = data['permission_code'];
-        }, permission)
+            permissioninfo.$data.id = data.id;
+            permissioninfo.$data.permission = data.permission;
+            permissioninfo.$data.permission_desc = data.permission_desc;
+            permissioninfo.$data.permission_code = data.permission_code;
+        }, permission);
     }
 }
 
@@ -159,7 +159,7 @@ function updatePermission() {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert(models.info);
             } else {
                 alert(models.info);
@@ -178,7 +178,7 @@ function deletePermission(permission) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
+            if (models.ok === true) {
                 alert(models.info);
             } else {
                 alert(models.info);
@@ -202,8 +202,6 @@ function showPermissionTree(zNodes) {
             }
         }
     };
-
-    var zNodes = zNodes;
 
     var code;
 
@@ -234,8 +232,8 @@ function createPermissionTree() {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                permission_data = models.info['data'];
+            if (models.ok === true) {
+                permission_data = models.info.data;
                 showPermissionTree(permission_data);
             } else {
                 alert(models.info);
@@ -256,16 +254,16 @@ function createUserPermissionTree(user_permission_list) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                permission_data = models.info['data'];
+            if (models.ok === true) {
+                permission_data = models.info.data;
                 for (var i = 0; i < permission_data.length; i++) {
                     var node = permission_data[i];
-                    if (!$.inArray(node['id'], user_permission_list)) {
-                        node['checked'] = true;
-                        zNodes.push(node)
+                    if (!$.inArray(node.id, user_permission_list)) {
+                        node.checked = true;
+                        zNodes.push(node);
                     }
                     else {
-                        zNodes.push(node)
+                        zNodes.push(node);
                     }
                 }
                 showPermissionTree(zNodes);
@@ -284,7 +282,7 @@ function getCheckPermissionList() {
 	var zTree = $.fn.zTree.getZTreeObj("permissionTree");
 	var checkedNodes = zTree.getCheckedNodes(true);
 	for (var i = 0 ; i < checkedNodes.length; i++ ) {
-		permission_list.push(checkedNodes[i]['id']);
+		permission_list.push(checkedNodes[i].id);
 	}
-	return permission_list.join(",")
+	return permission_list.join(",");
 }

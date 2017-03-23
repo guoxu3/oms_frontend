@@ -48,7 +48,7 @@ function get_days_before(days) {
         dateArray.push(dateTemp);
         today.setDate(today.getDate() + flag);
     }
-    return dateArray
+    return dateArray;
 }
 
 
@@ -64,7 +64,7 @@ function get_select_date_array(begin_date, end_date) {
         startTime.setDate(startTime.getDate() + 1);
     }
     
-    return date_array
+    return date_array;
 }
 
 function statistic_image_by_select(is_all) {
@@ -78,12 +78,12 @@ function statistic_image_by_select(is_all) {
     var end_time = new Date(end_date.replace(/-/g, '/') + " 23:59:59").getTime() / 1000;
     if (end_time <= begin_time) {
         alert("结束时间不可以早于开始时间");
-        return
+        return;
     }
     var date_array = get_select_date_array(begin_date, end_date);
     
     if (is_all) {
-        URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time
+        URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time;
     } else {
         var user_name = getCookie("username");
         URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time + '&username=' + user_name;
@@ -93,20 +93,20 @@ function statistic_image_by_select(is_all) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                var statistic_data = models.info['data'];
+            if (models.ok === true) {
+                var statistic_data = models.info.data;
                 for (var i = 0; i < date_array.length; i++) {
-                    day = date_array[i]
+                    day = date_array[i];
                     labels.push(day);
                     if (statistic_data[day]) {
-                        data_list.push(statistic_data[day])
+                        data_list.push(statistic_data[day]);
                     } else {
-                        data_list.push(0)
+                        data_list.push(0);
                     }
                 }
                 create_image(labels, data_list);
             } else {
-                alert(models.info)
+                alert(models.info);
             }
         },
         error: function (xhr, error, exception) {
@@ -126,7 +126,7 @@ function statistic_image_by_day(days, is_all) {
     var date_array = get_days_before(days);
 
     if (is_all) {
-        URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time
+        URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time;
     } else {
         var user_name = getCookie("username");
         URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time + '&username=' + user_name;
@@ -136,21 +136,21 @@ function statistic_image_by_day(days, is_all) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                var statistic_data = models.info['data'];
+            if (models.ok === true) {
+                var statistic_data = models.info.data;
                 for (var i = 0; i < date_array.length; i++) {
                     day = date_array[i];
                     labels.push(day);
                     if (statistic_data[day]) {
-                        data_list.push(statistic_data[day])
+                        data_list.push(statistic_data[day]);
                     } else {
-                        data_list.push(0)
+                        data_list.push(0);
                     }
                 }
                 console.log(labels);
                 create_image(labels, data_list);
             } else {
-                alert(models.info)
+                alert(models.info);
             }
         },
         error: function (xhr, error, exception) {
@@ -209,7 +209,7 @@ function detailed_statistic_image_by_day(days) {
     var end_time = new Date(new Date().toLocaleDateString()).getTime() / 1000 + (24 * 60 * 60 - 1);
     var begin_time = end_time - (days * 24 * 60 * 60 - 1);
     var date_array = get_days_before(days);
-    labels = date_array
+    labels = date_array;
 
     URL = '/api/task_statistic?begin_time=' + begin_time + '&end_time=' + end_time + "&is_all=true";
     $.ajax({
@@ -217,9 +217,9 @@ function detailed_statistic_image_by_day(days) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                var statistic_data = models.info['data'];
-                user_list = models.info['user_list'];
+            if (models.ok === true) {
+                var statistic_data = models.info.data;
+                user_list = models.info.user_list;
                 for (var i = 0; i < user_list.length; i++) {
                     user = user_list[i];
                     var data_list = [];
@@ -227,26 +227,28 @@ function detailed_statistic_image_by_day(days) {
                         day = date_array[j];
                         if (statistic_data[day]) {
                             if (user in statistic_data[day]) {
-                                data_list.push(statistic_data[day][user])
+                                data_list.push(statistic_data[day][user]);
                             } else {
-                                data_list.push(0)
+                                data_list.push(0);
                             }
                         } else {
-                            data_list.push(0)
+                            data_list.push(0);
                         }
                     }
                     series.push({
                         name: user,
                         type:'line',
-                        areaStyle: {normal: {
-                            color: '#FFF'
-                        }},
+                        areaStyle: {
+                            normal: {
+                                color: '#FFF'
+                            }
+                        },
                         data: data_list
-                    })
+                    });
                 }
                 create_detailed_image(user_list, labels, series);
             } else {
-                alert(models.info)
+                alert(models.info);
             }
         },
         error: function (xhr, error, exception) {
@@ -269,7 +271,7 @@ function detailed_statistic_image_by_select() {
     var end_time = new Date(end_date.replace(/-/g, '/') + " 23:59:59").getTime() / 1000;
     if (end_time <= begin_time) {
         alert("结束时间不可以早于开始时间");
-        return
+        return;
     }
     var date_array = get_select_date_array(begin_date, end_date);
     labels = date_array;
@@ -280,9 +282,9 @@ function detailed_statistic_image_by_select() {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                var statistic_data = models.info['data'];
-                user_list = models.info['user_list'];
+            if (models.ok === true) {
+                var statistic_data = models.info.data;
+                user_list = models.info.user_list;
                 for (var i = 0; i < user_list.length; i++) {
                     user = user_list[i];
                     var data_list = [];
@@ -290,26 +292,28 @@ function detailed_statistic_image_by_select() {
                         day = date_array[j];
                         if (statistic_data[day]) {
                             if (user in statistic_data[day]) {
-                                data_list.push(statistic_data[day][user])
+                                data_list.push(statistic_data[day][user]);
                             } else {
-                                data_list.push(0)
+                                data_list.push(0);
                             }
                         } else {
-                            data_list.push(0)
+                            data_list.push(0);
                         }
                     }
                     series.push({
                         name: user,
                         type:'line',
-                        areaStyle: {normal: {
-                            color: '#FFF'
-                        }},
+                        areaStyle: {
+                            normal: {
+                                color: '#FFF'
+                            }
+                        },
                         data: data_list
-                    })
+                    });
                 }
                 create_detailed_image(user_list, labels, series);
             } else {
-                alert(models.info)
+                alert(models.info);
             }
         },
         error: function (xhr, error, exception) {

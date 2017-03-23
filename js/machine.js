@@ -41,8 +41,8 @@ function getMachineData(callback, machine_name) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data'])
+            if (models.ok === true) {
+                callback(null, models.info.data);
             } else {
                 callback(models.info, {});
             }
@@ -54,20 +54,20 @@ function getMachineData(callback, machine_name) {
 }
 
 function getMachineByName(machine_name) {
-    if (machine_name != "") {
+    if (machine_name !== "") {
         getMachineData(function (err, data) {
             if (err) {
-                alert(err)
-                return
+                alert(err);
+                return;
             }
-            machineinfo.$data.id = data['id'];
-            machineinfo.$data.machine_name = data['machine_name'];
-            machineinfo.$data.inside_ip = data['inside_ip'];
-            machineinfo.$data.outside_ip = data['outside_ip'];
-            machineinfo.$data.usage = data['usage'];
-            machineinfo.$data.is_initialized = data['is_initialized'];
-            machineinfo.$data.location = data['location'];
-        }, machine_name)
+            machineinfo.$data.id = data.id;
+            machineinfo.$data.machine_name = data.machine_name;
+            machineinfo.$data.inside_ip = data.inside_ip;
+            machineinfo.$data.outside_ip = data.outside_ip;
+            machineinfo.$data.usage = data.usage;
+            machineinfo.$data.is_initialized = data.is_initialized;
+            machineinfo.$data.location = data.location;
+        }, machine_name);
     }
 }
 
@@ -77,7 +77,7 @@ function getAllMachineData(callback) {
     var count = GetQueryString('count');
     if (cur_page === null || count === null) {
         cur_page = 1;
-        count = 10
+        count = 10;
     }
     var start = ((cur_page - 1) * count);
     var URL = '/api/machine?start=' + start +'&count=' + count;
@@ -86,9 +86,9 @@ function getAllMachineData(callback) {
         url: URL,
         success: function (data) {
             var models = $.parseJSON(data);
-            if (models.ok == true) {
-                callback(null, models.info['data'], true);
-                machine_num = models.info['count'];
+            if (models.ok === true) {
+                callback(null, models.info.data, true);
+                machine_num = models.info.count;
             } else {
                 callback(models.info, {} ,false);
             }
@@ -104,11 +104,11 @@ function getAllMachine() {
     getAllMachineData(function (err, data, show) {
         if (err){
             alert(err);
-            return
+            return;
         }
         machinelist.$data.machine_list = data;
-        machinelist.$data.show_button = show
-    })
+        machinelist.$data.show_button = show;
+    });
 }
 
 function addMachine() {
@@ -138,8 +138,7 @@ function addMachine() {
         contentType: 'application/json;charset=utf8',
         success: function (data) {
             var models = data;
-            if (models.ok == true) {
-                alert("xxxx");
+            if (models.ok === true) {
                 window.location.href = "/machine/list";
             } else {
                 alert(models.info);
@@ -159,7 +158,7 @@ function deleteMachine(machine_name) {
             url: URL,
             success: function (data) {
                 var models = $.parseJSON(data);
-                if (models.ok == true) {
+                if (models.ok === true) {
                     alert(models.info);
                 } else {
                     alert(models.info);
@@ -170,6 +169,6 @@ function deleteMachine(machine_name) {
             }
         });
     } else {
-        return false
+        return false;
     }
 }
