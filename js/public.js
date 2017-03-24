@@ -183,12 +183,12 @@ Vue.filter('time', function (unix_time) {
     if (unix_time.toString().length === 10) {
         unix_time = unix_time * 1000;
     }
-    var date = new Date(unix_time);   //10位unix时间戳可通过value*1000转换为13位格式
-    var Y = date.getFullYear() + '-';
-    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-    var D = date.getDate() + ' ';
-    var h = date.getHours() + ':';
-    var m = date.getMinutes() + ':';
-    var s = date.getSeconds();
-    return Y+M+D+h+m+s;
+    var date = new Date(unix_time);
+    var Y = date.getFullYear().toString() ;
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth() + 1) : date.getMonth() + 1).toString();
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()).toString();
+    var h = date.getHours().toString() ;
+    var m = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes()).toString();
+    var s = (date.getSeconds() < 10 ? '0' + (date.getSeconds()) : date.getSeconds()).toString();
+    return Y + "-" + M + "-" + D + " " + h + ":" + m + ":" + s;
 });
