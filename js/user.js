@@ -276,7 +276,6 @@ function updateUser() {
 }
 
 
-
 function deleteUser() {
     var username = $("#username").val();
     var URL = '/api/user?username=' + username;
@@ -307,7 +306,7 @@ function showNav() {
             <p v-cloak>所属部门：{{ department }}</p></div>\
             <script>\
                 var user_name = getCookie('username');\
-                setTimeout($(function() { getUserByName(user_name);}), 2000)\
+                setTimeout(function() { getUserByName(user_name);}, 2000);\
             </script>";
 
     var second = "<div class='ui form'> \
@@ -334,12 +333,12 @@ function showNav() {
 
     var third = " <label for='begin_date'>开始日期:</label><input id='begin_date' type='date' value='2017-02-01'/>\
                 <label for='end_date'>结束日期:</label><input id='end_date' type='date' value='2017-12-31'/>\
-                <button class='ui button' onclick='javascript:statistic_image_by_select(false)'>查询</button>\
-                <button class='ui button' onclick='javascript:statistic_image_by_day(7, false)'>最近一周</button>\
-                <button class='ui button' onclick='javascript:statistic_image_by_day(30, false)'>最近一月</button>\
+                <button class='ui button' onclick='statistic_image_by_select(false)'>查询</button>\
+                <button class='ui button' onclick='statistic_image_by_day(7, false)'>最近一周</button>\
+                <button class='ui button' onclick='statistic_image_by_day(30, false)'>最近一月</button>\
                 <div id='myChart' style='width: 550px; height: 400px; margin: 0 auto'></div>\
                 <script>\
-                setTimeout($(function() { statistic_image_by_day(7)}), 200)\
+                    setTimeout(function() { statistic_image_by_day(7)}, 200);\
                 </script>";
 
     $('.main.container .menu .item')
@@ -361,5 +360,4 @@ function showNav() {
             auto: true,
             path: '/'
         });
-
 }

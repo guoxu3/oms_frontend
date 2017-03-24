@@ -63,7 +63,6 @@ function get_select_date_array(begin_date, end_date) {
         date_array.push(_year + _month + _day);
         startTime.setDate(startTime.getDate() + 1);
     }
-    
     return date_array;
 }
 
@@ -147,7 +146,6 @@ function statistic_image_by_day(days, is_all) {
                         data_list.push(0);
                     }
                 }
-                console.log(labels);
                 create_image(labels, data_list);
             } else {
                 alert(models.info);
