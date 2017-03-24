@@ -34,18 +34,20 @@
             $('.ui.dropdown').dropdown();
         });
         $(function() {
-            var task_id = document.getElementById("task_id").innerHTML;
             $('.ui.delete.button').click(function () {
-               deleteTask(task_id);
-               return false
+                var task_id = document.getElementById("task_id").innerHTML;
+                deleteTask(task_id);
+                return false;
             });
             $('.ui.update.button').click(function () {
-               update('update',  task_id);
-               return false
+                var task_id = document.getElementById("task_id").innerHTML;
+                update('update',  task_id);
+                return false;
             });
             $('.ui.revert.button').click(function () {
-               update('revert', task_id);
-               return false
+                var task_id = document.getElementById("task_id").innerHTML;
+                update('revert', task_id);
+                return false;
             });
         });
     </script>
