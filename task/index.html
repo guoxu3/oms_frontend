@@ -26,14 +26,14 @@
             var taskId = GetQueryString("task_id");
             if (taskId != "") {
                 getTaskByID(taskId)
-             }
+            }
         })
     </script>
     <script>
-        $(function() {
+        $(function () {
             $('.ui.dropdown').dropdown();
         });
-        $(function() {
+        $(function () {
             $('.ui.delete.button').click(function () {
                 var task_id = document.getElementById("task_id").innerHTML;
                 deleteTask(task_id);
@@ -41,12 +41,18 @@
             });
             $('.ui.update.button').click(function () {
                 var task_id = document.getElementById("task_id").innerHTML;
-                update('update',  task_id);
+                update('update', task_id);
                 return false;
             });
             $('.ui.revert.button').click(function () {
                 var task_id = document.getElementById("task_id").innerHTML;
                 update('revert', task_id);
+                return false;
+            });
+            $('.ui.log.button').click(function () {
+                var task_id = document.getElementById("task_id").innerHTML;
+                getLog(task_id);
+                $('.ui.modal').modal('show');
                 return false;
             });
         });
@@ -93,7 +99,7 @@
         <div id="admin" class="ui simple dropdown item" v-cloak v-show="show_admin">
             管理功能 <i class="dropdown icon"></i>
             <div class="menu">
-                 <div class="item">
+                <div class="item">
                     <i class="dropdown icon"></i>
                     <span class="text">用户管理</span>
                     <div class="menu">
@@ -184,13 +190,25 @@
                 <span>{{ revert }}</span>
             </p>
             <p v-cloak>
-                <div>任务进度:&nbsp&nbsp</div>
-                <div class="ui progress percent" id="update_progress">
-                    <div class="bar">
-                        <div class="progress"></div>
-                    </div>
+            <div>任务进度:&nbsp&nbsp</div>
+            <div class="ui progress percent" id="update_progress">
+                <div class="bar">
+                    <div class="progress"></div>
                 </div>
+            </div>
             </p>
+        </div>
+        <div class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+                日志详情
+            </div>
+                <div id=log_info></div>
+            <div class="actions">
+                <div class="ui black deny button">
+                    确定
+                </div>
+            </div>
         </div>
         <div class="ui divider"></div>
         <button class="ui update primary button" type="submit">
@@ -201,6 +219,9 @@
         </button>
         <button class="ui delete button" type="submit">
             删除
+        </button>
+        <button class="ui right log button" type="submit">
+            查看日志
         </button>
     </form>
 </div>

@@ -63,3 +63,24 @@ function getUpdateProgress(){
         }
     });
 }
+
+
+function getLog(task_id) {
+    var URL = '/api/update?task_id=' + task_id;
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok === true) {
+                var data = models.info['data'];
+                document.getElementById("log_info").innerHTML = data;
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
