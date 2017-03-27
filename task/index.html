@@ -183,6 +183,14 @@
                 <span>是否回退:&nbsp&nbsp</span>
                 <span>{{ revert }}</span>
             </p>
+            <p v-cloak>
+                <div>任务进度:&nbsp&nbsp</div>
+                <div class="ui progress percent" id="update_progress">
+                    <div class="bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </p>
         </div>
         <div class="ui divider"></div>
         <button class="ui update primary button" type="submit">

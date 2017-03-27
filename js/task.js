@@ -43,6 +43,7 @@ function getTaskData(callback, task_id) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
                 callback(null, models.info['data']);
+                taskProgress(models.info['data']['percent']);
             } else {
                 callback(models.info, {});
             }
@@ -80,6 +81,11 @@ function getTaskByID(task_id) {
     }
 }
 
+function taskProgress(percent) {
+     $('#update_progress').progress({
+                percent: percent
+     });
+}
 
 function getAllTaskData(callback) {
     var cur_page = GetQueryString('page');

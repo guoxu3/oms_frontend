@@ -27,6 +27,7 @@ function update(action, task_id) {
             var models = data;
             if (models.ok === true) {
                 alert(models.info);
+                setInterval('getUpdateProgress(task_id)', 500);
             } else {
                 alert(models.info);
             }
@@ -36,4 +37,26 @@ function update(action, task_id) {
         }
     });
 }
+
+function getUpdateProgress(task_id){
+    var URL = '/api/task?task_id=' + task_id;
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok === true) {
+                var percent = models.info['data']['percent'];
+                taskProgress(percent);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
+
+
 
