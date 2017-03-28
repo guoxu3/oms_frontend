@@ -50,8 +50,9 @@ function getUpdateProgress(){
             var models = $.parseJSON(data);
             if (models.ok === true) {
                 var percent = models.info['data']['percent'];
+                var failed = models.info['data']['failed'];
                 taskProgress(percent);
-                if (percent === 100) {
+                if (percent === 100 || failed === true) {
                     clearInterval(updateProgressID)
                 }
             } else {
