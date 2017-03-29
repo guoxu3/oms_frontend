@@ -36,3 +36,6 @@ td tr {
     top: 3em ;
 }
 
+.div-inline {
+    display: inline-block;
+}

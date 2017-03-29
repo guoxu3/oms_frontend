@@ -100,14 +100,16 @@
 
 
 <div class="ui main container">
-    <label for='begin_date'>开始日期:</label>
-    <input id='begin_date' type='date' value='2017-02-01'/>
-    <label for='end_date'>结束日期:</label>
-    <input id='end_date' type='date' value='2017-12-31'/>
-    <button class='ui button' onclick='javascript:statistic_image_by_select(true)'>查询</button>
-    <button class='ui button' onclick='javascript:statistic_image_by_day(7, true)'>最近一周</button>
-    <button class='ui button' onclick='javascript:statistic_image_by_day(30, true)'>最近一月</button>
-    <div id="myChart" style="width: 600px;height:400px;"></div>
+    <form>
+        <label for='begin_date'>开始日期:</label>
+        <input id='begin_date' type='date' value='2017-02-01'/>
+        <label for='end_date'>结束日期:</label>
+        <input id='end_date' type='date' value='2017-12-31'/>
+        <button class='ui button' onclick='statistic_image_by_select(true); return false'>查询</button>
+        <button class='ui button' onclick='statistic_image_by_day(7, true); return false'>最近一周</button>
+        <button class='ui button' onclick='statistic_image_by_day(30, true); return false'>最近一月</button>
+        <div id="myChart" style="width: 600px;height:400px;"></div>
+    </form>
 </div>
 
 
