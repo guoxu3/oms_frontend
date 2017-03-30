@@ -258,7 +258,7 @@ function createUserPermissionTree(user_permission_list) {
                 permission_data = models.info['data'];
                 for (var i = 0; i < permission_data.length; i++) {
                     var node = permission_data[i];
-                    if (!$.inArray(node['id'], user_permission_list)) {
+                    if ($.inArray(node['id'], user_permission_list) !== -1) {
                         node.checked = true;
                         zNodes.push(node);
                     }
