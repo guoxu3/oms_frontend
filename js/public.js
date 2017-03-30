@@ -11,10 +11,20 @@ function getCookie(name) {
         return null;
 }
 
+
+$(function () {
+    window.admin = new Vue({
+        el: '#admin',
+        data: {
+            show_admin: isAdmin
+        }
+    });
+});
+
+window.isAdmin = false;
 // 判断是否登陆或者是否登陆超时
 function isLogin() {
     var username = getCookie("username");
-    var is_admin = false;
     if (username === null) {
         alert("Please log in first!");
         window.location.href = "/login";
@@ -33,27 +43,15 @@ function isLogin() {
                 window.location.href = "/login?" + cur_path;
             }
             else {
-                is_admin = models.info['is_admin'];
+                isAdmin = models.info['is_admin']
             }
-            var admin = new Vue({
-                el: '#admin',
-                data: {
-                    show_admin: is_admin
-                }
-            });
         },
         error: function (xhr, error, exception) {
             alert(exception.toString());
-            var admin = new Vue({
-                el: '#admin',
-                data: {
-                    show_admin: is_admin
-                }
-            });
         }
     });
-
 }
+
 
 // 自动填写html中的用户名
 window.onload = function fillUsername() {
