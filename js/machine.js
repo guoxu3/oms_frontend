@@ -12,6 +12,7 @@ $(function () {
             outside_ip: '',
             usage: '',
             location: '',
+            remarks:'',
             location_options: [
                 { text: '阿里云-北京', value: 'aliyun-bj'},
                 { text: '阿里云-深圳', value: 'aliyun-sz'},
@@ -67,6 +68,7 @@ function getMachineByName(machine_name) {
             machineinfo.$data.usage = data['usage'];
             machineinfo.$data.is_initialized = data['is_initialized'];
             machineinfo.$data.location = data['location'];
+            machineinfo.$data.remarks = data['remarks'];
         }, machine_name);
     }
 }
@@ -118,7 +120,8 @@ function addMachine() {
         outside_ip: $("#outside_ip").val(),
         location: $("#location").val(),
         usage: $("#usage").val(),
-        is_initialized: $("#is_initialized").val()
+        is_initialized: $("#is_initialized").val(),
+        remarks: $("#remarks").val()
     };
 
     var request = {

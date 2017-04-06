@@ -114,6 +114,7 @@
                 <th>所属机房</th>
                 <th>机器用途</th>
                 <th>是否初始化</th>
+                <th>备注</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -127,11 +128,22 @@
                     <td v-cloak>{{ machine.usage  }}</td>
                     <td v-cloak v-if="machine.is_initialized == true">是</td>
                     <td v-cloak v-if="machine.is_initialized == false">否</td>
+                    <td v-cloak>{{ machine.remarks  }}</td>
                     <td v-cloak v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
                         <a v-bind:href="'/machine/edit?machine_name=' + machine.machine_name">
-                            <button class="ui button" data-tooltip="编辑" data-position="top left">
+                            <button class="ui button" data-tooltip="机器信息编辑" data-position="top left">
                                 <i class="edit icon"></i>
+                            </button>
+                        </a>
+                        <a v-bind:href="'/machine/ssh_key?machine_name=' + machine.machine_name">
+                            <button class="ui button" data-tooltip="ssh_key管理" data-position="top left">
+                                <i class="privacy icon"></i>
+                            </button>
+                        </a>
+                        <a v-bind:href="'/machine/initialized?machine_name=' + machine.machine_name">
+                            <button class="ui button" data-tooltip="初始化管理" data-position="top left">
+                                <i class="settings icon"></i>
                             </button>
                         </a>
                         <a v-bind:href="'javascript:deleteMachine(\'' + machine.machine_name + '\');'">
@@ -145,7 +157,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="8">
+                <th colspan="9">
                     <div id="pages" class="ui right floated pagination menu">
                     </div>
                 </th>
