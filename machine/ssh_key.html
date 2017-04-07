@@ -7,27 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>机器列表</title>
+    <title>机器key管理</title>
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
-    <script src="../lib/vue.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
     <script src="../lib/semantic.min.js"></script>
+    <script src="../lib/vue.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/machine.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
-
+    <script type="text/javascript" src="../js/machine.js"></script>
     <script>isLogin();</script>
     <script>
-        $(function () {
-            getAllMachine();
+        $(function() {
+            var machineName = GetQueryString("machine_name");
+            if (machineName != "") {
+                getMachineByName(machineName)
+            }
         });
-        $(function () {
-            $('.activating.element').popup();
-        })
+        setTimeout(function() {
+            $('.ui.dropdown').dropdown();
+        }, 200);
     </script>
 </head>
 
@@ -100,72 +102,24 @@
 </div>
 <!--navigater-end-->
 
-
-<div class="ui main container">
-    <h1 class="ui header">机器列表</h1>
-    <div id="machinelist">
-        <table class="ui single line table" align="center">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>机器名称</th>
-                <th>内网IP</th>
-                <th>外网IP</th>
-                <th>所属机房</th>
-                <th>机器用途</th>
-                <th>是否初始化</th>
-                <th>备注</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr v-for="machine in machine_list">
-                    <td v-cloak>{{ machine.id  }}</td>
-                    <td v-cloak>{{ machine.machine_name  }}</td>
-                    <td v-cloak>{{ machine.inside_ip  }}</td>
-                    <td v-cloak>{{ machine.outside_ip  }}</td>
-                    <td v-cloak>{{ machine.location  }}</td>
-                    <td v-cloak>{{ machine.usage  }}</td>
-                    <td v-cloak v-if="machine.is_initialized == true">是</td>
-                    <td v-cloak v-if="machine.is_initialized == false">否</td>
-                    <td v-cloak>{{ machine.remarks  }}</td>
-                    <td v-cloak v-show="show_button">
-                    <div v-cloak class="blue ui icon buttons">
-                        <a v-bind:href="'/machine/edit?machine_name=' + machine.machine_name">
-                            <button class="ui button" data-tooltip="编辑机器信息" data-position="top left">
-                                <i class="edit icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'/machine/ssh_key?machine_name=' + machine.machine_name">
-                            <button class="ui button" data-tooltip="ssh-key管理" data-position="top left">
-                                <i class="privacy icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'/machine/initialize?machine_name=' + machine.machine_name">
-                            <button class="ui button" data-tooltip="初始化管理" data-position="top left">
-                                <i class="settings icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'javascript:deleteMachine(\'' + machine.machine_name + '\');'">
-                            <div class="ui button" data-tooltip="删除" data-position="top right">
-                                <i class="trash icon"></i>
-                            </div>
-                        </a>
-                    </div>
-                </td>
-                </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="9">
-                    <div id="pages" class="ui right floated pagination menu">
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
-    </div>
-    <p id="taskList"></p>
+<div class="ui main text container">
+    <form id="machineinfo" class="ui form">
+        <h1 class="ui header">ssh-key 管理</h1>
+        <div class="ui divider"></div>
+        <div class="field">
+            <p v-cloak>机器名：{{ machine_name }} </p>
+            <p v-cloak>内网IP：{{ inside_ip }}</p>
+            <p v-cloak>外网IP：{{ outside_ip }}</p>
+            <div>用户列表</div>
+        </div>
+        <div class="ui divider"></div>
+        <button class="ui primary button" type="submit">
+            修改
+        </button>
+        <button class="ui back button" onclick="window.history.go(-1)">
+            返回
+        </button>
+    </form>
 </div>
 
 <!--footer-begin-->
