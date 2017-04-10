@@ -13,12 +13,13 @@
     <script src="../lib/jquery.json.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
     <script src="../lib/semantic.min.js"></script>
-    <script src="../lib/vue.min.js"></script>
+    <script src="../lib/vue.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
     <script type="text/javascript" src="../js/machine.js"></script>
+    <script type="text/javascript" src="../js/ssh_key_manage.js"></script>
     <script>isLogin();</script>
     <script>
         $(function() {
@@ -30,6 +31,9 @@
         setTimeout(function() {
             $('.ui.dropdown').dropdown();
         }, 200);
+        $(function () {
+            getSshKeyInfoByIp();
+        })
     </script>
 </head>
 
@@ -103,14 +107,26 @@
 <!--navigater-end-->
 
 <div class="ui main text container">
-    <form id="machineinfo" class="ui form">
+    <form class="ui form">
         <h1 class="ui header">ssh-key 管理</h1>
         <div class="ui divider"></div>
         <div class="field">
-            <p v-cloak>机器名：{{ machine_name }} </p>
-            <p v-cloak>内网IP：{{ inside_ip }}</p>
-            <p v-cloak>外网IP：{{ outside_ip }}</p>
-            <div>用户列表</div>
+            <div id="machineinfo">
+                <p v-cloak>机器名：{{ machine_name }} </p>
+                <p v-cloak>内网IP：{{ inside_ip }}</p>
+                <p v-cloak>外网IP：{{ outside_ip }}</p>
+            </div>
+            <div id="ip_sshkeyinfo">
+                <span>用户ssh-key权限列表:</span>
+                <div  v-for="sshkeyinfo in ip_ssh_key_data">
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="mailto" value="admin1@example.com">
+                            <label>{{ sshkeyinfo.username }}[{{ sshkeyinfo.system_user }}]</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="ui divider"></div>
         <button class="ui primary button" type="submit">

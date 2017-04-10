@@ -136,7 +136,7 @@
                                 <i class="edit icon"></i>
                             </button>
                         </a>
-                        <a v-bind:href="'/machine/ssh_key?machine_name=' + machine.machine_name">
+                        <a v-bind:href="'/machine/ssh_key?machine_name=' + machine.machine_name + '&ip=' + machine.inside_ip">
                             <button class="ui button" data-tooltip="ssh-key管理" data-position="top left">
                                 <i class="privacy icon"></i>
                             </button>
