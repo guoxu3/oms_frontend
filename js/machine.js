@@ -27,7 +27,7 @@ $(function () {
             mysql: '',
             php: '',
             redis: '',
-            memcache: '',
+            memcached: '',
             jdk: '',
             tomcat: ''
         }
@@ -76,6 +76,13 @@ function getMachineByName(machine_name) {
             machineinfo.$data.is_initialized = data['is_initialized'];
             machineinfo.$data.location = data['location'];
             machineinfo.$data.remarks = data['remarks'];
+            machineinfo.$data.nginx = data['nginx'];
+            machineinfo.$data.mysql = data['mysql'];
+            machineinfo.$data.php = data['php'];
+            machineinfo.$data.redis = data['redis'];
+            machineinfo.$data.memcached = data['memcached'];
+            machineinfo.$data.jdk = data['jdk'];
+            machineinfo.$data.tomcat = data['tomcat'];
         }, machine_name);
     }
 }
