@@ -55,7 +55,7 @@ function install_software() {
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
-    var URL = '/api/task';
+    var URL = '/api/initialize';
     $.ajax({
         url: URL,
         type: 'POST',

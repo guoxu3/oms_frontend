@@ -116,6 +116,21 @@
                 <p v-cloak>内网IP：{{ inside_ip }}</p>
                 <p v-cloak>外网IP：{{ outside_ip }}</p>
             </div>
+            <div class="field">
+                <label>用户</label>
+                <select id="username" class="ui dropdown">
+                    <option value="guoxu">郭旭</option>
+                    <option value="admin">管理员</option>
+                </select>
+                 <label>ssh系统用户</label>
+                <select id="location" class="ui dropdown">
+                    <option value="root">root</option>
+                    <option value="admin">admin</option>
+                </select>
+                <button class="ui blue button" type="submit">
+                    添加ssh-key
+                </button>
+            </div>
             <div id="ip_sshkeyinfo">
                 <span>用户ssh-key权限列表:</span>
                 <div  v-for="sshkeyinfo in ip_ssh_key_data">
@@ -130,7 +145,7 @@
         </div>
         <div class="ui divider"></div>
         <button class="ui primary button" type="submit">
-            修改
+            删除勾选ssh-key
         </button>
         <button class="ui back button" onclick="window.history.go(-1)">
             返回

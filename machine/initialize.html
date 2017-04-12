@@ -19,6 +19,7 @@
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
     <script type="text/javascript" src="../js/machine.js"></script>
+    <script type="text/javascript" src="../js/initialize.js"></script>
     <script>isLogin();</script>
     <script>
         $(function() {
@@ -27,9 +28,6 @@
                 getMachineByName(machineName)
             }
         });
-        setTimeout(function() {
-            $('.ui.dropdown').dropdown();
-        }, 200);
     </script>
 </head>
 
@@ -115,83 +113,83 @@
             <div>安装软件列表:</div>
             <div class="field">
                 <div class="ui checkbox" v-if="nginx == false">
-                    <input type="checkbox" name="nginx" value="nginx" >
+                    <input type="checkbox" name="software" value="nginx" >
                     <label>nginx</label>
                 </div>
                 <div class="ui read-only checkbox" v-if="nginx == true">
-                    <input type="checkbox" name="nginx"  disabled="disabled" value="nginx">
+                    <input type="checkbox" name="software"  disabled="disabled" value="nginx">
                     <label>nginx[已安装]</label>
                 </div>
             </div>
             <div class="field">
                 <div class="ui checkbox" v-if="php == false">
-                    <input type="checkbox" name="php" value="php" >
+                    <input type="checkbox" name="software" value="php" >
                     <label>php</label>
                 </div>
                 <div class="ui read-only checkbox" v-if="php == true">
-                    <input type="checkbox" name="php"  disabled="php" value="nginx">
+                    <input type="checkbox" name="software"  disabled="php" value="nginx">
                     <label>php[已安装]</label>
                 </div>
             </div>
             <div class="field">
                 <div class="ui checkbox" v-if="mysql == false">
-                    <input type="checkbox" name="mysql" value="mysql" >
+                    <input type="checkbox" name="software" value="mysql" >
                     <label>mysql</label>
                 </div>
                 <div class="ui read-only checkbox" v-if="mysql == true">
-                    <input type="checkbox" name="mysql"  disabled="disabled" value="mysql">
+                    <input type="checkbox" name="software"  disabled="disabled" value="mysql">
                     <label>mysql[已安装]</label>
                 </div>
             </div>
             <div class="field">
                 <div class="ui checkbox" v-if="redis == false">
-                    <input type="checkbox" name="redis" value="redis" >
+                    <input type="checkbox" name="software" value="redis" >
                     <label>redis</label>
                 </div>
                 <div class="ui read-only checkbox" v-if="redis == true">
-                    <input type="checkbox" name="redis"  disabled="disabled" value="redis">
+                    <input type="checkbox" name="software"  disabled="disabled" value="redis">
                     <label>redis[已安装]</label>
                 </div>
             </div>
             <div class="field">
                 <div class="ui checkbox" v-if="memcached == false">
-                    <input type="checkbox" name="memcached" value="memcached" >
+                    <input type="checkbox" name="software" value="memcached" >
                     <label>memcached</label>
                 </div>
                 <div class="ui read-only checkbox" v-if="memcached == true">
-                    <input type="checkbox" name="memcached"  disabled="disabled" value="memcached">
+                    <input type="checkbox" name="software"  disabled="disabled" value="memcached">
                     <label>memcached[已安装]</label>
                 </div>
             </div>
             <div class="field">
                 <div class="ui checkbox" v-if="jdk == false">
-                    <input type="checkbox" name="jdk" value="jdk" >
+                    <input type="checkbox" name="software" value="jdk" >
                     <label>jdk</label>
                 </div>
                 <div class="ui read-only checkbox" v-if="jdk == true">
-                    <input type="checkbox" name="jdk"  disabled="disabled" value="jdk">
+                    <input type="checkbox" name="software"  disabled="disabled" value="jdk">
                     <label>jdk[已安装]</label>
                 </div>
             </div>
             <div class="field">
                 <div class="ui checkbox" v-if="tomcat == false">
-                    <input type="checkbox" name="tomcat" value="tomcat" >
+                    <input type="checkbox" name="software" value="tomcat" >
                     <label>tomcat</label>
                 </div>
                 <div class="ui read-only checkbox" v-if="tomcat == true">
-                    <input type="checkbox" name="tomcat"  disabled="disabled" value="tomcat">
+                    <input type="checkbox" name="software"  disabled="disabled" value="tomcat">
                     <label>tomcat[已安装]</label>
                 </div>
             </div>
         </div>
         <div class="ui divider"></div>
-        <button class="ui primary button" type="submit" v-if="is_initialized == false">
+        <button class="ui primary button" type="button" onclick="machine_initialize(); return false" v-if="is_initialized == false">
             初始化
         </button>
-        <button class="ui primary button" type="submit" v-if="is_initialized == false" disabled="disabled">
+        <button class="ui primary button" v-if="is_initialized == false" disabled="disabled">
             安装选中软件
         </button>
-        <button class="ui primary button" type="submit" v-if="is_initialized == true">
+        <button class="ui primary button" type="button" onclick="install_software(); return false" v-if="is_initialized == true">
             安装选中软件
         </button>
         <button class="ui back button" onclick="window.history.go(-1)">
