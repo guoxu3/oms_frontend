@@ -80,3 +80,105 @@ function getSshKeyInfoByUser() {
         user_sshkeyinfo.$data.user_ssh_key_data = data;
     });
 }
+
+function addSshKeyInfoByIp() {
+    var ip = GetQueryString('ip');
+    var request = {
+        action: 'add',
+        data: {
+            'ip': ip,
+            'username': $("#username").val(),
+            'system_user': $("#system_user").val()
+        }
+    };
+    var encoded;
+    encoded = $.toJSON(request);
+    var jsonStr = encoded;
+    var URL = '/api/ssh_key_manage';
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data: jsonStr,
+        dataType: 'json',
+        contentType: 'application/json;charset=utf8',
+        success: function (data) {
+            var models = data;
+            if (models.ok === true) {
+                alert(models.info);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
+
+
+function addSshKeyInfoByUser() {
+    var request = {
+        action: 'add',
+        data: {
+            'ip': $("#ip").val(),
+            'username': $("#username").val(),
+            'system_user': $("#system_user").val()
+        }
+    };
+    var encoded;
+    encoded = $.toJSON(request);
+    var jsonStr = encoded;
+    var URL = '/api/ssh_key_manage';
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data: jsonStr,
+        dataType: 'json',
+        contentType: 'application/json;charset=utf8',
+        success: function (data) {
+            var models = data;
+            if (models.ok === true) {
+                alert(models.info);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
+
+
+function deleteSshKeyInfo() {
+    var request = {
+        action: 'delete',
+        data: {
+            'ip': $("#ip").val(),
+            'username': $("#username").val(),
+            'system_user': $("#system_user").val()
+        }
+    };
+    var encoded;
+    encoded = $.toJSON(request);
+    var jsonStr = encoded;
+    var URL = '/api/ssh_key_manage';
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data: jsonStr,
+        dataType: 'json',
+        contentType: 'application/json;charset=utf8',
+        success: function (data) {
+            var models = data;
+            if (models.ok === true) {
+                alert(models.info);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}

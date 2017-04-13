@@ -131,6 +131,11 @@
                                 <i class="browser icon"></i>
                             </button>
                         </a>
+                        <a v-bind:href="'/admin/user_ssh_key?username=' + user.username">
+                            <button class="ui button" data-tooltip="用户ssh-key管理" data-position="top left">
+                                <i class="privacy icon"></i>
+                            </button>
+                        </a>
                         <a v-bind:href="'javascript:deleteUser(\'' + user.username + '\');'">
                             <div class="ui button" data-tooltip="删除" data-position="top right">
                                 <i class="trash icon"></i>
