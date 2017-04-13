@@ -52,7 +52,7 @@ function getSshKeyInfoByIp() {
 
 
 function getAllSshKeyInfoByUser(callback) {
-    var username = 'guoxu';
+    var username = GetQueryString('username');
     var URL = '/api/ssh_key_manage?mode=user&username=' + username;
     $.ajax({
         type: "GET",
