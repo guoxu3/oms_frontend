@@ -27,7 +27,7 @@
             var user_name = GetQueryString('username');
             adminGetUserByName(user_name);
         });
-        setTimeout(function() {
+        setTimeout(function () {
             $('.ui.dropdown').dropdown();
         }, 200);
         $(function () {
@@ -76,7 +76,7 @@
         <div id="admin" class="ui simple dropdown item" v-cloak v-show="show_admin">
             管理功能 <i class="dropdown icon"></i>
             <div class="menu">
-                 <div class="item">
+                <div class="item">
                     <i class="dropdown icon"></i>
                     <span class="text">用户管理</span>
                     <div class="menu">
@@ -112,25 +112,33 @@
         <div class="field">
             <div id="userinfo">
                 <p v-cloak>用户：{{ username }} </p>
+                <p v-cloak>所属部门：{{ department }} </p>
             </div>
-            <div class="field">
-                <label>机器IP</label>
-                <select id="ip" class="ui dropdown">
-                    <option value="192.168.1.1">192.168.1.1</option>
-                    <option value="192.168.1.2">192.168.1.1</option>
-                </select>
-                 <label>ssh系统用户</label>
-                <select id="system_user" class="ui dropdown">
-                    <option value="root">root</option>
-                    <option value="admin">admin</option>
-                </select>
-                <button class="ui blue button" type="button" onclick="addSshKeyInfoByUser(); return false">
-                    添加ssh-key
-                </button>
+            <h5 class="ui horizontal divider header"> 新增ssh-key </h5>
+            <div class="two fields">
+                <div class="field">
+                    <label>机器IP</label>
+                    <select id="ip" class="ui dropdown">
+                        <option value="192.168.1.1">192.168.1.1</option>
+                        <option value="192.168.1.2">192.168.1.1</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>ssh系统用户</label>
+                    <select id="system_user" class="ui dropdown">
+                        <option value="root">root</option>
+                        <option value="admin">admin</option>
+                    </select>
+                </div>
             </div>
+            <button class="ui blue button" type="button" onclick="addSshKeyInfoByUser(); return false">
+                添加ssh-key
+            </button>
+
+            <h5 class="ui horizontal divider header"> 删除ssh-key </h5>
             <div id="user_sshkeyinfo">
                 <span>用户ssh-key权限列表:</span>
-                <div  v-for="sshkeyinfo in user_ssh_key_data">
+                <div v-for="sshkeyinfo in user_ssh_key_data">
                     <div class="field">
                         <div class="ui checkbox">
                             <input type="checkbox" name="ssh_keys" value="">
@@ -140,10 +148,10 @@
                 </div>
             </div>
         </div>
-        <div class="ui divider"></div>
         <button class="ui primary button" type="submit">
             删除勾选ssh-key
         </button>
+        <div class="ui divider"></div>
         <button class="ui back button" onclick="window.history.go(-1)">
             返回
         </button>
