@@ -137,13 +137,18 @@
             </div>
         </div>
         <div class="field">
+            <label>ssh-key</label>
+            <div class="ui input focus">
+                <input id="ssh_key" type="text" v-bind:value="ssh_key">
+            </div>
+        </div>
+        <div class="field">
             <label>权限</label>
             <div class="ui input focus" id="permissions">
                 <div class="tree">
 		            <ul id="permissionTree" class="ztree"></ul>
 	            </div>
             </div>
-
         </div>
         <div class="ui divider"></div>
         <button class="ui primary button" type="submit">

@@ -12,7 +12,8 @@ $(function () {
             nickname: '',
             mail: '',
             department: '',
-            permissions: ''
+            permissions: '',
+            ssh_key: ''
         }
     });
 
@@ -58,6 +59,7 @@ function getUserByName(username) {
             userinfo.$data.mail = data['mail'];
             userinfo.$data.department = data['department'];
             userinfo.$data.permissions = data['permissions'];
+            userinfo.$data.ssh_key = data['ssh_key'];
         }, username);
     }
 }
@@ -149,7 +151,8 @@ function addUser() {
         mail: $("#mail").val(),
         passwd: $("#passwd").val(),
         department: $("#department").val(),
-        permissions: getCheckPermissionList()
+        permissions: getCheckPermissionList(),
+        ssh_key: $("#ssh_key").val()
     };
     var request = {
         action: 'add',
@@ -238,6 +241,7 @@ function updateUser() {
     var passwd = $("#passwd").val();
     var department = $("#department").val();
     var permissions = getCheckPermissionList();
+    var ssh_key = $("#ssh_key").val();
 
     var data = {
         username: username,
@@ -245,7 +249,8 @@ function updateUser() {
         mail: mail,
         passwd: passwd,
         deparment: department,
-        permissions: permissions
+        permissions: permissions,
+        ssh_key: ssh_key
     };
     var request = {
         action: 'update_all',
