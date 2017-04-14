@@ -104,32 +104,32 @@
 <div class="ui main container">
     <h1 class="ui header">机器列表</h1>
     <div id="machinelist">
-        <table class="ui single line table" align="center">
+        <table class="ui single line celled table" align="center">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>机器名称</th>
-                <th>内网IP</th>
-                <th>外网IP</th>
-                <th>所属机房</th>
-                <th>机器用途</th>
-                <th>是否初始化</th>
-                <th>备注</th>
-                <th>操作</th>
+                <th class="center aligned">ID</th>
+                <th class="center aligned">机器名称</th>
+                <th class="center aligned">内网IP</th>
+                <th class="center aligned">外网IP</th>
+                <th class="center aligned">所属机房</th>
+                <th class="center aligned">机器用途</th>
+                <th class="center aligned">是否初始化</th>
+                <th class="center aligned">备注</th>
+                <th class="center aligned">操作</th>
             </tr>
             </thead>
             <tbody>
                 <tr v-for="machine in machine_list">
-                    <td v-cloak>{{ machine.id  }}</td>
-                    <td v-cloak>{{ machine.machine_name  }}</td>
-                    <td v-cloak>{{ machine.inside_ip  }}</td>
-                    <td v-cloak>{{ machine.outside_ip  }}</td>
-                    <td v-cloak>{{ machine.location  }}</td>
-                    <td v-cloak>{{ machine.usage  }}</td>
-                    <td v-cloak v-if="machine.is_initialized == true">是</td>
-                    <td v-cloak v-if="machine.is_initialized == false">否</td>
-                    <td v-cloak>{{ machine.remarks  }}</td>
-                    <td v-cloak v-show="show_button">
+                    <td v-cloak class="center aligned">{{ machine.id  }}</td>
+                    <td v-cloak class="center aligned">{{ machine.machine_name  }}</td>
+                    <td v-cloak class="center aligned">{{ machine.inside_ip  }}</td>
+                    <td v-cloak class="center aligned">{{ machine.outside_ip  }}</td>
+                    <td v-cloak class="center aligned">{{ machine.location  }}</td>
+                    <td v-cloak class="center aligned">{{ machine.usage  }}</td>
+                    <td v-cloak class="center aligned" v-if="machine.is_initialized == true">是</td>
+                    <td v-cloak class="center aligned" v-if="machine.is_initialized == false">否</td>
+                    <td v-cloak class="center aligned">{{ machine.remarks  }}</td>
+                    <td v-cloak class="center aligned" v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
                         <a v-bind:href="'/machine/edit?machine_name=' + machine.machine_name">
                             <button class="ui button" data-tooltip="编辑机器信息" data-position="top left">

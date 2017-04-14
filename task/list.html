@@ -106,30 +106,30 @@
 <div class="ui  main container">
     <h1 class="ui header">任务列表:</h1>
     <div id="tasklist">
-        <table class="ui single line center table">
+        <table class="ui single line celled table">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>创建时间</th>
-                <th>创建者</th>
-                <th>任务类型</th>
-                <th>任务描述</th>
-                <th>执行人</th>
-                <th>执行时间</th>
-                <th>操作</th>
+                <th class="center aligned">ID</th>
+                <th class="center aligned">创建时间</th>
+                <th class="center aligned">创建者</th>
+                <th class="center aligned">任务类型</th>
+                <th class="center aligned">任务描述</th>
+                <th class="center aligned">执行人</th>
+                <th class="center aligned">执行时间</th>
+                <th class="center aligned">操作</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="task in task_list">
-                <td v-cloak>{{ task.id }}</td>
-                <td v-cloak style="display:none !important;">{{ task.task_id }}</td>
-                <td v-cloak>{{ task.create_time | time }}</td>
-                <td v-cloak>{{ task.creator }}</td>
-                <td v-cloak>{{ task.type }}</td>
-                <td v-cloak>{{ task.description }}</td>
-                <td v-cloak>{{ task.executor }}</td>
-                <td v-cloak>{{ task.start_time | time}}</td>
-                <td v-cloak v-show="show_button">
+                <td v-cloak class="center aligned">{{ task.id }}</td>
+                <td v-cloak class="center aligned" style="display:none !important;">{{ task.task_id }}</td>
+                <td v-cloak class="center aligned">{{ task.create_time | time }}</td>
+                <td v-cloak class="center aligned">{{ task.creator }}</td>
+                <td v-cloak class="center aligned">{{ task.type }}</td>
+                <td v-cloak class="center aligned">{{ task.description }}</td>
+                <td v-cloak class="center aligned">{{ task.executor }}</td>
+                <td v-cloak class="center aligned">{{ task.start_time | time}}</td>
+                <td v-cloak class="center aligned" v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
                         <a v-bind:href="'/task/?task_id=' + task.task_id">
                             <button class="ui button" data-tooltip="查看详情" data-position="top left">

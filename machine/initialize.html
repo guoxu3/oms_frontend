@@ -186,6 +186,9 @@
         <button class="ui primary button" type="button" onclick="machine_initialize(); return false" v-if="is_initialized == false">
             初始化
         </button>
+        <button class="ui primary button" type="button" disabled="disabled" onclick="machine_initialize(); return false" v-if="is_initialized == true">
+            初始化
+        </button>
         <button class="ui primary button" v-if="is_initialized == false" disabled="disabled">
             安装选中软件
         </button>

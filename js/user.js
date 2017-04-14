@@ -24,7 +24,6 @@ $(function () {
             show_button: false
         }
     });
-
 });
 
 function getUserData(callback, username) {

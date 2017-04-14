@@ -104,23 +104,23 @@
 <div class="ui main text container">
     <h1 class="ui header">权限列表:</h1>
     <div id="permissionlist">
-        <table class="ui single line center table">
+        <table class="ui single line celled table">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>权限名</th>
-                <th>权限描述</th>
-                <th>权限代码</th>
-                <th>操作</th>
+                <th class="center aligned">ID</th>
+                <th class="center aligned">权限名</th>
+                <th class="center aligned">权限描述</th>
+                <th class="center aligned">权限代码</th>
+                <th class="center aligned">操作</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="permission in permission_list">
-                <td v-cloak>{{ permission.id }}</td>
-                <td v-cloak>{{ permission.permission }}</td>
-                <td v-cloak>{{ permission.permission_desc }}</td>
-                <td v-cloak>{{ permission.permission_code }}</td>
-                <td v-cloak v-show="show_button">
+                <td v-cloak class="center aligned">{{ permission.id }}</td>
+                <td v-cloak class="center aligned">{{ permission.permission }}</td>
+                <td v-cloak class="center aligned">{{ permission.permission_desc }}</td>
+                <td v-cloak class="center aligned">{{ permission.permission_code }}</td>
+                <td v-cloak class="center aligned" v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
                         <a v-bind:href="'/admin/edit_permission?permission=' + permission.permission">
                             <button class="ui button" data-tooltip="编辑" data-position="top left">
