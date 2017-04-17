@@ -129,100 +129,117 @@
 <!--navigater-end-->
 
 <div class="ui main text container">
-    <form class="ui form">
+    <form class="ui form" >
         <h1 id="update_db" class="ui header">查看任务详情:</h1>
         <div class="ui divider"></div>
         <div id="taskinfo">
-            <p v-cloak>
-                <span>任务ID:&nbsp&nbsp</span>
-                <span id="task_id">{{ task_id }} </span>
-            </p>
-            <p v-cloak>
-                <span>创建人:&nbsp&nbsp</span>
-                <span>{{ creator }}</span>
-            </p>
-            <p v-cloak>
-                <span>创建时间:&nbsp&nbsp</span>
-                <span>{{ create_time | time }} </span>
-            </p>
-            <p v-cloak>
-                <span>任务类型:&nbsp&nbsp</span>
-                <span id="type">{{ type }}</span>
-            </p>
-            <p v-cloak>
-                <span>任务描述:&nbsp&nbsp</span>
-                <span>{{ description }}</span>
-            </p>
-            <p v-cloak>
-                <span>版本库:&nbsp&nbsp</span>
-                <span>{{ target }}</span>
-            </p>
-            <p v-cloak>
-                <span>版本号:&nbsp&nbsp</span>
-                <span>{{ version }}</span>
-            </p>
-            <p v-cloak>
-                <span>任务内容:&nbsp&nbsp</span>
-                <span>{{ content }}</span>
-            </p>
-            <p v-cloak>
-                <span>机器:&nbsp&nbsp</span>
-                <span>{{ ip }}</span>
-            </p>
-            <p v-cloak>
-                <span>执行者:&nbsp&nbsp</span>
-                <span>{{ executor }} </span>
-            </p>
-            <p v-cloak>
-                <span>执行时间:&nbsp&nbsp</span>
-                <span>{{ start_time | time }} </span>
-            </p>
-            <p v-cloak>
-                <span>回退时间:&nbsp&nbsp</span>
-                <span>{{ revert_time | time }} </span>
-            </p>
-            <p v-cloak>
-                <span>是否执行:&nbsp&nbsp</span>
-                <span>{{ status }}</span>
-            </p>
-            <p v-cloak>
-                <span>是否回退:&nbsp&nbsp</span>
-                <span>{{ revert }}</span>
-            </p>
-            <p v-cloak>
-            <div class="div-inline">任务进度:&nbsp&nbsp</div>
-            <div class="ui progress percent div-inline" id="update_progress">
-                <div class="bar">
-                    <div class="progress"></div>
-                </div>
-            </div>
-            </p>
+            <table class="ui striped transparent celled table">
+                <tbody>
+                <tr>
+                    <td v-cloak>任务ID:</td>
+                    <td v-cloak id="task_id">{{task_id}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>创建人:</td>
+                    <td v-cloak>{{creator}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>创建时间:</td>
+                    <td v-cloak>{{create_time}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>任务类型:</td>
+                    <td v-cloak>{{type}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>任务描述:</td>
+                    <td v-cloak>{{create_time}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>版本库:</td>
+                    <td v-cloak>{{target}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>版本号:</td>
+                    <td v-cloak>{{version}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>任务内容:</td>
+                    <td v-cloak>{{content}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>机器IP:</td>
+                    <td v-cloak>{{ip}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>执行者:</td>
+                    <td v-cloak>{{executor}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>执行时间:</td>
+                    <td v-cloak>{{start_time | time}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>回退时间:</td>
+                    <td v-cloak>{{revert_time | time}}</td>
+                </tr>
+                <tr>
+                    <td v-cloak>是否执行:</td>
+                    <td v-if="status == true">是</td>
+                    <td v-if="status == false">否</td>
+                </tr>
+                <tr>
+                    <td v-cloak>是否回退:</td>
+                    <td v-if="revert == true">是</td>
+                    <td v-if="revert == false">否</td>
+                </tr>
+                <tr>
+                    <td v-cloak>任务进度:</td>
+                    <td v-cloak>
+                        <div class="ui progress percent" id="update_progress" style="margin-bottom: 0">
+                            <div class="bar">
+                                <div class="progress"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="ui divider"></div>
+            <button class="ui update primary button" type="button" v-if="status == false">
+                执行
+            </button>
+            <button class="ui update primary button" disabled="disabled" type="button" v-if="status == true">
+                执行
+            </button>
+            <button class="ui revert secondary button" type="button" v-if="revert == false">
+                回退
+            </button>
+            <button class="ui revert secondary button" disabled="disabled" type="button" v-if="revert == true">
+                回退
+            </button>
+            <button class="ui delete button" type="button" v-if="status == false">
+                删除
+            </button>
+            <button class="ui delete button" disabled type="button" v-if="status == true">
+                删除
+            </button>
+            <button class="ui right log button" type="button">
+                查看日志
+            </button>
         </div>
         <div class="ui modal">
             <i class="close icon"></i>
             <div class="header">
                 日志详情
             </div>
-                <div id=log_info></div>
+            <div id=log_info></div>
             <div class="actions">
                 <div class="ui black deny button">
                     确定
                 </div>
             </div>
         </div>
-        <div class="ui divider"></div>
-        <button class="ui update primary button" type="submit">
-            执行
-        </button>
-        <button class="ui revert secondary button" type="submit">
-            回退
-        </button>
-        <button class="ui delete button" type="submit">
-            删除
-        </button>
-        <button class="ui right log button" type="submit">
-            查看日志
-        </button>
     </form>
 </div>
 
