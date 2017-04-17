@@ -136,11 +136,15 @@
             </button>
 
             <h5 class="ui horizontal divider header"> 删除ssh-key </h5>
+            <div>用户ssh-key权限列表:</div>
             <div id="user_sshkeyinfo">
-                <span>用户ssh-key权限列表:</span>
-                <div v-for="sshkeyinfo in user_ssh_key_data">
+                <div v-for="(sshkeyinfo, index) in user_ssh_key_data">
                     <div class="field">
-                        <div class="ui checkbox">
+                        <div v-cloak class="ui checkbox" v-if="index%2 == 0" style="float:left;width:49%">
+                            <input type="checkbox" name="ssh_keys" value="">
+                            <label>{{ sshkeyinfo.ip }}[{{ sshkeyinfo.system_user }}]</label>
+                        </div>
+                        <div v-cloak class="ui checkbox" v-if="index%2 == 1" style="float:right;width:49%">
                             <input type="checkbox" name="ssh_keys" value="">
                             <label>{{ sshkeyinfo.ip }}[{{ sshkeyinfo.system_user }}]</label>
                         </div>
