@@ -27,7 +27,7 @@ $(function () {
             mysql: '',
             php: '',
             redis: '',
-            memcached: '',
+            memcache: '',
             jdk: '',
             tomcat: ''
         }
@@ -80,7 +80,7 @@ function getMachineByName(machine_name) {
             machineinfo.$data.mysql = data['mysql'];
             machineinfo.$data.php = data['php'];
             machineinfo.$data.redis = data['redis'];
-            machineinfo.$data.memcached = data['memcached'];
+            machineinfo.$data.memcache = data['memcache'];
             machineinfo.$data.jdk = data['jdk'];
             machineinfo.$data.tomcat = data['tomcat'];
         }, machine_name);

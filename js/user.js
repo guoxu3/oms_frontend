@@ -91,12 +91,13 @@ function adminGetUserByName(username) {
                 alert(err);
                 return;
             }
-            userinfo.$data.id = data.id;
-            userinfo.$data.username = data.username;
-            userinfo.$data.nickname = data.nickname;
-            userinfo.$data.mail = data.mail;
-            userinfo.$data.department = data.department;
-            userinfo.$data.permissions = data.permissions;
+            userinfo.$data.id = data['id'];
+            userinfo.$data.username = data['username'];
+            userinfo.$data.nickname = data['nickname'];
+            userinfo.$data.mail = data['mail'];
+            userinfo.$data.department = data['department'];
+            userinfo.$data.permissions = data['permissions'];
+            userinfo.$data.ssh_key = data['ssh_key'];
         }, username);
     }
 }
