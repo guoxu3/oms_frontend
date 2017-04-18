@@ -28,6 +28,7 @@ $(function () {
     window.tasklist = new Vue({
         el: '#tasklist',
         data: {
+            page: '',
             task_list: [],
             show_button: false
         }
@@ -103,7 +104,7 @@ function getAllTaskData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info['data'], true);
+                callback(null, models.info['data'], cur_page,true);
                 task_num = models.info['count'];
             } else {
                 callback(models.info, {} ,false);
@@ -117,11 +118,12 @@ function getAllTaskData(callback) {
 }
 
 function getAllTask() {
-    getAllTaskData(function (err, data, show) {
+    getAllTaskData(function (err, data, page, show) {
         if (err){
             alert(err);
             return;
         }
+        tasklist.$data.page = page;
         tasklist.$data.task_list = data;
         tasklist.$data.show_button = show;
     });

@@ -109,55 +109,53 @@
         <table class="ui single line celled table">
             <thead>
             <tr>
-                <th class="center aligned">ID</th>
+                <th class="center aligned">序号</th>
                 <th class="center aligned">创建时间</th>
                 <th class="center aligned">创建者</th>
                 <th class="center aligned">任务类型</th>
                 <th class="center aligned">任务描述</th>
+                <th class="center aligned">是否执行</th>
                 <th class="center aligned">执行人</th>
                 <th class="center aligned">执行时间</th>
+                <th class="center aligned">是否回退</th>
                 <th class="center aligned">操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="task in task_list">
-                <td v-cloak class="center aligned">{{ task.id }}</td>
+            <tr v-for="(task, index) in task_list">
+                <td v-cloak class="center aligned">{{ (page-1) * 10 + index + 1 }}</td>
                 <td v-cloak class="center aligned" style="display:none !important;">{{ task.task_id }}</td>
                 <td v-cloak class="center aligned">{{ task.create_time | time }}</td>
                 <td v-cloak class="center aligned">{{ task.creator }}</td>
                 <td v-cloak class="center aligned">{{ task.type }}</td>
                 <td v-cloak class="center aligned">{{ task.description }}</td>
+                <td v-cloak class="center aligned" v-if="task.status == true">是</td>
+                <td v-cloak class="center aligned" v-if="task.status == false">否</td>
                 <td v-cloak class="center aligned">{{ task.executor }}</td>
                 <td v-cloak class="center aligned">{{ task.start_time | time}}</td>
+                <td v-cloak class="center aligned" v-if="task.revert == true">是</td>
+                <td v-cloak class="center aligned" v-if="task.revert == false">否</td>
                 <td v-cloak class="center aligned" v-show="show_button">
-                    <div v-cloak class="blue ui icon buttons">
-                        <a v-bind:href="'/task/?task_id=' + task.task_id">
-                            <button class="ui button" data-tooltip="查看详情" data-position="top left">
-                                <i class="browser icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'javascript:update(\'update\' ,\'' + task.task_id + '\');'">
-                            <div class="ui button" data-tooltip="执行" data-position="top right">
-                                <i class="play icon"></i>
-                            </div>
-                        </a>
-                        <a v-bind:href="'javascript:update(\'revert\' ,\'' + task.task_id + '\');'">
-                            <div class="ui button" data-tooltip="回退" data-position="top right">
-                                <i class="undo icon"></i>
-                            </div>
-                        </a>
-                        <a v-bind:href="'javascript:deleteTask(\'' + task.task_id + '\');'">
-                            <div class="ui button" data-tooltip="删除" data-position="top right">
-                                <i class="trash icon"></i>
-                            </div>
-                        </a>
+                    <div v-cloak class="ui blue icon buttons">
+                        <button class="ui button" data-tooltip="查看详情" data-position="top left" @click="javascript:window.location.href='/task/?task_id=' + task.task_id">
+                            <i class="browser icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="执行" data-position="top right" v-bind:onclick="'javascript:update(\'update\' ,\'' + task.task_id + '\');'" >
+                            <i class="play icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="回退" data-position="top right" v-bind:onclick="'javascript:update(\'revert\' ,\'' + task.task_id + '\');'" >
+                            <i class="undo icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="删除" data-position="top right" v-bind:onclick="'javascript:deleteTask(\'' + task.task_id + '\');'" >
+                            <i class="trash icon"></i>
+                        </button>
                     </div>
                 </td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="8">
+                <th colspan="10">
                     <div id="pages" class="ui right floated pagination menu">
                     </div>
                 </th>
