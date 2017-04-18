@@ -104,15 +104,15 @@ function getAllTaskData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info['data'], cur_page,true);
+                callback(null, models.info['data'], cur_page, true);
                 task_num = models.info['count'];
             } else {
-                callback(models.info, {} ,false);
+                callback(models.info, {}, cur_page, false);
             }
             showPage(cur_page, Math.ceil(task_num/count), count);
         },
         error: function (xhr, error, exception) {
-            callback(exception.toString(), {}, false);
+            callback(exception.toString(), {}, cur_page, false);
         }
     });
 }

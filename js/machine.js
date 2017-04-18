@@ -36,6 +36,7 @@ $(function () {
     window.machinelist = new Vue({
         el: '#machinelist',
         data: {
+            page: '',
             machine_list: [],
             show_button: false
         }
@@ -103,25 +104,26 @@ function getAllMachineData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info['data'], true);
+                callback(null, models.info['data'], cur_page, true);
                 machine_num = models.info.count;
             } else {
-                callback(models.info, {} ,false);
+                callback(models.info, {}, cur_page, false);
             }
             showPage(cur_page, Math.ceil(machine_num/count), count);
         },
         error: function (xhr, error, exception) {
-            callback(exception.toString(), {}, false);
+            callback(exception.toString(), {}, cur_page, false);
         }
     });
 }
 
 function getAllMachine() {
-    getAllMachineData(function (err, data, show) {
+    getAllMachineData(function (err, data, page, show) {
         if (err){
             alert(err);
             return;
         }
+        machinelist.$data.page = page;
         machinelist.$data.machine_list = data;
         machinelist.$data.show_button = show;
     });

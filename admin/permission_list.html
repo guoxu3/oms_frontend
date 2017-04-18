@@ -107,7 +107,7 @@
         <table class="ui single line celled table">
             <thead>
             <tr>
-                <th class="center aligned">ID</th>
+                <th class="center aligned">序号</th>
                 <th class="center aligned">权限名</th>
                 <th class="center aligned">权限描述</th>
                 <th class="center aligned">权限代码</th>
@@ -115,23 +115,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="permission in permission_list">
-                <td v-cloak class="center aligned">{{ permission.id }}</td>
+            <tr v-for="(permission, index) in permission_list">
+                <td v-cloak class="center aligned">{{ (page-1) * 10 + index + 1 }}</td>
                 <td v-cloak class="center aligned">{{ permission.permission }}</td>
                 <td v-cloak class="center aligned">{{ permission.permission_desc }}</td>
                 <td v-cloak class="center aligned">{{ permission.permission_code }}</td>
                 <td v-cloak class="center aligned" v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
-                        <a v-bind:href="'/admin/edit_permission?permission=' + permission.permission">
-                            <button class="ui button" data-tooltip="编辑" data-position="top left">
-                                <i class="edit icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'javascript:deletePermission(\'' + permission.permission + '\');'">
-                            <div class="ui button" data-tooltip="删除" data-position="top right">
-                                <i class="trash icon"></i>
-                            </div>
-                        </a>
+                        <button class="ui button" data-tooltip="编辑" data-position="top left" @click="javascript:window.location.href='/admin/edit_permission?permission=' + permission.permission">
+                            <i class="edit icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="删除" data-position="top right" v-bind:onclick="'javascript:deletePermission(\'' + permission.permission + '\');'">
+                            <i class="trash icon"></i>
+                        </button>
                     </div>
                 </td>
             </tr>

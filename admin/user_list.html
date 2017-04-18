@@ -109,7 +109,7 @@
         <table class="ui single line celled table">
             <thead>
             <tr>
-                <th class="center aligned">ID</th>
+                <th class="center aligned">序号</th>
                 <th class="center aligned">用户名</th>
                 <th class="center aligned">昵称</th>
                 <th class="center aligned">邮箱</th>
@@ -118,29 +118,23 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="user in user_list">
-                <td v-cloak class="center aligned">{{ user.id }}</td>
+            <tr v-for="(user, index) in user_list">
+                <td v-cloak class="center aligned">{{ (page-1) * 10 + index + 1 }}</td>
                 <td v-cloak class="center aligned">{{ user.username }}</td>
                 <td v-cloak class="center aligned">{{ user.nickname }}</td>
                 <td v-cloak class="center aligned">{{ user.mail }}</td>
                 <td v-cloak class="center aligned">{{ user.department }}</td>
                 <td v-cloak class="center aligned" v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
-                        <a v-bind:href="'/admin/edit_user?username=' + user.username">
-                            <button class="ui button" data-tooltip="编辑用户" data-position="top left">
-                                <i class="browser icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'/admin/user_ssh_key?username=' + user.username">
-                            <button class="ui button" data-tooltip="用户ssh-key管理" data-position="top left">
-                                <i class="privacy icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'javascript:deleteUser(\'' + user.username + '\');'">
-                            <div class="ui button" data-tooltip="删除" data-position="top right">
-                                <i class="trash icon"></i>
-                            </div>
-                        </a>
+                        <button class="ui button" data-tooltip="编辑用户" data-position="top left" @click="javascript:window.location.href='/admin/edit_user?username=' + user.username">
+                            <i class="browser icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="用户ssh-key管理" data-position="top left" @click="javascript:window.location.href='/admin/user_ssh_key?username=' + user.username">
+                            <i class="privacy icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="删除" data-position="top right" v-bind:onclick="'javascript:deleteUser(\'' + user.username + '\');'">
+                            <i class="trash icon"></i>
+                        </button>
                     </div>
                 </td>
             </tr>

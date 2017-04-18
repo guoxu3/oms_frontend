@@ -11,7 +11,7 @@
 
     <script src="../lib/jquery-3.1.1.min.js"></script>
     <script src="../lib/jquery.json.min.js"></script>
-    <script src="../lib/vue.min.js"></script>
+    <script src="../lib/vue.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
     <script src="../lib/semantic.min.js"></script>
 
@@ -107,7 +107,7 @@
         <table class="ui single line celled table" align="center">
             <thead>
             <tr>
-                <th class="center aligned">ID</th>
+                <th class="center aligned">序号</th>
                 <th class="center aligned">机器名称</th>
                 <th class="center aligned">内网IP</th>
                 <th class="center aligned">外网IP</th>
@@ -119,8 +119,8 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="machine in machine_list">
-                    <td v-cloak class="center aligned">{{ machine.id  }}</td>
+                <tr v-for="(machine, index) in machine_list">
+                    <td v-cloak class="center aligned">{{ (page-1) * 10 + index + 1  }}</td>
                     <td v-cloak class="center aligned">{{ machine.machine_name  }}</td>
                     <td v-cloak class="center aligned">{{ machine.inside_ip  }}</td>
                     <td v-cloak class="center aligned">{{ machine.outside_ip  }}</td>
@@ -131,26 +131,18 @@
                     <td v-cloak class="center aligned">{{ machine.remarks  }}</td>
                     <td v-cloak class="center aligned" v-show="show_button">
                     <div v-cloak class="blue ui icon buttons">
-                        <a v-bind:href="'/machine/edit?machine_name=' + machine.machine_name">
-                            <button class="ui button" data-tooltip="编辑机器信息" data-position="top left">
-                                <i class="edit icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'/machine/ssh_key?machine_name=' + machine.machine_name + '&ip=' + machine.inside_ip">
-                            <button class="ui button" data-tooltip="ssh-key管理" data-position="top left">
-                                <i class="privacy icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'/machine/initialize?machine_name=' + machine.machine_name+ '&ip=' + machine.inside_ip">
-                            <button class="ui button" data-tooltip="初始化管理" data-position="top left">
-                                <i class="settings icon"></i>
-                            </button>
-                        </a>
-                        <a v-bind:href="'javascript:deleteMachine(\'' + machine.machine_name + '\');'">
-                            <div class="ui button" data-tooltip="删除" data-position="top right">
-                                <i class="trash icon"></i>
-                            </div>
-                        </a>
+                        <button class="ui button" data-tooltip="编辑机器信息" data-position="top left" @click="javascript:window.location.href='/machine/edit?machine_name=' + machine.machine_name">
+                            <i class="edit icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="ssh-key管理" data-position="top left" @click="javascript:window.location.href='/machine/ssh_key?machine_name=' + machine.machine_name + '&ip=' + machine.inside_ip">
+                            <i class="privacy icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="初始化管理" data-position="top left" @click="javascript:window.location.href='/machine/initialize?machine_name=' + machine.machine_name+ '&ip=' + machine.inside_ip">
+                            <i class="settings icon"></i>
+                        </button>
+                        <button class="ui button" data-tooltip="删除" data-position="top right" v-bind:onclick="'javascript:deleteMachine(\'' + machine.machine_name + '\');'">
+                            <i class="trash icon"></i>
+                        </button>
                     </div>
                 </td>
                 </tr>

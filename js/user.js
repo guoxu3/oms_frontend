@@ -20,6 +20,7 @@ $(function () {
     window.userlist = new Vue({
         el: '#userlist',
         data: {
+            page: '',
             user_list: [],
             show_button: false
         }
@@ -119,25 +120,26 @@ function getAllUserData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info['data'], true);
+                callback(null, models.info['data'], cur_page, true);
                 user_num = models.info['count'];
             } else {
-                callback(models.info, {} ,false);
+                callback(models.info, {}, cur_page, false);
             }
             showPage(cur_page, Math.ceil(user_num/count), count);
         },
         error: function (xhr, error, exception) {
-            callback(exception.toString(), {}, false);
+            callback(exception.toString(), {}, cur_page, false);
         }
     });
 }
 
 function getAllUser() {
-    getAllUserData(function (err, data, show) {
+    getAllUserData(function (err, data, page, show) {
         if (err){
             alert(err);
             return;
         }
+        userlist.$data.page = page;
         userlist.$data.user_list = data;
         userlist.$data.show_button = show;
     });

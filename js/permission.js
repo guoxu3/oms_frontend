@@ -16,6 +16,7 @@ $(function () {
     window.permissionlist = new Vue({
         el: '#permissionlist',
         data: {
+            page: '',
             permission_list: [],
             show_button: false
         }
@@ -38,25 +39,26 @@ function getAllPermissionData(callback) {
         success: function (data) {
             var models = $.parseJSON(data);
             if (models.ok === true) {
-                callback(null, models.info['data'], true);
+                callback(null, models.info['data'], cur_page, true);
                 permission_num = models.info.count;
             } else {
-                callback(models.info, {} ,false);
+                callback(models.info, {}, cur_page, false);
             }
             showPage(cur_page, Math.ceil(permission_num/count), count);
         },
         error: function (xhr, error, exception) {
-            callback(exception.toString(), {}, false);
+            callback(exception.toString(), {}, cur_page, false);
         }
     });
 }
 
 function getAllPermission() {
-    getAllPermissionData(function (err, data, show) {
+    getAllPermissionData(function (err, data, page, show) {
         if (err){
             alert(err);
             return;
         }
+        permissionlist.$data.page = page;
         permissionlist.$data.permission_list = data;
         permissionlist.$data.show_button = show;
     });
