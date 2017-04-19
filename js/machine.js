@@ -41,6 +41,13 @@ $(function () {
             show_button: false
         }
     });
+
+    window.iplist = new Vue({
+        el: '#iplist',
+        data: {
+            ip_list: []
+        }
+    });
 });
 
 function getMachineData(callback, machine_name) {
@@ -191,3 +198,33 @@ function deleteMachine(machine_name) {
         return false;
     }
 }
+
+function getAllIpData(callback) {
+    var URL = '/api/machine?get_ip_list=true';
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok === true) {
+                callback(null, models.info['data']);
+            } else {
+                callback(models.info, {});
+            }
+        },
+        error: function (xhr, error, exception) {
+            callback(exception.toString(), {});
+        }
+    });
+}
+
+function getIpList() {
+    getAllIpData(function (err, data) {
+        if (err){
+            alert(err);
+            return;
+        }
+        iplist.$data.ip_list = data;
+    });
+}
+

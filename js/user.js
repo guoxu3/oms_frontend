@@ -25,6 +25,13 @@ $(function () {
             show_button: false
         }
     });
+
+    window.usernamelist = new Vue({
+        el: '#usernamelist',
+        data: {
+            username_list: []
+        }
+    });
 });
 
 function getUserData(callback, username) {
@@ -367,4 +374,33 @@ function showNav() {
             auto: true,
             path: '/'
         });
+}
+
+function getAllUsernameData(callback) {
+    var URL = '/api/user?get_username_list=true';
+    $.ajax({
+        type: "GET",
+        url: URL,
+        success: function (data) {
+            var models = $.parseJSON(data);
+            if (models.ok === true) {
+                callback(null, models.info['data']);
+            } else {
+                callback(models.info, {});
+            }
+        },
+        error: function (xhr, error, exception) {
+            callback(exception.toString(), {});
+        }
+    });
+}
+
+function getUsernameList() {
+    getAllUsernameData(function (err, data) {
+        if (err){
+            alert(err);
+            return;
+        }
+        usernamelist.$data.username_list = data;
+    });
 }

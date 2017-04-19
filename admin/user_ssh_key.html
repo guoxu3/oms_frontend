@@ -21,6 +21,7 @@
     <script type="text/javascript" src="../js/user.js"></script>
     <script type="text/javascript" src="../js/permission.js"></script>
     <script type="text/javascript" src="../js/ssh_key_manage.js"></script>
+    <script type="text/javascript" src="../js/machine.js"></script>
     <script>isLogin();</script>
     <script>
         $(function () {
@@ -32,6 +33,9 @@
         }, 200);
         $(function () {
             getSshKeyInfoByUser();
+        });
+        $(function () {
+            getIpList();
         })
     </script>
 </head>
@@ -116,11 +120,10 @@
             </div>
             <h5 class="ui horizontal divider header"> 新增ssh-key </h5>
             <div class="two fields">
-                <div class="field">
+                <div class="field" id="iplist">
                     <label>机器IP</label>
                     <select id="ip" class="ui dropdown">
-                        <option value="192.168.1.1">192.168.1.1</option>
-                        <option value="192.168.1.2">192.168.1.1</option>
+                        <option v-for="ip in ip_list" v-bind:value="ip">{{ ip}}</option>
                     </select>
                 </div>
                 <div class="field">

@@ -20,6 +20,7 @@
     <script type="text/javascript" src="../js/logout.js"></script>
     <script type="text/javascript" src="../js/machine.js"></script>
     <script type="text/javascript" src="../js/ssh_key_manage.js"></script>
+    <script type="text/javascript" src="../js/user.js"></script>
     <script>isLogin();</script>
     <script>
         $(function () {
@@ -33,7 +34,10 @@
         }, 200);
         $(function () {
             getSshKeyInfoByIp();
-        })
+        });
+        $(function () {
+            getUsernameList();
+        });
     </script>
 </head>
 
@@ -120,11 +124,10 @@
             <div class="field">
                 <h5 class="ui horizontal divider header"> 新增ssh-key </h5>
                 <div class="two fields">
-                <div class="field">
+                <div class="field" id="usernamelist">
                     <label>用户</label>
                     <select id="username" class="ui search icon dropdown">
-                        <option value="guoxu">郭旭</option>
-                        <option value="admin">管理员</option>
+                        <option v-for="username in username_list" v-bind:value="username">{{username}}</option>
                     </select>
                 </div>
                 <div class="field">
