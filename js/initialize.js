@@ -38,18 +38,22 @@ function machine_initialize() {
 function install_software() {
     var ip = GetQueryString('ip');
     var obj = document.getElementsByName("software");
-    var software_list = [];
+    var software = '';
     var k;
     for (k in obj) {
         if (obj[k].checked)
-            software_list.push(obj[k].value);
-    }
+            if (software !== '') {
+                software = software + ',' + (obj[k].value);
+            } else {
+                software = (obj[k].value)
+            }
 
+    }
     var request = {
         action: 'install',
         data: {
             'ip': ip,
-            'software': software_list
+            'software': software
         }
     };
     var encoded;
@@ -65,7 +69,7 @@ function install_software() {
         success: function (data) {
             var models = data;
             if (models.ok === true) {
-                window.location.href = "/task/list";
+                alert(models.info)
             } else {
                 alert(models.info);
             }
