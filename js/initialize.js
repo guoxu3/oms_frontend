@@ -41,13 +41,13 @@ function install_software() {
     var software = '';
     var k;
     for (k in obj) {
-        if (obj[k].checked)
+        if (obj[k].checked) {
             if (software !== '') {
                 software = software + ',' + (obj[k].value);
             } else {
                 software = (obj[k].value)
             }
-
+        }
     }
     var request = {
         action: 'install',

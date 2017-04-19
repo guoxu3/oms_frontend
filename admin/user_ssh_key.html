@@ -144,18 +144,18 @@
                 <div v-for="(sshkeyinfo, index) in user_ssh_key_data">
                     <div class="field">
                         <div v-cloak class="ui checkbox" v-if="index%2 == 0" style="float:left;width:49%">
-                            <input type="checkbox" name="ssh_keys" value="">
+                            <input type="checkbox" name="ssh_keys" v-bind:value="sshkeyinfo.ip + '@' + sshkeyinfo.system_user">
                             <label>{{ sshkeyinfo.ip }}[{{ sshkeyinfo.system_user }}]</label>
                         </div>
                         <div v-cloak class="ui checkbox" v-if="index%2 == 1" style="float:right;width:49%">
-                            <input type="checkbox" name="ssh_keys" value="">
+                            <input type="checkbox" name="ssh_keys" v-bind:value="sshkeyinfo.ip + '@' + sshkeyinfo.system_user">
                             <label>{{ sshkeyinfo.ip }}[{{ sshkeyinfo.system_user }}]</label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="ui primary button" type="submit">
+        <button class="ui primary button" type="button" onclick="javascripts:deleteSshKeyByUser(); return false">
             删除勾选ssh-key
         </button>
         <div class="ui divider"></div>

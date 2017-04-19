@@ -150,15 +150,84 @@ function addSshKeyInfoByUser() {
 }
 
 
-function deleteSshKeyInfo() {
+function deleteSshKeyByUser() {
+    var ssh_key_info_list = [];
+    var username = GetQueryString('username');
+    var obj = document.getElementsByName("ssh_keys");
+    var k;
+    for (k in obj) {
+        if (obj[k].checked) {
+            var key_info = obj[k].value;
+            var ip = key_info.split('@')[0];
+            var system_user = key_info.split('@')[1];
+            var ssh_key_info = {
+                    'ip': ip,
+                    'username': username,
+                    'system_user': system_user
+                    };
+            ssh_key_info_list.push(ssh_key_info)
+        }
+    }
+    if (ssh_key_info_list.length === 0) {
+        alert("请先勾选再提交");
+        return
+    }
     var request = {
         action: 'delete',
-        data: {
-            'ip': $("#ip").val(),
-            'username': $("#username").val(),
-            'system_user': $("#system_user").val()
-        }
+        data: ssh_key_info_list
     };
+
+    var encoded;
+    encoded = $.toJSON(request);
+    var jsonStr = encoded;
+    var URL = '/api/ssh_key_manage';
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data: jsonStr,
+        dataType: 'json',
+        contentType: 'application/json;charset=utf8',
+        success: function (data) {
+            var models = data;
+            if (models.ok === true) {
+                alert(models.info);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
+
+function deleteSshKeyByMachine() {
+    var ssh_key_info_list = [];
+    var ip = GetQueryString('ip');
+    var obj = document.getElementsByName("ssh_keys");
+    var k;
+    for (k in obj) {
+        if (obj[k].checked) {
+            var key_info = obj[k].value;
+            var username = key_info.split('@')[0];
+            var system_user = key_info.split('@')[1];
+            var ssh_key_info = {
+                    'ip': ip,
+                    'username': username,
+                    'system_user': system_user
+                    };
+            ssh_key_info_list.push(ssh_key_info)
+        }
+    }
+    if (ssh_key_info_list.length == 0) {
+        alert("请先勾选再提交");
+        return
+    }
+    var request = {
+        action: 'delete',
+        data: ssh_key_info_list
+    };
+
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;

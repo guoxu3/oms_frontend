@@ -149,14 +149,14 @@
                 <div v-for="sshkeyinfo in ip_ssh_key_data">
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" name="ssh_keys" value="">
+                            <input type="checkbox" name="ssh_keys" v-bind:value="sshkeyinfo.username + '@' + sshkeyinfo.system_user">
                             <label>{{ sshkeyinfo.username }}[{{ sshkeyinfo.system_user }}]</label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="ui primary button" type="submit">
+        <button class="ui primary button" type="button" onclick="javascripts:deleteSshKeyByMachine(); return false">
             删除勾选ssh-key
         </button>
         <div class="ui divider"></div>
