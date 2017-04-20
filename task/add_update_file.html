@@ -13,11 +13,13 @@
     <script src="../lib/jquery.json.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/semantic.min.css">
     <script src="../lib/semantic.min.js"></script>
+    <script src="../lib/vue.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript" src="../js/task.js"></script>
     <script type="text/javascript" src="../js/public.js"></script>
     <script type="text/javascript" src="../js/logout.js"></script>
+    <script type="text/javascript" src="../js/update.js"></script>
     <script>isLogin();</script>
     <script>
         $(function() {
@@ -114,6 +116,11 @@
                 <option value="static">static</option>
                 <option value="card">card</option>
             </select>
+        </div>
+        <div class="field">
+            <button class="ui primary button" type="button" onclick="javascripts:getCurrentVersion(); return false;">
+            当前版本
+            </button>
         </div>
         <div class="field">
             <label>请选择更新机器</label>

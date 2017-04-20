@@ -85,3 +85,37 @@ function getLog(task_id) {
         }
     });
 }
+
+function getCurrentVersion() {
+    var data = {
+        target: $("#target").val()
+    }
+    var request = {
+        action: 'get_current_version',
+        data: data
+    };
+    console.log(request);
+    return;
+    var encoded;
+    encoded = $.toJSON(request);
+    var jsonStr = encoded;
+    var URL = '/api/update';
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data: jsonStr,
+        dataType: 'json',
+        contentType: 'application/json;charset=utf8',
+        success: function (data) {
+            var models = data;
+            if (models.ok === true) {
+                alert(models.info);
+            } else {
+                alert(models.info);
+            }
+        },
+        error: function (xhr, error, exception) {
+            alert(exception.toString());
+        }
+    });
+}
