@@ -94,8 +94,6 @@ function getCurrentVersion() {
         action: 'get_current_version',
         data: data
     };
-    console.log(request);
-    return;
     var encoded;
     encoded = $.toJSON(request);
     var jsonStr = encoded;
