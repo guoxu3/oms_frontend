@@ -117,11 +117,12 @@ function addSshKeyInfoByIp() {
 
 
 function addSshKeyInfoByUser() {
+    var username = GetQueryString('username');
     var request = {
         action: 'add',
         data: {
             'ip': $("#ip").val(),
-            'username': $("#username").val(),
+            'username': username,
             'system_user': $("#system_user").val()
         }
     };
@@ -191,6 +192,7 @@ function deleteSshKeyByUser() {
             var models = data;
             if (models.ok === true) {
                 alert(models.info);
+                location.reload();
             } else {
                 alert(models.info);
             }
@@ -219,7 +221,7 @@ function deleteSshKeyByMachine() {
             ssh_key_info_list.push(ssh_key_info)
         }
     }
-    if (ssh_key_info_list.length == 0) {
+    if (ssh_key_info_list.length === 0) {
         alert("请先勾选再提交");
         return
     }
@@ -242,6 +244,7 @@ function deleteSshKeyByMachine() {
             var models = data;
             if (models.ok === true) {
                 alert(models.info);
+                location.reload();
             } else {
                 alert(models.info);
             }
